@@ -224,6 +224,78 @@
     justify-content: center; 
 }
 
+/* Estilos para el contenedor de inscripción de admin */
+.admin-enroll-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 350px;
+}
+
+.admin-enroll-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 20px;
+    background-color: rgba(40, 40, 40, 0.95);
+    border: 2px solid #c9a83e;
+    box-shadow: 5px 5px 0 #000;
+}
+
+.admin-enroll-container input {
+    padding: 12px 16px;
+    font-size: 16px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #c9a83e;
+    outline: none;
+    font-family: 'MiSans', sans-serif;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0 #444;
+}
+
+.admin-enroll-container input::placeholder {
+    color: #888;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.admin-enroll-container input:focus {
+    border-color: #d12c2c;
+    box-shadow: 0 0 10px rgba(209, 44, 44, 0.5);
+}
+
+.admin-enroll-container button {
+    margin: 0;
+    max-width: 100%;
+}
+
+.admin-action-message {
+    margin: 0;
+    padding: 12px 16px;
+    background-color: rgba(56, 161, 105, 0.2);
+    color: #c9a83e;
+    border: 2px solid #c9a83e;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 4px 4px 0 #000;
+    animation: fadeIn 0.3s ease-out;
+    width: 100%;
+}
+
+.admin-action-message.error {
+    background-color: rgba(209, 44, 44, 0.2);
+    color: #ff6b6b;
+    border-color: #d12c2c;
+}
+
 @media (max-width: 768px) {
     .button-group {
         flex-direction: column; 
@@ -235,7 +307,11 @@
         max-width: 100%; 
         width: 100%;
     }
-    .detail-grid { grid-template-columns: 1fr; } 
+    .detail-grid { grid-template-columns: 1fr; }
+    
+    .admin-enroll-wrapper {
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 480px) {

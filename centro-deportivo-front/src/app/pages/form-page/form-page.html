@@ -46,7 +46,43 @@
         </fieldset>
     </div>
 
+    @if (isAdminRegisterMode) {
+        <fieldset>
+            <label for="role">Tipo de usuario</label>
+            <select id="role" formControlName="role">
+            <option value="MEMBER">Socio</option>
+            @if (currentAdmin?.permissionLevel === 'SUPER_ADMIN' || currentAdmin?.permissionLevel === 'USER_MANAGER' ) {
+                <option value="INSTRUCTOR">Instructor</option>
+            }
+            @if (currentAdmin?.permissionLevel === 'SUPER_ADMIN') {
+                <option value="ADMIN">Administrador</option>
+            }
+            </select>
+            <app-field-error [control]="role"></app-field-error>
+        </fieldset>
+    }
+
     @if (!isEditMode) {
+        @if (isAdminRegisterMode && role?.value === 'ADMIN') {
+            <fieldset>
+            <label for="permissionLevel">Tipo de administrador</label>
+            <select id="permissionLevel" formControlName="permissionLevel">
+            <option value="USER_MANAGER">Administrador de usuarios</option>
+            <option value="FINANCE_ADMIN">Administrador de finanzas</option>
+            <option value="SUPER_ADMIN">Administrador control total</option>
+            </select>
+            <app-field-error [control]="permissionLevel"></app-field-error>
+        </fieldset>
+        }
+
+        @if (isAdminRegisterMode && role?.value === 'INSTRUCTOR') {
+            <fieldset>
+                <label for="specialty">Especialidad</label>
+                <input type="text" id="specialty" formControlName="specialty">
+                <app-field-error [control]="specialty"></app-field-error>
+            </fieldset>
+        }
+
         <div class="form-row">
             <fieldset>
                 <label for="username">Nombre de usuario</label>

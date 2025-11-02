@@ -64,6 +64,22 @@
                         <button class="button-base action-btn subscribe-btn" (click)="enrollToActivity()">Inscribirse</button>
                     }
                 }
+
+                @if (authService.isLoggedIn() && authService.getPermission() === 'PERMISSION_USER_MANAGER' || authService.getPermission() === 'PERMISSION_SUPER_ADMIN') {
+                    @if (activity.currentMembers < activity.maxMembers) {
+                        <div class="admin-enroll-wrapper">
+                            <div class="admin-enroll-container">
+                                <input type="text" id="admin-username" placeholder="Usuario (username)"
+                                    [value]="memberUsername"
+                                    (input)="memberUsername = $any($event.target).value">
+                                <button class="button-base action-btn subscribe-btn" (click)="enrollMemberAsAdmin(memberUsername)">Inscribir</button>
+                            </div>
+                            @if (adminActionMessage) {
+                                <p class="admin-action-message" [class.error]="isAdminActionError">{{adminActionMessage}}</p>
+                            }
+                        </div>
+                    }
+                }
                 
                 <button [routerLink]="['/activity-list']" class="button-base back-to-list-btn">Volver al Listado</button>
             </div>    

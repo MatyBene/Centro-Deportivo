@@ -53,7 +53,7 @@ public class InstructorMapper {
         dto.setLastname(instructor.getLastname());
         dto.setUsername(instructor.getCredential().getUsername());
         dto.setRole(instructor.getCredential().getRole());
-        dto.setSpeciality(instructor.getSpecialty());
+        dto.setSpecialty(instructor.getSpecialty());
         return dto;
     }
 

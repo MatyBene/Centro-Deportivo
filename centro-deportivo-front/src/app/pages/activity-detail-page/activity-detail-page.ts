@@ -5,6 +5,7 @@ import { ActivityService } from '../../services/activity-service';
 import SportActivity from '../../models/SportActivity';
 import { AuthService } from '../../services/auth-service';
 import { MemberService } from '../../services/member-service';
+import { AdminService } from '../../services/admin-service';
 
 @Component({
   selector: 'app-activity-detail-page',
@@ -18,13 +19,17 @@ export class ActivityDetailPage implements OnInit {
   error: string | null = null;
   isEnrolled: boolean = false;
   activityId!: number;
+  memberUsername: string = '';
+  adminActionMessage: string | null = null;
+  isAdminActionError: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private activityService : ActivityService,
     private router: Router, 
     public authService: AuthService,
-    private memberService: MemberService
+    private memberService: MemberService,
+    private adminService: AdminService
   ){}
 
   ngOnInit(): void {
@@ -101,5 +106,41 @@ export class ActivityDetailPage implements OnInit {
         console.log('Error al desuscribirse:', e)
       }
     })
+  }
+
+  enrollMemberAsAdmin(username: string) {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
+      this.adminService.enrollMemberToActivity(idParam, username).subscribe({
+        next: () => {
+          this.adminActionMessage = `Usuario "${username}" inscripto correctamente.`;
+          this.isAdminActionError = false;
+          this.memberUsername = '';
+          this.loadActivityDetail();
+        },
+        error: (e) => {
+          console.log('Error al inscribir miembro como admin:', e);
+          
+          let errorMessage = 'No se pudo inscribir al usuario. Verifique el nombre y vuelva a intentar.';
+          
+          if (e.error) {
+            try {
+              const errorObj = typeof e.error === 'string' ? JSON.parse(e.error) : e.error;
+              
+              if (errorObj.details && errorObj.details.message) {
+                errorMessage = errorObj.details.message;
+              } else if (errorObj.message) {
+                errorMessage = errorObj.message;
+              }
+            } catch (parseError) {
+              console.error('Error al parsear mensaje de error:', parseError);
+            }
+          }
+          
+          this.adminActionMessage = errorMessage;
+          this.isAdminActionError = true;
+        }
+      })
+    }
   }
 }

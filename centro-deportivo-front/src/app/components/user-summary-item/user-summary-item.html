@@ -1,0 +1,35 @@
+<article class="user-card">
+    <div class="user-header">
+        <h3 class="user-username">
+            {{user()?.username}} | {{getRole()}}
+        </h3>
+    </div>
+
+    <div class="user-details">
+        <div class="detail-item">
+            <span class="detail-label">Nombre:</span>
+            <span class="detail-value">{{user()?.name}} {{user()?.lastname}}</span>
+        </div>
+
+        <div class="detail-item">
+            @if (isAdmin(user())) {
+                <span class="detail-label">Nivel de permiso:</span>
+                <span class="detail-value">{{getAdmin()?.permissionLevel}}</span>
+            }
+            
+            @if (isInstructor(user())) {
+                <span class="detail-label">Especialidad:</span>
+                <span class="detail-value">{{getInstructor()?.specialty}}</span>
+            }
+            
+            @if (isMember(user())) {
+                <span class="detail-label">Status:</span>
+                <span class="detail-value">{{getMember()?.status}}</span>
+            }
+        </div>
+    </div>
+
+    <div class="user-actions">
+        <button class="btn-detail" (click)="goToDetail()">Ver perfil</button>
+    </div>
+</article>

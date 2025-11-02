@@ -15,6 +15,15 @@
                     <a routerLink="/activity-list">Actividades</a>
                 </li>
             }
+
+            @if(authService.getUserRole() === 'ADMIN') {
+                <li>
+                    <a routerLink="/users">Usuarios</a>
+                </li>
+                <li>
+                    <a routerLink="/admin/register">Registrar</a>
+                </li>
+            }
             
             @if (!authService.isLoggedIn()) {
                 <li>
@@ -30,7 +39,7 @@
                     <a routerLink="/profile">Perfil</a>
                 </li>
                 <li>
-                    <button (click)="logout()">Cerrar sesión</button>
+                    <a (click)="logout()" style="cursor: pointer;">Cerrar sesión</a>
                 </li>
             }
         </ul>

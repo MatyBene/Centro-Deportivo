@@ -58,6 +58,11 @@ export class AuthService {
     return null;
   }
 
+  getPermission(): string | null {
+    const decodedToken = this.getDecodedToken();
+    return decodedToken?.rol[1]?.authority ?? null;
+  }
+
   logout(): void {
     localStorage.removeItem('token');
   }

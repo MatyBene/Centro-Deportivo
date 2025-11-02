@@ -1,0 +1,49 @@
+<article class="profile-card">
+    <div class="profile-header">
+        <h3 class="profile-name">{{instructor().name}} {{instructor().lastname}}</h3>
+        <span class="profile-specialty">{{instructor().specialty}}</span>
+    </div>
+
+    <div class="profile-details">
+        <div class="detail-item">
+            <span class="detail-label">Usuario:</span>
+            <span class="detail-value">{{instructor().username}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Rol:</span>
+            <span class="detail-value">{{instructor().role}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Especialidad:</span>
+            <span class="detail-value">{{instructor().specialty}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Fecha de nacimiento:</span>
+            <span class="detail-value">{{instructor().birthdate}}</span>
+        </div>
+
+    </div>
+
+    @if (instructor().activities.length > 0) {
+        <div class="activities-section">
+            <h4 class="activities-title">Actividades del instructor</h4>
+            <div class="activities-list">
+                @for (activity of instructor().activities; track activity.id) {
+                    <div class="activity-item">
+                        <div class="activity-name">{{activity.name}}</div>
+                        <div class="activity-info">
+                            <span class="activity-detail">Cupos: {{activity.maxMembers}}</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    } @else {
+        <div class="no-activities">
+            <p>No tiene actividades asignadas</p>
+        </div>
+    }
+</article>

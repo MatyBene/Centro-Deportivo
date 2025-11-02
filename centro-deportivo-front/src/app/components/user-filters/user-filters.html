@@ -1,0 +1,40 @@
+<div class="filters-container">
+    <div class="filter-group">
+        <label for="roleFilter">Rol:</label>
+        <select id="roleFilter" [value]="selectedRole()" (change)="onRoleChange($event)" class="filter-select">
+            <option value="">Todos los roles</option>
+            <option value="MEMBER">Miembro</option>
+            <option value="INSTRUCTOR">Instructor</option>
+            <option value="ADMIN">Administrador</option>
+        </select>
+    </div>
+
+    @if (showStatusFilter()) {
+        <div class="filter-group">
+            <label for="statusFilter">Estado (Miembro):</label>
+            <select id="statusFilter" [value]="selectedStatus()" (change)="onStatusChange($event)" class="filter-select">
+                <option value="">Todos los estados</option>
+                <option value="ACTIVE">Activo</option>
+                <option value="INACTIVE">Inactivo</option>
+            </select>
+        </div>
+    }
+
+    @if (showPermissionFilter()) {
+        <div class="filter-group">
+            <label for="permissionFilter">Nivel de Permiso (Admin):</label>
+            <select id="permissionFilter" [value]="selectedPermission()" (change)="onPermissionChange($event)" class="filter-select">
+                <option value="">Todos los permisos</option>
+                <option value="SUPER_ADMIN">Control total</option>
+                <option value="USER_MANAGER">Control de usuarios</option>
+                <option value="FINANCE_ADMIN">Control de finanzas</option>
+            </select>
+        </div>
+    }
+
+    <div class="filter-actions">
+        <button class="clear-filters-btn" (click)="onClearFilters()">
+            Limpiar Filtros
+        </button>
+    </div>
+</div>

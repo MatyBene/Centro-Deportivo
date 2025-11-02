@@ -1,6 +1,4 @@
-import EnrolledActivitySummary from "./EnrolledActivitySummary"
-
-export interface Member {
+export interface Admin {
     id: number,
     name: string,
     lastname: string,
@@ -10,7 +8,7 @@ export interface Member {
     email: string,
     username: string,
     password: string,
-    status: string,
     role: string,
-    enrollments?: EnrolledActivitySummary[]
+    permissionLevel: string,
+    hireDate: string
 }
