@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from '../../models/Member';
 import { InstructorService } from '../../services/instructor-service';
 import { PageableResponse } from '../../models/Pageable';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-member-list-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './member-list-page.html',
   styleUrl: './member-list-page.css'
 })
-export class MembersListPage implements OnInit{
+export class MemberListPage implements OnInit{
   currentPage: number = 0;
   pageSize: number = 5;
   totalPages: number = 0;
