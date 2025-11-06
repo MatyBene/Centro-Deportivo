@@ -12,6 +12,7 @@ import { MemberActivitiesPageComponent } from './pages/member-activities-page/me
 import { InstructorDetailPage } from './pages/instructor-detail-page/instructor-detail-page';
 import { UserListPage } from './pages/user-list-page/user-list-page';
 import { UserDetailPage } from './pages/user-detail-page/user-detail-page';
+import { MemberListPage } from './pages/member-list-page/member-list-page';
 
 export const routes: Routes = [
     {path: '', component: HomePage},
@@ -23,8 +24,9 @@ export const routes: Routes = [
     {path: 'activity-list/:id', component: ActivityDetailPage},
 
     {path: 'my-activities', component: MemberActivitiesPageComponent, canActivate: [authGuard]},
-
+    {path: 'instructors/members', component: MemberListPage},
     {path: 'instructors/:id', component: InstructorDetailPage},
+    
 
     {path: 'admin/register', component: FormPage, canActivate: [authGuard]},
 
