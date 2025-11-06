@@ -23,11 +23,19 @@ export class InstructorService {
     return this.http.get<Instructor>(`${this.URL}/${id}/details`);
   }
   
-    getAllMembers(page: number, size: number): Observable<PageableResponse<Member>> {
+  getAllMembers(page: number, size: number): Observable<PageableResponse<Member>> {
     let params = new HttpParams()
         .set('page', page.toString())
         .set('size', size.toString());
     
     return this.http.get<PageableResponse<Member>>(`${this.URL}/members`,{params});
   }
+
+  enrollMemberToMyActivity(activityId: number, memberId: number): Observable<any> {
+    const url = `${environment.apiUrl}/enrollments/my-activities/${activityId}/enroll/${memberId}`;
+    
+    return this.http.post(url, null); 
+  }
+
+
 }

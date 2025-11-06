@@ -6,6 +6,7 @@ import SportActivity from '../../models/SportActivity';
 import { AuthService } from '../../services/auth-service';
 import { MemberService } from '../../services/member-service';
 import { AdminService } from '../../services/admin-service';
+import { InstructorService } from '../../services/instructor-service';
 
 @Component({
   selector: 'app-activity-detail-page',
@@ -22,6 +23,9 @@ export class ActivityDetailPage implements OnInit {
   memberUsername: string = '';
   adminActionMessage: string | null = null;
   isAdminActionError: boolean = false;
+  memberIdToEnroll: number | null = null;
+  instructorActionMessage: string | null = null;
+  isInstructorActionError: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +33,8 @@ export class ActivityDetailPage implements OnInit {
     private router: Router, 
     public authService: AuthService,
     private memberService: MemberService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private instructorService: InstructorService
   ){}
 
   ngOnInit(): void {
@@ -143,4 +148,28 @@ export class ActivityDetailPage implements OnInit {
       })
     }
   }
+  enrollMemberByInstructor(): void {
+  if (!this.activityId || !this.memberIdToEnroll) {
+    this.instructorActionMessage = 'Debe ingresar un ID de socio.';
+    this.isInstructorActionError = true;
+    return;
+  }
+  
+  // Llama al servicio de inscripción para instructores
+  this.instructorService.enrollMemberToMyActivity(this.activityId, this.memberIdToEnroll).subscribe({
+    next: () => {
+      this.instructorActionMessage = `Socio ID ${this.memberIdToEnroll} inscrito correctamente.`;
+      this.isInstructorActionError = false;
+      this.memberIdToEnroll = null; 
+      this.loadActivityDetail(); // Refrescar los detalles/inscripciones
+    },
+    error: (e) => {
+      console.error('Error al inscribir socio (Instructor):', e);
+      let errorMessage = 'Error al inscribir. Verifique el ID o si ya está inscrito.';
+      // Lógica para extraer mensajes de error específicos del backend (similar a enrollMemberAsAdmin)
+      this.instructorActionMessage = errorMessage;
+      this.isInstructorActionError = true;
+    }
+  });
+}
 }
