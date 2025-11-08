@@ -34,7 +34,7 @@ export class InstructorService {
   enrollMemberToMyActivity(activityId: number, memberId: number): Observable<any> {
     const url = `${environment.apiUrl}/enrollments/my-activities/${activityId}/enroll/${memberId}`;
     
-    return this.http.post(url, null); 
+    return this.http.post(url, null, {responseType: 'text'}); 
   }
 
 

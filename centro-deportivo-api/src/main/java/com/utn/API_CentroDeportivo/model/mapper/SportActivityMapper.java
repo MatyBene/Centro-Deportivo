@@ -11,22 +11,22 @@ public class SportActivityMapper {
         activitySummaryDTO.setId(activity.getId());
         activitySummaryDTO.setName(activity.getName());
         activitySummaryDTO.setMaxMembers(activity.getMaxMembers());
-        activitySummaryDTO.setInstructorId(activitySummaryDTO.getInstructorId());
+        activitySummaryDTO.setInstructorId(activity.getInstructor().getId());
         activitySummaryDTO.setInstructorName(activity.getInstructor().getName());
         return activitySummaryDTO;
     }
 
     public static SportActivityDetailsDTO mapToSportActivityDetailsDTO(SportActivity activity) {
         SportActivityDetailsDTO activityDetailsDTO = new SportActivityDetailsDTO();
+        activityDetailsDTO.setId(activity.getId());
         activityDetailsDTO.setName(activity.getName());
         activityDetailsDTO.setMaxMembers(activity.getMaxMembers());
+        activityDetailsDTO.setInstructorId(activity.getInstructor().getId());
         activityDetailsDTO.setInstructorName(activity.getInstructor().getName());
         activityDetailsDTO.setDescription(activity.getDescription());
         activityDetailsDTO.setStartTime(String.valueOf(activity.getStartTime()));
         activityDetailsDTO.setEndTime(String.valueOf(activity.getEndTime()));
         activityDetailsDTO.setClassDays(activity.getClassDays());
-        activityDetailsDTO.setInstructorId(activity.getInstructor().getId());
-        activityDetailsDTO.setInstructorName(activity.getInstructor().getName());
         return activityDetailsDTO;
     }
 }

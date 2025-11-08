@@ -82,12 +82,17 @@ export class ActivityDetailPage implements OnInit {
     }
   }
 
-  getInstructor(instructorId: number): void {
+getInstructor(instructorId: number | undefined): void { 
+    if (instructorId === null || instructorId === undefined || isNaN(instructorId)) {
+        console.warn('Intento de navegación a detalle de instructor con ID inválido/no cargado.');
+        return; 
+    }
+    
     this.router.navigate(['/instructors', instructorId]).then(() => {
     }).catch(error => {
-      console.error('Error en la navegación:', error);
+        console.error('Error en la navegación:', error);
     });
-  }
+}
 
   enrollToActivity() {  
     this.memberService.subscribeToActivity(this.activityId).subscribe({
@@ -148,28 +153,27 @@ export class ActivityDetailPage implements OnInit {
       })
     }
   }
+
   enrollMemberByInstructor(): void {
-  if (!this.activityId || !this.memberIdToEnroll) {
-    this.instructorActionMessage = 'Debe ingresar un ID de socio.';
-    this.isInstructorActionError = true;
-    return;
-  }
-  
-  // Llama al servicio de inscripción para instructores
-  this.instructorService.enrollMemberToMyActivity(this.activityId, this.memberIdToEnroll).subscribe({
-    next: () => {
-      this.instructorActionMessage = `Socio ID ${this.memberIdToEnroll} inscrito correctamente.`;
-      this.isInstructorActionError = false;
-      this.memberIdToEnroll = null; 
-      this.loadActivityDetail(); // Refrescar los detalles/inscripciones
-    },
-    error: (e) => {
-      console.error('Error al inscribir socio (Instructor):', e);
-      let errorMessage = 'Error al inscribir. Verifique el ID o si ya está inscrito.';
-      // Lógica para extraer mensajes de error específicos del backend (similar a enrollMemberAsAdmin)
-      this.instructorActionMessage = errorMessage;
+    if (!this.activityId || !this.memberIdToEnroll) {
+      this.instructorActionMessage = 'Debe ingresar un ID de socio.';
       this.isInstructorActionError = true;
+      return;
     }
-  });
-}
+  
+    this.instructorService.enrollMemberToMyActivity(this.activityId, this.memberIdToEnroll).subscribe({
+      next: () => {
+        this.instructorActionMessage = `Socio ID ${this.memberIdToEnroll} inscrito correctamente.`;
+        this.isInstructorActionError = false;
+        this.memberIdToEnroll = null; 
+        this.loadActivityDetail(); 
+      },
+      error: (e) => {
+        console.error('Error al inscribir socio (Instructor):', e);
+        let errorMessage = 'Error al inscribir. Verifique el ID o si ya está inscrito.';
+        this.instructorActionMessage = errorMessage;
+        this.isInstructorActionError = true;
+      }
+    });
+  }
 }
