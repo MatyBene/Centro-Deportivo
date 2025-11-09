@@ -176,5 +176,34 @@ public class EnrollmentService implements IEnrollmentService {
         enrollmentRepository.save(enrollment);
         memberService.updateMemberStatus(memberId);
     }
+    @Transactional
+    @Override
+    public void unenrollMemberFromActivityByUsername(String instructorUsername, Long activityId, String memberUsername) {
+        User instructorUser = credentialService.getUserByUsername(instructorUsername);
+        if (!(instructorUser instanceof Instructor)) {
+            throw new UnauthorizedException("El usuario autenticado no es un Instructor.");
+        }
+
+        Instructor instructor = (Instructor) credentialService.getUserByUsername(instructorUsername);
+        User memberUser = credentialService.getUserByUsername(memberUsername);
+        if (!(memberUser instanceof Member)) {
+            throw new MemberNotFoundException("El usuario proporcionado no es un socio (Member) o no existe.");
+        }
+        Member member = (Member) memberUser;
+        Enrollment enrollment = enrollmentRepository
+                .findByMemberIdAndActivityId(member.getId(), activityId)
+                .orElseThrow(() -> new EnrollmentNotFoundException("El socio no está inscripto en esta actividad"));
+
+        SportActivity activity = enrollment.getActivity();
+        if (!activity.getInstructor().getId().equals(instructor.getId())) {
+            throw new UnauthorizedException("El instructor no tiene permiso para cancelar esta inscripción");
+        }
+        enrollmentRepository.delete(enrollment);
+        boolean hasOtherEnrollments = enrollmentRepository.existsByMemberId(member.getId());
+        if (!hasOtherEnrollments) {
+            member.setStatus(Status.INACTIVE);
+            userRepository.save(member);
+        }
+    }
 }
 
