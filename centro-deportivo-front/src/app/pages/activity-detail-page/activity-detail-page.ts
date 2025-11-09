@@ -24,6 +24,7 @@ export class ActivityDetailPage implements OnInit {
   adminActionMessage: string | null = null;
   isAdminActionError: boolean = false;
   memberIdToEnroll: number | null = null;
+  memberUsernameToEnroll: string = '';
   instructorActionMessage: string | null = null;
   isInstructorActionError: boolean = false;
 
@@ -174,6 +175,31 @@ getInstructor(instructorId: number | undefined): void {
         this.instructorActionMessage = errorMessage;
         this.isInstructorActionError = true;
       }
+    });
+  }
+
+  enrollMemberByUsernameByInstructor(): void {
+    if (!this.activityId) return;
+    const usernameToEnroll = this.memberUsernameToEnroll.trim();
+
+    if (!usernameToEnroll) {
+        this.instructorActionMessage = 'Debe ingresar un nombre de usuario (username).';
+        this.isInstructorActionError = true;
+        return;
+    }
+    this.instructorService.enrollMemberByUsername(this.activityId, usernameToEnroll).subscribe({
+        next: (response) => {
+            this.instructorActionMessage = response; 
+            this.isInstructorActionError = false;
+            this.memberUsernameToEnroll = ''; 
+            this.loadActivityDetail(); 
+        },
+        error: (e) => {
+            console.error('Error al inscribir socio (Instructor):', e);
+            let errorMessage = e.error || 'Error al inscribir. Verifique el username.';    
+            this.instructorActionMessage = errorMessage;
+            this.isInstructorActionError = true;
+        }
     });
   }
 }

@@ -67,17 +67,18 @@
                 @if (authService.isLoggedIn() && authService.getUserRole() === 'INSTRUCTOR') {
                     @if (activity.currentMembers < activity.maxMembers) {
                         <div class="instructor-enroll-wrapper admin-enroll-wrapper"> 
-                            <p class="enroll-title">Inscribir Socio (ID)</p>
+                            <p class="enroll-title">Inscribir Socio</p>
                             <div class="admin-enroll-container">
                                 <input 
-                                    type="number" 
-                                    id="instructor-member-id" 
-                                    placeholder="ID Socio"
-                                    [value]="memberIdToEnroll"
-                                    (input)="memberIdToEnroll = $any($event.target).value"
+                                    type="text" 
+                                    id="member-username" 
+                                    placeholder="Username Socio"
+                                    [value]="memberUsernameToEnroll"
+                                    (input)="memberUsernameToEnroll = $any($event.target).value"
                                 >
                                 <button class="button-base action-btn subscribe-btn" 
-                                        (click)="enrollMemberByInstructor()">
+                                        (click)="enrollMemberByUsernameByInstructor()"
+                                        [disabled]="!memberUsernameToEnroll.trim() || activity.currentMembers >= activity.maxMembers">
                                     Inscribir
                                 </button>
                             </div>

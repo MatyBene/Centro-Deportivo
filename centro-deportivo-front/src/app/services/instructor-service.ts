@@ -37,5 +37,10 @@ export class InstructorService {
     return this.http.post(url, null, {responseType: 'text'}); 
   }
 
+  enrollMemberByUsername(activityId: number, username: string): Observable<any> {
+    const url = `${environment.apiUrl}/enrollments/my-activities/${activityId}/enroll-by-username/${username}`;
+    return this.http.post(url, null, {responseType: 'text'}); 
+  }
+
 
 }
