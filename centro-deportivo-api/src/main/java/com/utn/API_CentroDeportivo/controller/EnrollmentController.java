@@ -178,7 +178,7 @@ public class EnrollmentController {
             }
     )
     @PreAuthorize("hasRole('INSTRUCTOR')")
-    @DeleteMapping("/{activityId}/unenroll-by-username/{username}")
+    @DeleteMapping("/my-activities/{activityId}/unenroll-by-username/{username}")
     public ResponseEntity<String> unenrollMemberToMyActivityByUsername(
             @PathVariable Long activityId,
             @PathVariable String username) {

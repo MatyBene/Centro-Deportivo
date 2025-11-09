@@ -42,5 +42,8 @@ export class InstructorService {
     return this.http.post(url, null, {responseType: 'text'}); 
   }
 
-
+  unenrollMemberByUsername(activityId: number, username: string): Observable<any> {
+    const url = `${environment.apiUrl}/enrollments/my-activities/${activityId}/unenroll-by-username/${username}`;
+    return this.http.delete(url, {responseType: 'text'}); 
+    }
 }

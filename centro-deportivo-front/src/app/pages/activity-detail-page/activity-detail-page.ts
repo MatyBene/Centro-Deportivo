@@ -196,7 +196,33 @@ getInstructor(instructorId: number | undefined): void {
         },
         error: (e) => {
             console.error('Error al inscribir socio (Instructor):', e);
-            let errorMessage = e.error || 'Error al inscribir. Verifique el username.';    
+            let errorMessage = e.error?.message || e.error || 'Error desconocido al inscribir.';
+            this.instructorActionMessage = errorMessage;
+            this.isInstructorActionError = true;
+        }
+    });
+  }
+
+  unenrollMemberByInstructor(): void {
+    if (!this.activityId) return;
+
+    const usernameToUnenroll = this.memberUsernameToEnroll.trim();
+
+    if (!usernameToUnenroll) {
+        this.instructorActionMessage = 'Debe ingresar un nombre de usuario para dar de baja.';
+        this.isInstructorActionError = true;
+        return;
+    }
+
+    this.instructorService.unenrollMemberByUsername(this.activityId, usernameToUnenroll).subscribe({
+        next: (response) => {
+            this.instructorActionMessage = response; 
+            this.isInstructorActionError = false;
+            this.memberUsernameToEnroll = ''; 
+            this.loadActivityDetail(); 
+        },
+        error: (e) => {
+            let errorMessage = e.error || 'Error al dar de baja. Verifique el username.';
             this.instructorActionMessage = errorMessage;
             this.isInstructorActionError = true;
         }

@@ -81,6 +81,11 @@
                                         [disabled]="!memberUsernameToEnroll.trim() || activity.currentMembers >= activity.maxMembers">
                                     Inscribir
                                 </button>
+                                <button class="button-base action-btn unsubscribe-btn" 
+                                        (click)="unenrollMemberByInstructor()"
+                                        [disabled]="!memberUsernameToEnroll.trim()">
+                                    Dar de Baja
+                                </button>
                             </div>
                             @if (instructorActionMessage) { 
                                 <p class="admin-action-message" [class.error]="isInstructorActionError">{{instructorActionMessage}}</p>
