@@ -153,4 +153,38 @@ public class EnrollmentController {
 
         return ResponseEntity.ok("Socio " + username + " inscripto correctamente a la actividad");
     }
+
+    @Operation(
+            summary = "Remover un miembro de una actividad usando su Username",
+            description = "Permite a un instructor remover a un miembro de una de sus actividades usando el username del socio.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Socio dado de baja correctamente",
+                            content = @Content(mediaType = "text/plain", schema = @Schema(type = "string", example = "Socio dado de baja correctamente."))
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "No autenticado"
+                    ),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "Acceso denegado (la actividad no es gestionada por el instructor)"
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Inscripción, actividad o socio no encontrado"
+                    )
+            }
+    )
+    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @DeleteMapping("/{activityId}/unenroll-by-username/{username}")
+    public ResponseEntity<String> unenrollMemberToMyActivityByUsername(
+            @PathVariable Long activityId,
+            @PathVariable String username) {
+        String instructorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        enrollmentService.unenrollMemberFromActivityByUsername(instructorUsername, activityId, username);
+
+        return ResponseEntity.ok("Socio " + username + " dado de baja correctamente.");
+    }
 }

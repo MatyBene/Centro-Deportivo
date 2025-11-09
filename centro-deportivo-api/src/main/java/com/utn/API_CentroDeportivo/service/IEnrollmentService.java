@@ -11,4 +11,5 @@ public interface IEnrollmentService {
     void cancelEnrollment(Long instructorId, Long activityId, Long memberId);
     void enrollMemberToActivityByInstructor(String username, Long activityId, Long memberId);
     void enrollMemberToActivityByUsername(String instructorUsername, Long activityId, String memberUsername);
+    void unenrollMemberFromActivityByUsername(String instructorUsername, Long activityId, String memberUsername);
 }
