@@ -42,12 +42,11 @@
                 
                 <div class="detail-item full-width">
                     <strong>Días de Clase: </strong> 
-                    <span>
-                        @for (day of activity.classDays; track $index) {
-                            {{ day }} @if (!$last) { {{', '}}
-                            }
+                        <span>
+                        @for (day of activity.classDays; track day) {  {{ day }} @if (!$last) { {{', '}}
                         }
-                    </span>
+                        }
+    </span>
                 </div>
                 
                 <div class="detail-item full-width">
@@ -62,6 +61,31 @@
                         <button class="button-base action-btn unsubscribe-btn" (click)="unenrollToActivity()">Darse de baja</button>
                     } @else if(activity.currentMembers < activity.maxMembers) {
                         <button class="button-base action-btn subscribe-btn" (click)="enrollToActivity()">Inscribirse</button>
+                    }
+                }
+
+                @if (authService.isLoggedIn() && authService.getUserRole() === 'INSTRUCTOR') {
+                    @if (activity.currentMembers < activity.maxMembers) {
+                        <div class="instructor-enroll-wrapper admin-enroll-wrapper"> 
+                            <p class="enroll-title">Inscribir Socio</p>
+                            <div class="admin-enroll-container">
+                                <input 
+                                    type="text" 
+                                    id="member-username" 
+                                    placeholder="Username Socio"
+                                    [value]="memberUsernameToEnroll"
+                                    (input)="memberUsernameToEnroll = $any($event.target).value"
+                                >
+                                <button class="button-base action-btn subscribe-btn" 
+                                        (click)="enrollMemberByUsernameByInstructor()"
+                                        [disabled]="!memberUsernameToEnroll.trim() || activity.currentMembers >= activity.maxMembers">
+                                    Inscribir
+                                </button>
+                            </div>
+                            @if (instructorActionMessage) { 
+                                <p class="admin-action-message" [class.error]="isInstructorActionError">{{instructorActionMessage}}</p>
+                            }
+                        </div>
                     }
                 }
 

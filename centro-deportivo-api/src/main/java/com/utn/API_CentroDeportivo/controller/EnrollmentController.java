@@ -110,4 +110,47 @@ public class EnrollmentController {
         return ResponseEntity.ok("Socio inscripto correctamente a la actividad");
     }
 
+    @Operation(
+            summary = "Inscribir un miembro a una actividad usando su Username (gestionado por el instructor)",
+            description = "Permite a un instructor inscribir a un miembro específico en una de sus actividades usando el username del socio.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Socio inscripto correctamente a la actividad",
+                            content = @Content(mediaType = "text/plain", schema = @Schema(type = "string", example = "Socio inscripto correctamente a la actividad"))
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Solicitud inválida (ej. actividad no existe, miembro ya inscrito, etc.)"
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "No autenticado"
+                    ),
+                    @ApiResponse(
+                            responseCode = "403",
+                            description = "Acceso denegado (la actividad no es gestionada por el instructor)"
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Actividad o socio no encontrado"
+                    ),
+                    @ApiResponse(
+                            responseCode = "409",
+                            description = "Conflicto (ej. el socio ya está inscrito)"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Error interno del servidor"
+                    )
+            }
+    )
+    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @PostMapping("/my-activities/{activityId}/enroll-by-username/{username}")
+    public ResponseEntity<String> enrollMemberToMyActivityByUsername( @PathVariable Long activityId, @PathVariable String username) {
+        String instructorUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        enrollmentService.enrollMemberToActivityByUsername(instructorUsername, activityId, username);
+
+        return ResponseEntity.ok("Socio " + username + " inscripto correctamente a la actividad");
+    }
 }

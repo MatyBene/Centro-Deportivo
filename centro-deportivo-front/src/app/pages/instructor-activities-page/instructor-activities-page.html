@@ -1,6 +1,6 @@
 <section class="activity-list-container">
     @if (activities.length > 0) {
-        @for (activity of activities; track $index) {
+        @for (activity of activities; track activity.id) {
             <div class="activity-card fade-in">
                 
                 <h2 class="activity-name">{{ activity.name }}</h2>
@@ -15,7 +15,7 @@
                 </div>
                 
                 <div class="button-group-card">
-                    <button [routerLink]="['/activity-list', $index + 1]" class="button-base view-detail-btn">
+                    <button [routerLink]="['/activity-list', activity.id]" class="button-base view-detail-btn">
                         Ver Detalle
                     </button>
                 </div>

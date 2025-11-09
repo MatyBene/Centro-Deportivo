@@ -6,6 +6,7 @@ import SportActivity from '../../models/SportActivity';
 import { AuthService } from '../../services/auth-service';
 import { MemberService } from '../../services/member-service';
 import { AdminService } from '../../services/admin-service';
+import { InstructorService } from '../../services/instructor-service';
 
 @Component({
   selector: 'app-activity-detail-page',
@@ -22,6 +23,10 @@ export class ActivityDetailPage implements OnInit {
   memberUsername: string = '';
   adminActionMessage: string | null = null;
   isAdminActionError: boolean = false;
+  memberIdToEnroll: number | null = null;
+  memberUsernameToEnroll: string = '';
+  instructorActionMessage: string | null = null;
+  isInstructorActionError: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,7 +34,8 @@ export class ActivityDetailPage implements OnInit {
     private router: Router, 
     public authService: AuthService,
     private memberService: MemberService,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private instructorService: InstructorService
   ){}
 
   ngOnInit(): void {
@@ -77,12 +83,17 @@ export class ActivityDetailPage implements OnInit {
     }
   }
 
-  getInstructor(instructorId: number): void {
+getInstructor(instructorId: number | undefined): void { 
+    if (instructorId === null || instructorId === undefined || isNaN(instructorId)) {
+        console.warn('Intento de navegación a detalle de instructor con ID inválido/no cargado.');
+        return; 
+    }
+    
     this.router.navigate(['/instructors', instructorId]).then(() => {
     }).catch(error => {
-      console.error('Error en la navegación:', error);
+        console.error('Error en la navegación:', error);
     });
-  }
+}
 
   enrollToActivity() {  
     this.memberService.subscribeToActivity(this.activityId).subscribe({
@@ -142,5 +153,53 @@ export class ActivityDetailPage implements OnInit {
         }
       })
     }
+  }
+
+  enrollMemberByInstructor(): void {
+    if (!this.activityId || !this.memberIdToEnroll) {
+      this.instructorActionMessage = 'Debe ingresar un ID de socio.';
+      this.isInstructorActionError = true;
+      return;
+    }
+  
+    this.instructorService.enrollMemberToMyActivity(this.activityId, this.memberIdToEnroll).subscribe({
+      next: () => {
+        this.instructorActionMessage = `Socio ID ${this.memberIdToEnroll} inscrito correctamente.`;
+        this.isInstructorActionError = false;
+        this.memberIdToEnroll = null; 
+        this.loadActivityDetail(); 
+      },
+      error: (e) => {
+        console.error('Error al inscribir socio (Instructor):', e);
+        let errorMessage = 'Error al inscribir. Verifique el ID o si ya está inscrito.';
+        this.instructorActionMessage = errorMessage;
+        this.isInstructorActionError = true;
+      }
+    });
+  }
+
+  enrollMemberByUsernameByInstructor(): void {
+    if (!this.activityId) return;
+    const usernameToEnroll = this.memberUsernameToEnroll.trim();
+
+    if (!usernameToEnroll) {
+        this.instructorActionMessage = 'Debe ingresar un nombre de usuario (username).';
+        this.isInstructorActionError = true;
+        return;
+    }
+    this.instructorService.enrollMemberByUsername(this.activityId, usernameToEnroll).subscribe({
+        next: (response) => {
+            this.instructorActionMessage = response; 
+            this.isInstructorActionError = false;
+            this.memberUsernameToEnroll = ''; 
+            this.loadActivityDetail(); 
+        },
+        error: (e) => {
+            console.error('Error al inscribir socio (Instructor):', e);
+            let errorMessage = e.error || 'Error al inscribir. Verifique el username.';    
+            this.instructorActionMessage = errorMessage;
+            this.isInstructorActionError = true;
+        }
+    });
   }
 }
