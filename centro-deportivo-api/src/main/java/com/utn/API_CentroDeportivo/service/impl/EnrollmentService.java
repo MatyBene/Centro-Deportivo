@@ -144,5 +144,37 @@ public class EnrollmentService implements IEnrollmentService {
         enrollmentRepository.save(enrollment);
         memberService.updateMemberStatus(memberId);
     }
+
+    @Transactional
+    public void enrollMemberToActivityByUsername(String instructorUsername, Long activityId, String memberUsername) {
+        Instructor instructor = (Instructor) credentialService.getUserByUsername(instructorUsername);
+        SportActivity activity = sportActivityService.getSportActivityEntityById(activityId)
+                .orElseThrow(() -> new SportActivityNotFoundException("Actividad no encontrada"));
+        if (!activity.getInstructor().getId().equals(instructor.getId())) {
+            throw new UnauthorizedException("No tienes permiso para inscribir en esta actividad");
+        }
+        if (activity.getEnrollments().size() >= activity.getMaxMembers()) {
+            throw new MaxCapacityException("La actividad alcanzó el cupo máximo");
+        }
+        User memberUser = credentialService.getUserByUsername(memberUsername);
+        if (!(memberUser instanceof Member)) {
+            throw new MemberNotFoundException("El usuario proporcionado no es un socio (Member)");
+        }
+        Member member = (Member) memberUser;
+        Long memberId = member.getId();
+        if (enrollmentRepository.findByMemberIdAndActivityId(memberId, activityId).isPresent()) {
+            throw new MemberAlreadyEnrolledException("El socio ya está inscripto en esta actividad");
+        }
+
+        Enrollment enrollment = Enrollment.builder()
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now().plusDays(30))
+                .member(member)
+                .activity(activity)
+                .build();
+
+        enrollmentRepository.save(enrollment);
+        memberService.updateMemberStatus(memberId);
+    }
 }
 
