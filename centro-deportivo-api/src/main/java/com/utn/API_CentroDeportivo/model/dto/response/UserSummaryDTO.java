@@ -11,6 +11,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 
 public class UserSummaryDTO {
+    private Long id;
     private String name;
     private String lastname;
 }

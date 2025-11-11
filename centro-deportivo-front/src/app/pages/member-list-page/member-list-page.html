@@ -1,88 +1,44 @@
 <section class="title-section">
-    <h1>LISTADO DE SOCIOS</h1>
+  <h1>SOCIOS</h1>
 </section>
 
+
 @if (isLoading) {
-    <div class="loading-container">
-        <div class="loading-spinner"></div>
-        <p class="loading-text">Cargando listado de socios...</p>
-    </div>
+  <div class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Cargando socios...</p>
+  </div>
 }
 
 <section class="members-container" [class.fade-in]="!isLoading">
-    
-    @if (!isLoading && members.length > 0) {
-        
-        <div class="table-responsive">
-            <table class="members-table">
-                <thead>
-                    <tr>
-                        <th>Nombre y Usuario</th>
-                        <th>DNI / Fecha Nac.</th>
-                        <th>Contacto</th>
-                        <th>Estado</th>
-                        <th>Inscripciones Activas</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (member of members; track member.id) {
-                        <tr>
-                            <td class="member-name-cell" [routerLink]="['/instructors/members', member.id]">
-                            <strong>{{ member.lastname }}, {{ member.name }}</strong>
-                            <br><small class="username-text">@{{ member.username }}</small>
-                        </td>
-                        <td>
-                            <p>{{ member.dni }}</p>
-                            <small>Nac.: {{ member.birthdate }}</small>
-                        </td>
-                        <td class="contact-cell">
-                            <small>{{ member.email }}</small>
-                            <br><small>Tel: {{ member.phone }}</small>
-                        </td>
-                        <td>
-                            <span class="status-badge" [class.active]="member.status === 'ACTIVE'">
-                            {{ member.status }}
-                            </span>
-                        </td>
-                    <td class="enrollments-cell">
-                        @if (member.enrollments && member.enrollments.length > 0) {
-                            <ul class="enrollment-list">
-                                @for (enrollment of member.enrollments; track $index) {
-                                    <li class="enrollment-item">{{ enrollment.activityName }}</li>
-                                }
-                            </ul>
-                        } @else {
-                            <span class="no-enrollments">Ninguna</span>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-            </table>
+  @if (!isLoading && members.length > 0) {
+    @for (member of members; track $index) {
+      <div class="member-card">
+        <app-user-summary-item [user]="member"></app-user-summary-item>
+
+        <div class="actions">
+          <button
+            [routerLink]="['/instructors/members', member.id]"
+            class="btn-view-profile">
+            Ver perfil
+          </button>
         </div>
-        
-    } @else if (!isLoading) {
-        <p class="no-members no-activities">No se encontraron socios en la base de datos.</p>
+      </div>
     }
+  } @else if (!isLoading && !error) {
+    <p class="no-members">No hay socios disponibles</p>
+  }
 </section>
 
 <section class="pagination-container" [class.visible]="!isLoading">
-    @if (!isLoading && totalPages > 1) { 
-        <div class="pagination-controls">
-            
-            <button (click)="prevPage()" [disabled]="currentPage === 0" class="page-btn">
-                Anterior
-            </button>
-
-            <span class="page-info">
-                Página {{ currentPage + 1 }} de {{ totalPages }} 
-                ({{ totalElements }} socios)
-            </span>
-
-            <button (click)="nextPage()" [disabled]="currentPage === totalPages - 1" class="page-btn">
-                Siguiente
-            </button>
-        </div>
-    }
+  @if (!isLoading && totalPages > 1) {
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      [hasPreviousPage]="hasPreviousPage"
+      [hasNextPage]="hasNextPage"
+      (previousPageEvent)="prevPage()"
+      (nextPageEvent)="nextPage()">
+    </app-pagination>
+  }
 </section>
-

@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { Member } from '../../models/Member';
 import { InstructorService } from '../../services/instructor-service';
 import { ActivatedRoute } from '@angular/router';
+import { MemberProfileCard } from '../../components/member-profile-card/member-profile-card';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-member-detail-page',
-  imports: [],
+  imports: [MemberProfileCard, CommonModule],
   templateUrl: './member-detail-page.html',
   styleUrl: './member-detail-page.css'
 })

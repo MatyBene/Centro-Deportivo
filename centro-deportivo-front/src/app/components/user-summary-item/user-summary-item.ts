@@ -3,6 +3,7 @@ import { Member } from '../../models/Member';
 import Instructor from '../../models/Instructor';
 import { Admin } from '../../models/Admin';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-user-summary-item',
@@ -13,7 +14,7 @@ import { Router } from '@angular/router';
 export class UserSummaryItem {
   user = input<Member | Instructor | Admin>();
 
-  constructor(private router: Router) {};
+  constructor(private router: Router, private authService: AuthService) {};
 
   isAdmin(user: Member | Instructor | Admin | undefined): user is Admin {
     if (!user) return false;
@@ -56,6 +57,18 @@ export class UserSummaryItem {
   }
 
   goToDetail() {
-    this.router.navigate(['/users', this.user()?.username]);
+    const selectedUser = this.user();
+    const role = this.authService.getUserRole(); 
+
+    if (!selectedUser || !role) {
+      console.warn('Usuario no definido o no logueado');
+      return;
+    }
+
+    if (role === 'ADMIN') {
+      this.router.navigate(['/users', selectedUser.username]);
+    } else if (role === 'INSTRUCTOR') {
+      this.router.navigate(['/instructors/members', selectedUser.id]);
+    }
   }
 }
