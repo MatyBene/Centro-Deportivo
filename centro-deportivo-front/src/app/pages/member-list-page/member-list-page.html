@@ -15,14 +15,6 @@
     @for (member of members; track $index) {
       <div class="member-card">
         <app-user-summary-item [user]="member"></app-user-summary-item>
-
-        <div class="actions">
-          <button
-            [routerLink]="['/instructors/members', member.id]"
-            class="btn-view-profile">
-            Ver perfil
-          </button>
-        </div>
       </div>
     }
   } @else if (!isLoading && !error) {
