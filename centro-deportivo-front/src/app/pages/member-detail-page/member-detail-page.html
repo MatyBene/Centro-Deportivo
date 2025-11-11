@@ -1,0 +1,22 @@
+<section class="title-section">
+     <h1>PERFIL DEL SOCIO</h1>
+</section>
+
+@if (isLoading) {
+    <div class="loading-container">
+        <p>Cargando perfil del socio...</p>
+    </div>
+} @else if (error) {
+    <div class="error-container">
+        <p>Error: {{ error }}</p>
+        <p>No se pudo cargar la información. Intente nuevamente.</p>
+    </div>
+} @else if (member) {
+    <section class="profile-container">
+        
+        <app-member-profile-card 
+            [member]="member" 
+            (memberUpdated)="loadMember(member.id.toString())">
+        </app-member-profile-card>
+    </section>
+}

@@ -3,10 +3,14 @@ import { Member } from '../../models/Member';
 import { InstructorService } from '../../services/instructor-service';
 import { PageableResponse } from '../../models/Pageable';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { UserFilters } from '../../components/user-filters/user-filters';
+import { Pagination } from '../../components/pagination/pagination';
+import { UserSummaryItem } from '../../components/user-summary-item/user-summary-item';
 
 @Component({
   selector: 'app-member-list-page',
-  imports: [RouterLink],
+  imports: [CommonModule, RouterLink, Pagination, UserSummaryItem],
   templateUrl: './member-list-page.html',
   styleUrl: './member-list-page.css'
 })
@@ -56,5 +60,13 @@ export class MemberListPage implements OnInit{
 
   prevPage(): void {
     this.goToPage(this.currentPage - 1);
+  }
+
+   get hasNextPage(): boolean {
+    return this.currentPage < this.totalPages - 1;
+  }
+
+  get hasPreviousPage(): boolean {
+    return this.currentPage > 0;
   }
 }
