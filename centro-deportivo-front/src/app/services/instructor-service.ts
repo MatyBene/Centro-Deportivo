@@ -49,6 +49,9 @@ export class InstructorService {
 
   getMemberProfileDetails(id: number): Observable<Member> {
     return this.http.get<Member>(`${this.URL}/members/${id}`);
-    
+  }
+
+   registerMemberByInstructor(memberData: Member): Observable<string> {
+    return this.http.post(`${this.URL}/register-member`, memberData, { responseType: 'text' });
   }
 }
