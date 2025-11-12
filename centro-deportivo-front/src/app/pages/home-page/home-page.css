@@ -1,0 +1,178 @@
+.hero-section {
+  position: relative;
+  height: 35vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  max-width: 800px;
+  padding: 0 20px;
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+.hero-content h1 {
+  font-family: 'AlimamaBold', sans-serif;
+    font-size: 70px;
+    color: #d12c2c;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 0 #000;
+    margin-bottom: 15px;
+    -webkit-text-stroke: 1px #c9a83e;
+}
+
+.hero-content p {
+  font-size: 30px;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 40px;
+  animation: fadeInUp 1.4s ease-in-out;
+}
+
+.hero-button { 
+    background-color: #d12c2c; 
+    color: #fff;
+    border: 2px solid #c9a83e; 
+    padding: 15px 40px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-family: 'MiSans', sans-serif;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 6px 6px 0 #000; 
+    flex-grow: 1; 
+    max-width: 250px; 
+    display: inline-flex; 
+    justify-content: center;
+    align-items: center;
+    width: auto; 
+}
+
+.hero-button:hover {
+    background-color: #c9a83e; 
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0 #000;
+}
+
+
+.hero-button:active {
+    transform: translateY(-1px);
+    box-shadow: 4px 4px 0 #000;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 44px;
+  }
+  .hero-content p {
+    font-size: 18px;
+  }
+  .hero-button {
+    font-size: 16px;
+    padding: 12px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 32px;
+  }
+  .hero-content p {
+    font-size: 16px;
+  }
+}
+
+.logo-scroller {
+  max-width: 100%; 
+  margin: 0 auto;
+  overflow: hidden; 
+  -webkit-mask-image: linear-gradient(
+    90deg, 
+    transparent, 
+    #fff 20%, 
+    #fff 80%, 
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg, 
+    transparent, 
+    #fff 20%, 
+    #fff 80%, 
+    transparent
+  );
+  background-color: var(--color-fondo);
+}
+
+.logo-scroller-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content; 
+  animation: scroll 45s linear infinite;
+}
+
+.logo-scroller-inner ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.logo-scroller-inner li {
+  padding: 0 30px; 
+}
+
+.logo-scroller-inner img {
+  margin-top: 20px;
+  height: 220px;
+  width: auto;
+  opacity: 0.9; 
+  transition: opacity 0.3s ease;
+  cursor: pointer
+}
+
+.logo-scroller-inner img:hover {
+  opacity: 1; 
+}
+
+.logo-scroller:hover .logo-scroller-inner {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
