@@ -1,0 +1,64 @@
+.logo-scroller {
+  max-width: 100%; 
+  margin: 0 auto;
+  overflow: hidden; 
+  -webkit-mask-image: linear-gradient(
+    90deg, 
+    transparent, 
+    #fff 20%, 
+    #fff 80%, 
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg, 
+    transparent, 
+    #fff 20%, 
+    #fff 80%, 
+    transparent
+  );
+  background-color: var(--color-fondo);
+}
+
+.logo-scroller-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content; 
+  animation: scroll 45s linear infinite;
+}
+
+.logo-scroller-inner ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.logo-scroller-inner li {
+  padding: 0 30px; 
+}
+
+.logo-scroller-inner img {
+  margin-top: 20px;
+  height: 220px;
+  width: auto;
+  opacity: 0.9; 
+  transition: opacity 0.3s ease;
+  cursor: pointer
+}
+
+.logo-scroller-inner img:hover {
+  opacity: 1; 
+}
+
+.logo-scroller:hover .logo-scroller-inner {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
