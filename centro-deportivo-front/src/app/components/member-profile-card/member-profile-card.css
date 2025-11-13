@@ -213,6 +213,13 @@
     box-shadow: 2px 2px 0 #000;
 }
 
+.btn-unenroll:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 .no-activities {
     padding: 20px 30px 30px;
     position: relative;

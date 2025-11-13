@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MemberDetailPage {
 member: Member | undefined;
+instructorActivities: number[] = [];
   isLoading: boolean = true;
   error: string | null = null;
 
@@ -24,6 +25,7 @@ member: Member | undefined;
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.loadMember(params.get('id'));
+      this.loadInstructorActivities();
     });
   }
 
@@ -55,6 +57,15 @@ member: Member | undefined;
         this.error = 'No se pudo cargar el perfil del socio. Verifique que el ID exista.';
         this.isLoading = false;
       }
+    });
+  }
+  
+  loadInstructorActivities(): void {
+    this.instructorService.getActivitiesByInstructor().subscribe({
+      next: (activities) => {
+        this.instructorActivities = activities.map(a => a.id);
+      },
+      error: (e) => console.error('Error al cargar actividades del instructor', e)
     });
   }
 }
