@@ -67,7 +67,6 @@
                 @if (authService.isLoggedIn() && authService.getUserRole() === 'INSTRUCTOR') {
                     @if (activity.currentMembers < activity.maxMembers) {
                         <div class="instructor-enroll-wrapper admin-enroll-wrapper"> 
-                            <p class="enroll-title">Inscribir Socio</p>
                             <div class="admin-enroll-container">
                                 <input 
                                     type="text" 

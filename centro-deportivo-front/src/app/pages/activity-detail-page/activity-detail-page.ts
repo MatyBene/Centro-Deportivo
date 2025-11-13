@@ -170,11 +170,27 @@ getInstructor(instructorId: number | undefined): void {
         this.loadActivityDetail(); 
       },
       error: (e) => {
-        console.error('Error al inscribir socio (Instructor):', e);
-        let errorMessage = 'Error al inscribir. Verifique el ID o si ya está inscrito.';
-        this.instructorActionMessage = errorMessage;
-        this.isInstructorActionError = true;
-      }
+          console.log('Error al inscribir miembro como admin:', e);
+          
+          let errorMessage = 'No se pudo inscribir al usuario. Verifique el nombre y vuelva a intentar.';
+          
+          if (e.error) {
+            try {
+              const errorObj = typeof e.error === 'string' ? JSON.parse(e.error) : e.error;
+              
+              if (errorObj.details && errorObj.details.message) {
+                errorMessage = errorObj.details.message;
+              } else if (errorObj.message) {
+                errorMessage = errorObj.message;
+              }
+            } catch (parseError) {
+              console.error('Error al parsear mensaje de error:', parseError);
+            }
+          }
+          
+          this.instructorActionMessage = errorMessage;
+          this.isInstructorActionError = true;
+        }
     });
   }
 
@@ -195,10 +211,26 @@ getInstructor(instructorId: number | undefined): void {
             this.loadActivityDetail(); 
         },
         error: (e) => {
-            console.error('Error al inscribir socio (Instructor):', e);
-            let errorMessage = e.error?.message || e.error || 'Error desconocido al inscribir.';
-            this.instructorActionMessage = errorMessage;
-            this.isInstructorActionError = true;
+          console.log('Error al inscribir miembro como admin:', e);
+          
+          let errorMessage = 'No se pudo inscribir al usuario. Verifique el nombre y vuelva a intentar.';
+          
+          if (e.error) {
+            try {
+              const errorObj = typeof e.error === 'string' ? JSON.parse(e.error) : e.error;
+              
+              if (errorObj.details && errorObj.details.message) {
+                errorMessage = errorObj.details.message;
+              } else if (errorObj.message) {
+                errorMessage = errorObj.message;
+              }
+            } catch (parseError) {
+              console.error('Error al parsear mensaje de error:', parseError);
+            }
+          }
+          
+          this.instructorActionMessage = errorMessage;
+          this.isInstructorActionError = true;
         }
     });
   }
@@ -222,9 +254,26 @@ getInstructor(instructorId: number | undefined): void {
             this.loadActivityDetail(); 
         },
         error: (e) => {
-            let errorMessage = e.error || 'Error al dar de baja. Verifique el username.';
-            this.instructorActionMessage = errorMessage;
-            this.isInstructorActionError = true;
+          console.log('Error al inscribir miembro como admin:', e);
+          
+          let errorMessage = 'No se pudo inscribir al usuario. Verifique el nombre y vuelva a intentar.';
+          
+          if (e.error) {
+            try {
+              const errorObj = typeof e.error === 'string' ? JSON.parse(e.error) : e.error;
+              
+              if (errorObj.details && errorObj.details.message) {
+                errorMessage = errorObj.details.message;
+              } else if (errorObj.message) {
+                errorMessage = errorObj.message;
+              }
+            } catch (parseError) {
+              console.error('Error al parsear mensaje de error:', parseError);
+            }
+          }
+          
+          this.instructorActionMessage = errorMessage;
+          this.isInstructorActionError = true;
         }
     });
   }
