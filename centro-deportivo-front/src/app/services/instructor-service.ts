@@ -22,6 +22,9 @@ export class InstructorService {
   getInstructor(id: number): Observable<Instructor> {
     return this.http.get<Instructor>(`${this.URL}/${id}/details`);
   }
+  getProfile(): Observable<Instructor>{
+  return this.http.get<Instructor>(`${this.URL}/profile`);
+  }
   
   getAllMembers(page: number, size: number): Observable<PageableResponse<Member>> {
     let params = new HttpParams()

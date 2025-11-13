@@ -11,6 +11,10 @@
         <app-admin-profile-card [admin]="admin"></app-admin-profile-card>
     }
 
+    @if (instructor) {
+        <app-instructor-profile-card [instructor]="instructor"></app-instructor-profile-card>
+    }
+
     <div class="actions-container">
         <button class="action-btn edit-btn" [routerLink]="['/profile/edit']">
             Editar mi perfil
