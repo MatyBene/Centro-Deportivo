@@ -16,6 +16,7 @@
         
         <app-member-profile-card 
             [member]="member" 
+            [instructorActivities]="instructorActivities"
             (memberUpdated)="loadMember(member.id.toString())">
         </app-member-profile-card>
     </section>
