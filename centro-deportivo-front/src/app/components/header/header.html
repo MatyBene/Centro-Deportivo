@@ -1,13 +1,10 @@
 <header>
-    <!-- EL LOGO AHORA ES UN ENLACE QUE REDIRIGE A LA RAÍZ (/) -->
     <a routerLink="/"> 
         <img src="https://assets-persist.lovart.ai/agent_images/828d45c7-f4b4-4c15-a4a5-a65bcb3edaf4.png" class="logo" >
     </a>
     
     <nav>
         <ul>
-            <!-- EL ENLACE ORIGINAL A "Inicio" HA SIDO ELIMINADO -->
-
             @if (authService.getUserRole() === 'INSTRUCTOR') {
                 <li>
                     <a routerLink="/activity-list/my-activities">Mis actividades</a>
@@ -15,6 +12,18 @@
             } @else {
                 <li>
                     <a routerLink="/activity-list">Actividades</a>
+                </li>
+            }
+
+            @if (authService.getUserRole() !== 'ADMIN') {
+                <li class="dropdown">
+                    <button class="dropdown-btn">Gimnasio ▾</button>
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="#">Motivación</a></li> 
+                        @if (authService.isLoggedIn()) {
+                            <li><a routerLink="#">Rutinas</a></li> 
+                        }
+                    </ul>
                 </li>
             }
 
