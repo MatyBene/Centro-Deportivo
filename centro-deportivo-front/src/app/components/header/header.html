@@ -26,11 +26,13 @@
             }
             
             @if (!authService.isLoggedIn()) {
-                <li>
-                    <a routerLink="/public/login">Iniciar sesión</a>
-                </li>
-                <li>
-                    <a routerLink="/public/register">Registrarse</a>
+                <li class="dropdown">
+                    <button class="dropdown-btn">Cuenta ▾</button>
+
+                    <ul class="dropdown-menu">
+                        <li><a routerLink="/public/login">Iniciar sesión</a></li>
+                        <li><a routerLink="/public/register">Registrarse</a></li>
+                    </ul>
                 </li>
             }
             
