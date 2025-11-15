@@ -18,7 +18,7 @@ export const routes: Routes = [
     {path: '', component: HomePage},
     {path: 'public/login', component: LoginPage, canActivate: [guestGuard]},
     {path: 'public/register', component: FormPage, canActivate: [guestGuard]},
-    {path: '/motivation', component: MotivationPage},
+    {path: 'motivation', component: MotivationPage},
     {path: 'activity-list', component: ActivityListPage},
     {path: 'activity-list/my-activities', component: InstructorActivitiesPage, canActivate: [authGuard]},
     {path: 'activity-list/:id', component: ActivityDetailPage},
