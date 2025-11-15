@@ -1,3 +1,37 @@
+.title-section {
+    text-align: center;
+    margin-bottom: 5px;
+    position: relative;
+}
+
+.title-section h1 {
+    font-family: 'AlimamaBold', sans-serif;
+    font-size: 56px;
+    color: #d12c2c;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 4px 4px 0 #000;
+    margin-bottom: 20px;
+    -webkit-text-stroke: 1px #c9a83e;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+.title-section h1:hover {
+    color: #ca5c5c; 
+}
+
+.title-section h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #c9a83e 20%, #d12c2c 50%, #c9a83e 80%, transparent);
+}
+
 .logo-scroller {
   max-width: 100%;
   margin: 0 auto;
@@ -20,11 +54,14 @@
   background-color: var(--color-fondo);
 }
 
+
+
 .logo-scroller-inner {
   display: flex;
   flex-wrap: nowrap;
   width: max-content;
-  animation: scroll 35s linear infinite;
+  transition: transform 0.5s ease;
+  animation: scroll 30s linear infinite;
 }
 
 .logo-scroller-inner ul {
@@ -35,19 +72,20 @@
 }
 
 .logo-scroller-inner li {
-  padding: 0 30px;
+  padding: 0 40px;
 }
 
 .logo-scroller-inner img {
   margin-top: 20px;
   height: 220px;
   width: auto;
-  opacity: 0.9;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+    border-radius: 4px;
 }
 
 .logo-scroller-inner img:hover {
   opacity: 1;
+  transform: scale(1.25);
 }
 
 .logo-scroller:hover .logo-scroller-inner {
@@ -61,4 +99,48 @@
   to {
     transform: translateX(-50%);
   }
+}
+
+.description-section > div { 
+    margin-top: 30px;
+    background: linear-gradient(145deg, #1c0000, #3a0000); /* Degradado sutil en el fondo */
+    color: #fff; 
+    border-radius: 16px; /* Bordes más redondeados */
+    padding: 30px; /* Más padding */
+    
+    /* Borde izquierdo se mantiene */
+    border-left: 6px solid #f5c300; /* Borde más visible, color dorado brillante */
+    
+    /* Sombra moderna: Más dispersa y menos sólida */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 10px rgba(245, 195, 0, 0.3); 
+    
+    /* Margen y alineación se mantienen igual que en la última corrección */
+    margin-left: 0 !important; 
+    margin-right: auto !important;
+    transition: transform 0.3s ease;
+}
+
+.description-section > div:hover {
+    transform: translateY(-5px); /* Pequeño efecto 3D al pasar el ratón */
+}
+
+.description-section h3 {
+    text-align: left !important;
+    color: #ff4747; /* Rojo más vibrante para el título de la tarjeta */
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.description-section p {
+    color: #e0e0e0; /* Gris claro para el cuerpo del texto */
+    text-align: justify !important;
+    line-height: 1.7;
+    font-size: 18px;
+}
+
+.description-section p strong {
+    color: #f5c300; 
+    font-weight: bold;
 }
