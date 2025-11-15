@@ -32,101 +32,67 @@
     background: linear-gradient(90deg, transparent, #c9a83e 20%, #d12c2c 50%, #c9a83e 80%, transparent);
 }
 
-.logo-scroller {
-  max-width: 100%;
-  margin: 0 auto;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #fff 20%,
-    #fff 80%,
-    transparent
-  );
-
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #fff 20%,
-    #fff 80%,
-    transparent
-  );
-  background-color: var(--color-fondo);
+.logo-scroller-container {
+    width: 100%; 
 }
 
-
-
-.logo-scroller-inner {
-  display: flex;
-  flex-wrap: nowrap;
-  width: max-content;
-  transition: transform 0.5s ease;
-  animation: scroll 30s linear infinite;
+.slide-viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 370px;
+    width: auto; 
+    overflow: hidden;
+    margin-top: 0;
 }
 
-.logo-scroller-inner ul {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.slide-viewer .slide-inner {
+    position: relative;
+    width: 100%; 
+    height: 100%;
 }
 
-.logo-scroller-inner li {
-  padding: 0 40px;
+.slide-viewer img {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    
+    height: 220px; 
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 }
 
-.logo-scroller-inner img {
-  margin-top: 20px;
-  height: 220px;
-  width: auto;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-    border-radius: 4px;
-}
-
-.logo-scroller-inner img:hover {
-  opacity: 1;
-  transform: scale(1.25);
-}
-
-.logo-scroller:hover .logo-scroller-inner {
-  animation-play-state: paused;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.slide-viewer img.active {
+    opacity: 1; 
+    z-index: 10; 
+    transform: translate(-50%, -50%) scale(1.1); 
 }
 
 .description-section > div { 
     margin-top: 30px;
-    background: linear-gradient(145deg, #1c0000, #3a0000); /* Degradado sutil en el fondo */
+    background: linear-gradient(145deg, #1c0000, #3a0000); 
     color: #fff; 
-    border-radius: 16px; /* Bordes más redondeados */
-    padding: 30px; /* Más padding */
-    
-    /* Borde izquierdo se mantiene */
-    border-left: 6px solid #f5c300; /* Borde más visible, color dorado brillante */
-    
-    /* Sombra moderna: Más dispersa y menos sólida */
+    border-radius: 16px; 
+    padding: 30px; 
+    border-left: 6px solid #f5c300; 
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 10px rgba(245, 195, 0, 0.3); 
-    
-    /* Margen y alineación se mantienen igual que en la última corrección */
     margin-left: 0 !important; 
     margin-right: auto !important;
     transition: transform 0.3s ease;
 }
 
 .description-section > div:hover {
-    transform: translateY(-5px); /* Pequeño efecto 3D al pasar el ratón */
+    transform: translateY(-5px); 
 }
 
 .description-section h3 {
     text-align: left !important;
-    color: #ff4747; /* Rojo más vibrante para el título de la tarjeta */
+    color: #ff4747; 
     font-weight: 700;
     margin-bottom: 20px;
     font-size: 28px;
@@ -134,7 +100,7 @@
 }
 
 .description-section p {
-    color: #e0e0e0; /* Gris claro para el cuerpo del texto */
+    color: #e0e0e0; 
     text-align: justify !important;
     line-height: 1.7;
     font-size: 18px;
@@ -143,4 +109,118 @@
 .description-section p strong {
     color: #f5c300; 
     font-weight: bold;
+}
+
+.motivation-list {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.motivation-phrase-wrapper {
+    overflow: hidden; 
+    height: 180px; 
+    display: flex;
+    align-items: center;
+    padding: 15px 30px; 
+    border-radius: 12px; 
+    margin-bottom: 25px; 
+    background: linear-gradient(90deg, #3a0000, #1a0000); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6); 
+    width: 100%; 
+    opacity: 0; 
+    transform: translateX(0); 
+    transition: opacity 1.0s ease-out, transform 1.0s cubic-bezier(0.2, 0.8, 0.5, 1);
+}
+
+
+.motivation-phrase-wrapper.fade-in-left {
+    transform: translateX(-100%); 
+    border-left: none; 
+}
+
+.motivation-phrase-wrapper.visible.fade-in-left {
+    border-left: none; 
+    border-right: 3px solid #f5c300; 
+}
+
+.motivation-phrase-wrapper.fade-in-right {
+    transform: translateX(100%);
+    flex-direction: row-reverse; 
+    border-right: none; 
+}
+
+.motivation-phrase-wrapper.visible.fade-in-right {
+    background: linear-gradient(-90deg, #3a0000, #1a0000); 
+    border-right: none; 
+    border-left: 3px solid #f5c300; 
+}
+
+
+.motivation-phrase-wrapper.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+.author-image-box {
+    flex-shrink: 0; 
+    width: 130px; 
+    height: 130px; 
+    border-radius: 8px; 
+    overflow: hidden;
+    margin-right: 25px; 
+    margin-left: 0;
+    box-shadow: 0 0 15px rgba(245, 195, 0, 0.5); 
+}
+
+.author-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.motivation-phrase-wrapper.fade-in-right .author-image-box {
+    margin-right: 0; 
+    margin-left: 25px; 
+}
+
+
+.phrase-content-box {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; 
+}
+
+
+.motivation-phrase-wrapper.fade-in-right .phrase-content-box {
+    text-align: right; 
+}
+
+.motivation-phrase-wrapper.fade-in-right .phrase-content-box p,
+.motivation-phrase-wrapper.fade-in-right .phrase-content-box .phrase-author {
+    text-align: right; 
+}
+
+.motivation-phrase-wrapper p {
+    background: none; 
+    border: none; 
+    box-shadow: none; 
+    padding: 0; 
+    margin-bottom: 5px; 
+    font-size: 2.1rem; 
+    color: #f5c300; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
+}
+
+.phrase-author {
+    display: block; 
+    font-size: 1.3rem; 
+    font-style: normal; 
+    font-weight: 600; 
+    color: #e0e0e0; 
+    opacity: 0.9;
+    text-align: left; 
 }

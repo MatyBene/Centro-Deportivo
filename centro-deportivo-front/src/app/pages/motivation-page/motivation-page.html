@@ -4,25 +4,17 @@
     </h1>
 </div>
 
-<div class="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">   
-    <div class="w-full">   
-        <div class="flex flex-col md:flex-row md:justify-between md:items-start w-full">     
+<div class="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4"> 
+    <div class="w-full"> 
+        <div class="flex flex-col md:flex-row md:justify-between md:items-start w-full md:gap-8">     
+            
             <div class="logo-scroller-container w-full md:w-1/2 md:order-2"> 
-                <div class="logo-scroller">
-                    <div class="logo-scroller-inner">
-                        <ul>
-                    <li><img src="assets/img/derek.png" alt="Campeon Open Mr Olympia 2025: Derek Lunsford."></li>
-                    <li><img src="assets/img/keone.png" alt="Campeon 212 Mr Olympia 2025: Keone Pearson."></li>
-                    <li><img src="assets/img/ramon.png" alt="Campeon Classic Physique Mr Olympia 2025: Ramon Queiroz"></li>
-                    <li><img src="assets/img/ryan.png" alt="Campeon Men's Physique Mr Olympia 2025: Ryan Terry"></li>
-                </ul>
-                
-                <ul aria-hidden="true">
-                    <li><img src="assets/img/derek.png" alt="Campeon Open Mr Olympia 2025: Derek Lunsford."></li>
-                    <li><img src="assets/img/keone.png" alt="Campeon 212 Mr Olympia 2025: Keone Pearson."></li>
-                    <li><img src="assets/img/ramon.png" alt="Campeon Classic Physique Mr Olympia 2025: Ramon Queiroz"></li>
-                    <li><img src="assets/img/ryan.png" alt="Campeon Men's Physique Mr Olympia 2025: Ryan Terry"></li>
-                </ul>
+                <div class="slide-viewer">
+                    <div class="slide-inner">
+                        <img *ngFor="let imgUrl of slideImages; let i = index" 
+                             [src]="imgUrl" 
+                             [alt]="'Campeón Mr Olympia ' + i"
+                             [class.active]="i === currentSlideIndex">
                     </div>
                 </div>
             </div>
@@ -33,9 +25,30 @@
                         La Cima del Culturismo Mundial
                     </h3>
                     <p class="text-base text-gray-700 leading-relaxed text-justify">
-                        El Mr. Olympia es, sin lugar a dudas, la competición más prestigiosa y la cúspide del fisicoculturismo profesional. Fundado por Joe Weider en 1965, este evento anual corona al mejor físico del mundo, cimentando su legado junto a leyendas como Arnold Schwarzenegger, Dorian Yates y Ronnie Coleman. Para un atleta, ganar el Mr. Olympia no es solo una victoria, es alcanzar la inmortalidad deportiva y un estándar de excelencia física inigualable.                    </p>
+                        El Mr. Olympia es, sin lugar a dudas, la competición más prestigiosa y la cúspide del fisicoculturismo profesional. Fundado por Joe Weider en 1965, este evento anual corona al mejor físico del mundo, cimentando su legado junto a leyendas como Arnold Schwarzenegger, Dorian Yates y Ronnie Coleman. Para un atleta, ganar el Mr. Olympia no es solo una victoria, es alcanzar la inmortalidad deportiva y un estándar de excelencia física inigualable.                    </p>
                 </div>
             </div>
         </div> 
+        
+        <div class="motivation-list w-full max-w-6xl mx-auto py-16">
+    <div *ngFor="let moto of motivations" 
+         class="motivation-phrase-wrapper" 
+         [class.visible]="moto.visible" 
+         [ngClass]="{ 
+             'fade-in-left': moto.direction === 'left', 
+             'fade-in-right': moto.direction === 'right' 
+         }">
+        
+        <div class="author-image-box">
+            <img [src]="moto.authorImage" [alt]="moto.author">
         </div>
+
+        <div class="phrase-content-box">
+            <p>"{{ moto.text }}"</p>
+            <span class="phrase-author"> — {{ moto.author }}</span>
+        </div>
+        
+    </div>
+</div>
+    </div>
 </div>
