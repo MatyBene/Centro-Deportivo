@@ -1,0 +1,357 @@
+{
+  "routines": [
+    {
+      "id": "rut001",
+      "name": "Mi Rutina Personal - Socio1",
+      "description": "Rutina que creé para entrenar 3 veces por semana enfocada en fuerza",
+      "level": "principiante",
+      "weeksDuration": 8,
+      "daysPerWeek": 3,
+      "goal": "Ganar fuerza base y tonificar",
+      "warmUp": {
+        "durationMinutes": 10,
+        "activities": ["5 min cardio suave", "Movilidad articular"]
+      },
+      "coolDown": {
+        "durationMinutes": 10,
+        "activities": ["Estiramientos estáticos"]
+      },
+      "generalNotes": [],
+      "tags": [],
+      "createdBy": "member_marcos",
+      "createdAt": "2025-01-15",
+      "isTemplate": false,
+
+      "days": [
+        {
+          "id": "dia001",
+          "dayNumber": 1,
+          "name": "Pecho y Espalda",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej001",
+              "name": "Press Banca",
+              "muscleGroup": "Pecho",
+              "type": "compuesto",
+              "setsCount": 4,
+              "repetitions": "8-10",
+              "restSeconds": 120,
+              "suggestedWeight": "80kg",
+              "notes": "Agarre medio, codos a 45 grados",
+              "order": 1,
+              "sets": [
+                { "number": 1, "repetitions": "8-10" },
+                { "number": 2, "repetitions": "8-10" },
+                { "number": 3, "repetitions": "8-10" },
+                { "number": 4, "repetitions": "8-10" }
+              ]
+            },
+            {
+              "id": "ej002",
+              "name": "Remo con Barra",
+              "muscleGroup": "Espalda",
+              "type": "compuesto",
+              "setsCount": 4,
+              "repetitions": "10-12",
+              "restSeconds": 90,
+              "suggestedWeight": "70kg",
+              "notes": "Torso paralelo al suelo",
+              "order": 2,
+              "sets": [
+                { "number": 1, "repetitions": "10-12" },
+                { "number": 2, "repetitions": "10-12" },
+                { "number": 3, "repetitions": "10-12" },
+                { "number": 4, "repetitions": "10-12" }
+              ]
+            },
+            {
+              "id": "ej003",
+              "name": "Press Inclinado",
+              "muscleGroup": "Pecho Superior",
+              "type": "compuesto",
+              "setsCount": 3,
+              "repetitions": "10-12",
+              "restSeconds": 90,
+              "suggestedWeight": "60kg",
+              "notes": "Banco a 30-45 grados",
+              "order": 3,
+              "sets": [
+                { "number": 1, "repetitions": "10-12" },
+                { "number": 2, "repetitions": "10-12" },
+                { "number": 3, "repetitions": "10-12" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dia002",
+          "dayNumber": 2,
+          "name": "Piernas",
+          "order": 2,
+          "exercises": [
+            {
+              "id": "ej004",
+              "name": "Sentadilla Libre",
+              "muscleGroup": "Piernas",
+              "type": "compuesto",
+              "setsCount": 4,
+              "repetitions": "10-12",
+              "restSeconds": 120,
+              "suggestedWeight": "100kg",
+              "notes": "Mantener espalda recta, bajar hasta paralelo",
+              "order": 1,
+              "sets": [
+                { "number": 1, "repetitions": "10-12" },
+                { "number": 2, "repetitions": "10-12" },
+                { "number": 3, "repetitions": "10-12" },
+                { "number": 4, "repetitions": "10-12" }
+              ]
+            },
+            {
+              "id": "ej005",
+              "name": "Peso Muerto Rumano",
+              "muscleGroup": "Piernas/Espalda",
+              "type": "compuesto",
+              "setsCount": 4,
+              "repetitions": "8-10",
+              "restSeconds": 120,
+              "suggestedWeight": "90kg",
+              "notes": "Mantener espalda recta",
+              "order": 2,
+              "sets": [
+                { "number": 1, "repetitions": "8-10" },
+                { "number": 2, "repetitions": "8-10" },
+                { "number": 3, "repetitions": "8-10" },
+                { "number": 4, "repetitions": "8-10" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dia003",
+          "dayNumber": 3,
+          "name": "Hombros y Brazos",
+          "order": 3,
+          "exercises": [
+            {
+              "id": "ej006",
+              "name": "Press Militar",
+              "muscleGroup": "Hombros",
+              "type": "compuesto",
+              "setsCount": 4,
+              "repetitions": "10-12",
+              "restSeconds": 90,
+              "suggestedWeight": "50kg",
+              "notes": "Espalda recta, no arquear lumbar",
+              "order": 1,
+              "sets": [
+                { "number": 1, "repetitions": "10-12" },
+                { "number": 2, "repetitions": "10-12" },
+                { "number": 3, "repetitions": "10-12" },
+                { "number": 4, "repetitions": "10-12" }
+              ]
+            },
+            {
+              "id": "ej007",
+              "name": "Curl Bíceps",
+              "muscleGroup": "Brazos",
+              "type": "aislamiento",
+              "setsCount": 3,
+              "repetitions": "12-15",
+              "restSeconds": 60,
+              "suggestedWeight": "30kg",
+              "notes": "Sin balanceo",
+              "order": 2,
+              "sets": [
+                { "number": 1, "repetitions": "12-15" },
+                { "number": 2, "repetitions": "12-15" },
+                { "number": 3, "repetitions": "12-15" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "rut002",
+      "name": "Rutina Hipertrofia - Socio2",
+      "description": "Rutina avanzada asignada por instructor1",
+      "level": "intermedio",
+      "weeksDuration": 12,
+      "daysPerWeek": 4,
+      "goal": "Ganancia de masa muscular",
+      "warmUp": { "durationMinutes": 10, "activities": ["Cardio 5 min", "Movilidad"] },
+      "coolDown": { "durationMinutes": 10, "activities": ["Estiramientos"] },
+      "generalNotes": [],
+      "tags": [],
+      "createdBy": "inst_juan",
+      "createdAt": "2025-02-10",
+      "isTemplate": false,
+
+      "days": [
+        {
+          "id": "dia004",
+          "dayNumber": 1,
+          "name": "Upper A - Pecho/Hombros",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej008",
+              "name": "Press Banca Plano",
+              "muscleGroup": "Pecho",
+              "type": "compuesto",
+              "setsCount": 4,
+              "repetitions": "8-12",
+              "restSeconds": 120,
+              "suggestedWeight": "85kg",
+              "notes": "Explosivo en subida",
+              "order": 1,
+              "sets": [
+                { "number": 1, "repetitions": "8-12" },
+                { "number": 2, "repetitions": "8-12" },
+                { "number": 3, "repetitions": "8-12" },
+                { "number": 4, "repetitions": "8-12" }
+              ]
+            },
+            {
+              "id": "ej009",
+              "name": "Press Militar Mancuernas",
+              "muscleGroup": "Hombros",
+              "type": "compuesto",
+              "setsCount": 3,
+              "repetitions": "10-12",
+              "restSeconds": 90,
+              "suggestedWeight": "20kg c/u",
+              "notes": "Control total",
+              "order": 2,
+              "sets": [
+                { "number": 1, "repetitions": "10-12" },
+                { "number": 2, "repetitions": "10-12" },
+                { "number": 3, "repetitions": "10-12" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "dia005",
+          "dayNumber": 2,
+          "name": "Lower A - Piernas",
+          "order": 2,
+          "exercises": [
+            {
+              "id": "ej010",
+              "name": "Sentadilla Profunda",
+              "muscleGroup": "Piernas",
+              "type": "compuesto",
+              "setsCount": 5,
+              "repetitions": "10-12",
+              "restSeconds": 150,
+              "suggestedWeight": "120kg",
+              "notes": "Máxima profundidad",
+              "order": 1,
+              "sets": [
+                { "number": 1, "repetitions": "10-12" },
+                { "number": 2, "repetitions": "10-12" },
+                { "number": 3, "repetitions": "10-12" },
+                { "number": 4, "repetitions": "10-12" },
+                { "number": 5, "repetitions": "10-12" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "1762977944833",
+      "name": "rutina maty",
+      "description": "asddas",
+      "level": "principiante",
+      "goal": "eqweqw",
+      "weeksDuration": 12,
+      "daysPerWeek": 1,
+      "warmUp": { "durationMinutes": 10, "activities": [] },
+      "coolDown": { "durationMinutes": 10, "activities": [] },
+      "generalNotes": [],
+      "tags": [],
+      "createdBy": "member_marcos",
+      "createdAt": "2025-11-12",
+      "isTemplate": false,
+
+      "days": [
+        {
+          "id": "dia006",
+          "dayNumber": 1,
+          "name": "pecho",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej1762977922464",
+              "name": "press con mancuerna",
+              "muscleGroup": "pecho",
+              "type": "isometrico",
+              "setsCount": 4,
+              "repetitions": "8-12",
+              "restSeconds": 90,
+              "suggestedWeight": "",
+              "notes": "",
+              "order": 1,
+              "sets": [
+                { "number": 1, "repetitions": "8-12" },
+                { "number": 2, "repetitions": "8-12" },
+                { "number": 3, "repetitions": "8-12" },
+                { "number": 4, "repetitions": "8-12" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "routineAssignments": [
+    {
+      "id": "asig001",
+      "routineId": "rut002",
+      "memberUsername": "member_renata",
+      "instructorUsername": "inst_juan",
+      "assignmentDate": "2025-02-15T14:30:00Z",
+      "active": true,
+      "startDate": "2025-02-15",
+      "endDate": null,
+      "notes": "Rutina avanzada para hipertrofia"
+    }
+  ],
+
+  "trainingHistory": [
+    {
+      "id": "hist001",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej001",
+      "date": "2025-03-01",
+      "sets": [
+        {"number": 1, "repetitions": 10, "weight": 75, "completed": true},
+        {"number": 2, "repetitions": 8, "weight": 80, "completed": true},
+        {"number": 3, "repetitions": 8, "weight": 80, "completed": true},
+        {"number": 4, "repetitions": 6, "weight": 75, "completed": true}
+      ],
+      "notes": "Buen entrenamiento, subí peso en segunda serie"
+    },
+    {
+      "id": "hist1762977824821",
+      "date": "2025-11-12",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej001",
+      "sets": [
+        {"number": 1, "weight": 85, "repetitions": 8},
+        {"number": 2, "weight": 85, "repetitions": 8},
+        {"number": 3, "weight": 90, "repetitions": 8},
+        {"number": 4, "weight": 90, "repetitions": 8}
+      ]
+    }
+  ]
+}
