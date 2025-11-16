@@ -29,7 +29,7 @@ motivations = [
           direction: 'left', visible: false, author: "Arnold Schwarzenegger", 
           authorImage: "assets/img/arnold1.jpg" }, 
         
-        { text: "Todo el mundo quiere ser una bestia, pero nadie quiere hacer lo que hacen las bestias. ¡Luz de luna!", 
+        { text: "Todo el mundo quiere ser una bestia, pero nadie quiere hacer lo que hacen las bestias.", 
           direction: 'right', visible: false, author: "Ronnie Coleman", 
           authorImage: "assets/img/ronnie1.jpg" }, 
         

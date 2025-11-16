@@ -1,6 +1,7 @@
 .title-section {
     text-align: center;
-    margin-bottom: 5px;
+    margin-bottom: 0;
+    padding-bottom: 20px;
     position: relative;
 }
 
@@ -11,7 +12,7 @@
     text-transform: uppercase;
     letter-spacing: 3px;
     text-shadow: 4px 4px 0 #000;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     -webkit-text-stroke: 1px #c9a83e;
     position: relative;
     display: inline-block;
@@ -40,7 +41,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 370px;
+    height: 420px;
     width: auto; 
     overflow: hidden;
     margin-top: 0;
@@ -57,8 +58,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); 
-    
-    height: 220px; 
+    height: 320px; 
     width: auto;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
@@ -70,7 +70,7 @@
 .slide-viewer img.active {
     opacity: 1; 
     z-index: 10; 
-    transform: translate(-50%, -50%) scale(1.1); 
+    transform: translate(-50%, -50%) scale(1.2); 
 }
 
 .description-section > div { 
@@ -80,6 +80,7 @@
     border-radius: 16px; 
     padding: 30px; 
     border-left: 6px solid #f5c300; 
+    border-right: 6px solid #f5c300;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 10px rgba(245, 195, 0, 0.3); 
     margin-left: 0 !important; 
     margin-right: auto !important;
@@ -95,7 +96,7 @@
     color: #ff4747; 
     font-weight: 700;
     margin-bottom: 20px;
-    font-size: 28px;
+    font-size: 30px;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
@@ -103,7 +104,7 @@
     color: #e0e0e0; 
     text-align: justify !important;
     line-height: 1.7;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .description-section p strong {
@@ -223,4 +224,61 @@
     color: #e0e0e0; 
     opacity: 0.9;
     text-align: left; 
+}
+
+@media (max-width: 768px) {
+    .title-section h1 {
+        font-size: 36px;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 0 #000;
+    }
+
+    .slide-viewer {
+        height: 300px; 
+    }
+
+    .slide-viewer img {
+        height: 220px; 
+    }
+
+    .motivation-list {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    .motivation-phrase-wrapper {
+        height: auto; 
+        padding: 15px; 
+        margin-bottom: 15px;
+        flex-direction: column; 
+        text-align: center;
+    }
+
+    .author-image-box {
+        width: 100px; 
+        height: 100px;
+        margin: 0 auto 10px auto; 
+    }
+
+    .motivation-phrase-wrapper.fade-in-right .author-image-box {
+        margin: 0 auto 10px auto; 
+    }
+    
+    .motivation-phrase-wrapper p {
+        font-size: 1.5rem; 
+        text-align: center !important;
+    }
+
+    .phrase-author {
+        font-size: 1rem;
+        text-align: center !important;
+    }
+    
+    .motivation-phrase-wrapper .phrase-content-box {
+        text-align: center !important;
+    }
+
+    .motivation-phrase-wrapper.fade-in-right {
+        flex-direction: column; 
+    }
 }
