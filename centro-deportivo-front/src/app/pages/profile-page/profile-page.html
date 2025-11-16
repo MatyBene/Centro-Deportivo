@@ -5,18 +5,23 @@
 <section class="profile-container">
     @if (member) {
         <app-member-profile-card [member]="member"></app-member-profile-card>
-    }
-
-    @if (admin) {
-        <app-admin-profile-card [admin]="admin"></app-admin-profile-card>
-    }
-
-    <div class="actions-container">
+        <div class="actions-container">
         <button class="action-btn edit-btn" [routerLink]="['/profile/edit']">
             Editar mi perfil
         </button>
         <button class="action-btn delete-btn" (click)="removeMember()">
             Eliminar cuenta
         </button>
-    </div>
+        </div>
+    }
+
+    @if (admin) {
+        <app-admin-profile-card [admin]="admin"></app-admin-profile-card>
+    }
+
+    @if (instructor) {
+        <app-instructor-profile-card [instructor]="instructor"></app-instructor-profile-card>
+    }
+
+    
 </section>

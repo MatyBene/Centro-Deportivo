@@ -2,10 +2,7 @@ package com.utn.API_CentroDeportivo.controller;
 
 import com.utn.API_CentroDeportivo.model.dto.request.MemberRequestDTO;
 
-import com.utn.API_CentroDeportivo.model.dto.response.InstructorDetailsDTO;
-import com.utn.API_CentroDeportivo.model.dto.response.InstructorSummaryDTO;
-import com.utn.API_CentroDeportivo.model.dto.response.MembersDetailsDTO;
-import com.utn.API_CentroDeportivo.model.dto.response.SportActivityDetailsDTO;
+import com.utn.API_CentroDeportivo.model.dto.response.*;
 import com.utn.API_CentroDeportivo.model.entity.Instructor;
 import com.utn.API_CentroDeportivo.service.IAuthService;
 import com.utn.API_CentroDeportivo.service.IInstructorService;
@@ -324,5 +321,13 @@ public class InstructorController {
         return instructorService.getInstructorDetailsById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @GetMapping("/profile")
+    public ResponseEntity<Optional<UserDetailsDTO>> getProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserDetailsDTO> dto = instructorService.findUserDetailsByUsername(username);
+        return ResponseEntity.ok(dto);
     }
 }

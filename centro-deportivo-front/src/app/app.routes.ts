@@ -13,6 +13,8 @@ import { InstructorDetailPage } from './pages/instructor-detail-page/instructor-
 import { UserListPage } from './pages/user-list-page/user-list-page';
 import { UserDetailPage } from './pages/user-detail-page/user-detail-page';
 import { MotivationPage } from './pages/motivation-page/motivation-page';
+import { MemberListPage } from './pages/member-list-page/member-list-page';
+import { MemberDetailPage } from './pages/member-detail-page/member-detail-page';
 
 export const routes: Routes = [
     {path: '', component: HomePage},
@@ -23,10 +25,12 @@ export const routes: Routes = [
     {path: 'activity-list/my-activities', component: InstructorActivitiesPage, canActivate: [authGuard]},
     {path: 'activity-list/:id', component: ActivityDetailPage},
 
-    {path: 'my-activities', component: MemberActivitiesPageComponent, canActivate: [authGuard]},
-
+    {path: 'my-activities', component: MemberActivitiesPageComponent, canActivate: [authGuard]}, 
+    {path: 'instructors/register-member', component: FormPage, canActivate: [authGuard]},
+    {path: 'instructors/members', component: MemberListPage},
     {path: 'instructors/:id', component: InstructorDetailPage},
-
+    {path: 'instructors/members/:id', component: MemberDetailPage, canActivate: [authGuard]},
+    
     {path: 'admin/register', component: FormPage, canActivate: [authGuard]},
 
     {path: 'users', component: UserListPage, canActivate: [authGuard]},

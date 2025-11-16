@@ -6,6 +6,7 @@ import { FieldError } from '../../components/field-error/field-error';
 import { CustomValidators } from '../../utils/custom-validators';
 import { AdminService } from '../../services/admin-service';
 import { Admin } from '../../models/Admin';
+import { InstructorService } from '../../services/instructor-service';
 
 @Component({
   selector: 'app-form-page',
@@ -17,12 +18,14 @@ export class FormPage implements OnInit{
   userForm!: FormGroup;
   isEditMode: boolean = false;
   isAdminRegisterMode: boolean = false;
+  isInstructorRegisterMode: boolean = false;
   currentAdmin: Admin | null = null;
   serverErrors: { [key: string]: string } = {};
 
   constructor(
     private memberService: MemberService,
     private adminService: AdminService,
+    private instructorService: InstructorService,
     private fb: FormBuilder,
     private router: Router
   ){}
@@ -30,6 +33,7 @@ export class FormPage implements OnInit{
   ngOnInit(): void {
     this.isEditMode = this.router.url.includes('/profile/edit');
     this.isAdminRegisterMode = this.router.url.includes('/admin/register');
+    this.isInstructorRegisterMode = this.router.url.includes('/instructors/register-member');
 
     if (this.isAdminRegisterMode) {
       this.adminService.getAdmin().subscribe({
@@ -141,8 +145,17 @@ export class FormPage implements OnInit{
           this.handleServerError(e);
         }
       });
+
     } else if(this.isAdminRegisterMode) {
-      this.registerUserByRole(formValue);
+        this.registerUserByRole(formValue);
+    } else if(this.isInstructorRegisterMode) {
+      this.instructorService.registerMemberByInstructor(formValue).subscribe({
+       next: () => {
+          alert('Socio registrado correctamente');
+          this.router.navigate(['/instructors/members']);
+        },
+        error: (e) => this.handleServerError(e)
+      });
     } else {
       console.log('Datos enviados al backend:', formValue);
       this.memberService.register(formValue).subscribe({
