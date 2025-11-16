@@ -1,0 +1,284 @@
+.title-section {
+    text-align: center;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.title-section h1 {
+    font-family: 'AlimamaBold', sans-serif;
+    font-size: 56px;
+    color: #d12c2c;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 4px 4px 0 #000;
+    margin-bottom: 5px;
+    -webkit-text-stroke: 1px #c9a83e;
+    position: relative;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+.title-section h1:hover {
+    color: #ca5c5c; 
+}
+
+.title-section h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #c9a83e 20%, #d12c2c 50%, #c9a83e 80%, transparent);
+}
+
+.logo-scroller-container {
+    width: 100%; 
+}
+
+.slide-viewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 420px;
+    width: auto; 
+    overflow: hidden;
+    margin-top: 0;
+}
+
+.slide-viewer .slide-inner {
+    position: relative;
+    width: 100%; 
+    height: 100%;
+}
+
+.slide-viewer img {
+    position: absolute; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    height: 320px; 
+    width: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); 
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.slide-viewer img.active {
+    opacity: 1; 
+    z-index: 10; 
+    transform: translate(-50%, -50%) scale(1.2); 
+}
+
+.description-section > div { 
+    margin-top: 30px;
+    background: linear-gradient(145deg, #1c0000, #3a0000); 
+    color: #fff; 
+    border-radius: 16px; 
+    padding: 30px; 
+    border-left: 6px solid #f5c300; 
+    border-right: 6px solid #f5c300;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 10px rgba(245, 195, 0, 0.3); 
+    margin-left: 0 !important; 
+    margin-right: auto !important;
+    transition: transform 0.3s ease;
+}
+
+.description-section > div:hover {
+    transform: translateY(-5px); 
+}
+
+.description-section h3 {
+    text-align: left !important;
+    color: #ff4747; 
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.description-section p {
+    color: #e0e0e0; 
+    text-align: justify !important;
+    line-height: 1.7;
+    font-size: 20px;
+}
+
+.description-section p strong {
+    color: #f5c300; 
+    font-weight: bold;
+}
+
+.motivation-list {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+.motivation-phrase-wrapper {
+    overflow: hidden; 
+    height: 180px; 
+    display: flex;
+    align-items: center;
+    padding: 15px 30px; 
+    border-radius: 12px; 
+    margin-bottom: 25px; 
+    background: linear-gradient(90deg, #3a0000, #1a0000); 
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6); 
+    width: 100%; 
+    opacity: 0; 
+    transform: translateX(0); 
+    transition: opacity 1.0s ease-out, transform 1.0s cubic-bezier(0.2, 0.8, 0.5, 1);
+}
+
+
+.motivation-phrase-wrapper.fade-in-left {
+    transform: translateX(-100%); 
+    border-left: none; 
+}
+
+.motivation-phrase-wrapper.visible.fade-in-left {
+    border-left: none; 
+    border-right: 3px solid #f5c300; 
+}
+
+.motivation-phrase-wrapper.fade-in-right {
+    transform: translateX(100%);
+    flex-direction: row-reverse; 
+    border-right: none; 
+}
+
+.motivation-phrase-wrapper.visible.fade-in-right {
+    background: linear-gradient(-90deg, #3a0000, #1a0000); 
+    border-right: none; 
+    border-left: 3px solid #f5c300; 
+}
+
+
+.motivation-phrase-wrapper.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+.author-image-box {
+    flex-shrink: 0; 
+    width: 130px; 
+    height: 130px; 
+    border-radius: 8px; 
+    overflow: hidden;
+    margin-right: 25px; 
+    margin-left: 0;
+    box-shadow: 0 0 15px rgba(245, 195, 0, 0.5); 
+}
+
+.author-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    display: block;
+}
+
+.motivation-phrase-wrapper.fade-in-right .author-image-box {
+    margin-right: 0; 
+    margin-left: 25px; 
+}
+
+
+.phrase-content-box {
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left; 
+}
+
+
+.motivation-phrase-wrapper.fade-in-right .phrase-content-box {
+    text-align: right; 
+}
+
+.motivation-phrase-wrapper.fade-in-right .phrase-content-box p,
+.motivation-phrase-wrapper.fade-in-right .phrase-content-box .phrase-author {
+    text-align: right; 
+}
+
+.motivation-phrase-wrapper p {
+    background: none; 
+    border: none; 
+    box-shadow: none; 
+    padding: 0; 
+    margin-bottom: 5px; 
+    font-size: 2.1rem; 
+    color: #f5c300; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
+}
+
+.phrase-author {
+    display: block; 
+    font-size: 1.3rem; 
+    font-style: normal; 
+    font-weight: 600; 
+    color: #e0e0e0; 
+    opacity: 0.9;
+    text-align: left; 
+}
+
+@media (max-width: 768px) {
+    .title-section h1 {
+        font-size: 36px;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 0 #000;
+    }
+
+    .slide-viewer {
+        height: 300px; 
+    }
+
+    .slide-viewer img {
+        height: 220px; 
+    }
+
+    .motivation-list {
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
+    
+    .motivation-phrase-wrapper {
+        height: auto; 
+        padding: 15px; 
+        margin-bottom: 15px;
+        flex-direction: column; 
+        text-align: center;
+    }
+
+    .author-image-box {
+        width: 100px; 
+        height: 100px;
+        margin: 0 auto 10px auto; 
+    }
+
+    .motivation-phrase-wrapper.fade-in-right .author-image-box {
+        margin: 0 auto 10px auto; 
+    }
+    
+    .motivation-phrase-wrapper p {
+        font-size: 1.5rem; 
+        text-align: center !important;
+    }
+
+    .phrase-author {
+        font-size: 1rem;
+        text-align: center !important;
+    }
+    
+    .motivation-phrase-wrapper .phrase-content-box {
+        text-align: center !important;
+    }
+
+    .motivation-phrase-wrapper.fade-in-right {
+        flex-direction: column; 
+    }
+}

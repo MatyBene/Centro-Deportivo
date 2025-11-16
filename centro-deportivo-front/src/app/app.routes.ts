@@ -12,12 +12,13 @@ import { MemberActivitiesPageComponent } from './pages/member-activities-page/me
 import { InstructorDetailPage } from './pages/instructor-detail-page/instructor-detail-page';
 import { UserListPage } from './pages/user-list-page/user-list-page';
 import { UserDetailPage } from './pages/user-detail-page/user-detail-page';
+import { MotivationPage } from './pages/motivation-page/motivation-page';
 
 export const routes: Routes = [
     {path: '', component: HomePage},
     {path: 'public/login', component: LoginPage, canActivate: [guestGuard]},
     {path: 'public/register', component: FormPage, canActivate: [guestGuard]},
-
+    {path: 'motivation', component: MotivationPage},
     {path: 'activity-list', component: ActivityListPage},
     {path: 'activity-list/my-activities', component: InstructorActivitiesPage, canActivate: [authGuard]},
     {path: 'activity-list/:id', component: ActivityDetailPage},
