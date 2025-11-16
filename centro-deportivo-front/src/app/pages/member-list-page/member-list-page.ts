@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Member } from '../../models/Member';
 import { InstructorService } from '../../services/instructor-service';
 import { PageableResponse } from '../../models/Pageable';
-import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { UserFilters } from '../../components/user-filters/user-filters';
 import { Pagination } from '../../components/pagination/pagination';
@@ -10,7 +9,7 @@ import { UserSummaryItem } from '../../components/user-summary-item/user-summary
 
 @Component({
   selector: 'app-member-list-page',
-  imports: [CommonModule, RouterLink, Pagination, UserSummaryItem],
+  imports: [CommonModule, Pagination, UserSummaryItem],
   templateUrl: './member-list-page.html',
   styleUrl: './member-list-page.css'
 })

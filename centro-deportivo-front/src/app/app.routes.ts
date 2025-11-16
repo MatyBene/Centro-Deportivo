@@ -15,6 +15,7 @@ import { UserDetailPage } from './pages/user-detail-page/user-detail-page';
 import { MotivationPage } from './pages/motivation-page/motivation-page';
 import { MemberListPage } from './pages/member-list-page/member-list-page';
 import { MemberDetailPage } from './pages/member-detail-page/member-detail-page';
+import { RoutineFormPage } from './pages/routine-form-page/routine-form-page';
 
 export const routes: Routes = [
     {path: '', component: HomePage},
@@ -37,5 +38,7 @@ export const routes: Routes = [
     {path: 'users/:user', component: UserDetailPage, canActivate: [authGuard]},
 
     {path: 'profile', component: ProfilePage, canActivate: [authGuard]},
-    {path: 'profile/edit', component: FormPage, canActivate: [authGuard]}
+    {path: 'profile/edit', component: FormPage, canActivate: [authGuard]},
+
+    {path: 'routines/routine-form', component: RoutineFormPage}
 ];

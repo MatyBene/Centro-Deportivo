@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-motivation-page',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './motivation-page.html',
   styleUrl: './motivation-page.css'
 })
