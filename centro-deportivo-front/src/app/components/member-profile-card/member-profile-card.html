@@ -51,8 +51,10 @@
                                 <span class="activity-detail">Fin: {{enrollment.endDate}}</span>
                             </div>
                         </div>
-
-                        <button class="btn-unenroll" (click)="unerollment(enrollment.activityId.toString())">
+                        <button 
+                            class="btn-unenroll" 
+                            [disabled]="!canUnenroll(enrollment.activityId)" 
+                            (click)="unerollment(enrollment.activityId.toString())">
                             Dar de baja
                         </button>
                     </div>

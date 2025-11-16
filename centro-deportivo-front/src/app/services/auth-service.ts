@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { LoginRequest, LoginResponse, TokenPayLoad } from '../models/Auth';
 import { tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
+import { InstructorService } from './instructor-service';
+import { MemberService } from './member-service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,9 @@ import { jwtDecode } from 'jwt-decode';
 export class AuthService {
   private readonly URL = `${environment.apiUrl}/public/login`;
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, 
+              private instructorService: InstructorService, 
+              private memberService: MemberService ){}
 
   login(username: string, password: string){
     const body: LoginRequest = {username, password};

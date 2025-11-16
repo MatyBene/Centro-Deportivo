@@ -224,7 +224,6 @@
     justify-content: center; 
 }
 
-/* Estilos para el contenedor de inscripción de admin */
 .admin-enroll-wrapper {
     display: flex;
     flex-direction: column;
