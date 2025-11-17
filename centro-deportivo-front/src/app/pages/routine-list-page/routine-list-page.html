@@ -19,6 +19,7 @@
         <th>Semanas</th>
         <th>Días/Semana</th>
         <th>Creado Por</th>
+        <th>Información</th>
         <th>Acciones</th>
       </tr>
     </thead>
@@ -32,19 +33,32 @@
     <td data-label="Días/Semana">{{ routine.daysPerWeek }}</td>
     <td data-label="Creado Por">{{ routine.createdBy }}</td>
     
-    <td data-label="Acciones">
-      <button class="btn btn-edit" (click)="$event.stopPropagation(); editRoutine(routine.id)">
-        Editar
-      </button>
-      <button 
-        class="btn btn-delete" 
-        (click)="$event.stopPropagation(); deleteRoutine(routine.id, routine.name)">
-        Eliminar
-      </button>
+    <td data-label="Información">
+      <div class="action-column">
+        <button class="btn-uniform btn-detail">
+          Detalle
+        </button>
+        <button class="btn-uniform btn-graphs">
+          Gráficos
+        </button>
+      </div>
     </td>
-  </tr>
+
+    <td data-label="Acción">
+      <div class="action-column">
+        <button class="btn-uniform btn-edit"
+          (click)="$event.stopPropagation(); editRoutine(routine.id)">
+          Editar
+        </button>
+
+        <button class="btn-uniform btn-delete"
+          (click)="$event.stopPropagation(); deleteRoutine(routine.id, routine.name)">
+          Eliminar
+        </button>
+      </div>
+    </td>
 </tbody>
-  </table>
+</table>
 
   <div *ngIf="!(routines$ | async)?.length && !errorMessage" class="no-data-message">
     No se encontraron rutinas. 

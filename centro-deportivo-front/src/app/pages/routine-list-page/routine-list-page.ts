@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-routine-list-page',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './routine-list-page.html',
   styleUrl: './routine-list-page.css'
 })
