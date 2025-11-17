@@ -18,7 +18,9 @@ export class RoutineProgressChart implements AfterViewInit{
 
   loading = signal(false);
   hasData = signal(false);
-  totalWorkouts = signal(0);  
+  totalWorkouts = signal(0);
+  maxWeight = signal(0);
+  averageWeight = signal(0);
 
   private chart?: Chart;
 
@@ -46,11 +48,21 @@ export class RoutineProgressChart implements AfterViewInit{
 
     this.hasData.set(true);
     this.totalWorkouts.set(hist.length);
-    // hist.forEach(th => {
-    //   th.sets.forEach(set => {
+    
+    let totalWeight = 0;
+    let maxWeight = 0;
+    const weights: number[] = [];
 
-    //   })
-    // })
+    hist.forEach(th => {
+      th.sets.forEach(set => {
+        totalWeight += set.weight;
+        if (set.weight > maxWeight) maxWeight = set.weight;
+        weights.push(set.weight);
+      });
+    });
+
+    this.maxWeight.set(maxWeight);
+    this.averageWeight.set(Math.round((totalWeight / weights.length) * 10) / 10);
 
     this.createChart();
   }
