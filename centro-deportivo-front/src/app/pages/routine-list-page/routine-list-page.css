@@ -170,8 +170,8 @@
     .routine-table td {
         text-align: right;
         /* Ajuste: Más espacio para el valor */
-        padding-left: 55%; 
-        border-bottom: 1px solid rgba(201, 168, 62, 0.1);
+        padding-left: 45%; 
+        border-bottom: 3px solid rgba(201, 168, 62, 0.1);
         position: relative;
         word-wrap: break-word; 
     }
@@ -192,8 +192,8 @@
     /* Última celda (Contenedor de Grupos de Botones) */
     .routine-table td:last-child {
         border-bottom: none;
-        padding-left: 0;
-        display: block; /* Para que los grupos se apilen */
+        padding-left: 43%;
+        display: block; 
         text-align: center; 
         padding-top: 12px;
         padding-bottom: 12px;
@@ -203,10 +203,10 @@
     .button-group {
         display: flex;
         flex-direction: column;
-        align-items: center; /* Centra los elementos hijos horizontalmente */
+        align-items: flex-end; 
         width: 100%;
         gap: 10px; 
-        margin-bottom: 15px; /* Espacio entre el grupo de Info y el grupo de Acción */
+        margin-bottom: 15px; 
     }
 
     /* Botones uniformes (DETALLE, GRÁFICOS, EDITAR, ELIMINAR) */
@@ -233,9 +233,7 @@
     }
 }
 
-/* ==================================== */
-/* 📱 Estilos para Móviles Pequeños (≤ 480px) */
-/* ==================================== */
+
 @media (max-width: 480px) {
 
     .routine-list-container {
@@ -260,7 +258,7 @@
 
     .routine-table td {
         font-size: 14px;
-        padding-left: 58%; /* Ajuste fino */
+        padding-left: 58%; 
     }
 
     .routine-table td:before {
@@ -284,9 +282,6 @@
     }
 }
 
-/* ==================================== */
-/* 🤏 Estilos Adicionales para Móviles Muy Pequeños (≤ 420px) */
-/* ==================================== */
 @media (max-width: 420px) {
     
     .routine-table td {
@@ -295,7 +290,7 @@
     }
 
     .routine-table td:before {
-        width: 40%; /* Menos espacio para la etiqueta */
+        width: 40%;
         font-size: 13px;
     }
     
