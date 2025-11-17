@@ -55,7 +55,7 @@
   visibility: hidden;
   transform: translateY(20px) scale(0.95);
   transition: all 0.3s ease;
-  z-index: 999;
+  z-index: 1002;
   overflow: hidden;
   font-family: 'MiSans', sans-serif;
 }
