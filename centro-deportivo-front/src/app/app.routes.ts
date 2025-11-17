@@ -42,6 +42,8 @@ export const routes: Routes = [
     {path: 'profile', component: ProfilePage, canActivate: [authGuard]},
     {path: 'profile/edit', component: FormPage, canActivate: [authGuard]},
 
+    { path: 'routines/new', component: RoutineFormPage, canActivate: [authGuard] }, 
+    { path: 'routines/edit/:id', component: RoutineFormPage, canActivate: [authGuard] },
     {path: 'routines/routine-form', component: RoutineFormPage},
     {path: 'routines/:id/progress', component: ProgressChartPage, canActivate: [authGuard, routineOwnerGuard]}
 ];

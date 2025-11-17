@@ -10,18 +10,21 @@
       "goal": "Ganar fuerza base y tonificar",
       "warmUp": {
         "durationMinutes": 10,
-        "activities": ["5 min cardio suave", "Movilidad articular"]
+        "activities": [
+          "5 min cardio suave",
+          "Movilidad articular"
+        ]
       },
       "coolDown": {
         "durationMinutes": 10,
-        "activities": ["Estiramientos estáticos"]
+        "activities": [
+          "Estiramientos estáticos"
+        ]
       },
       "generalNotes": [],
-      "tags": [],
       "createdBy": "member_marcos",
       "createdAt": "2025-01-15",
       "isTemplate": false,
-
       "days": [
         {
           "id": "dia001",
@@ -40,11 +43,17 @@
               "suggestedWeight": "80kg",
               "notes": "Agarre medio, codos a 45 grados",
               "order": 1,
-              "sets": [
-                { "number": 1, "repetitions": "8-10" },
-                { "number": 2, "repetitions": "8-10" },
-                { "number": 3, "repetitions": "8-10" },
-                { "number": 4, "repetitions": "8-10" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             },
             {
@@ -58,11 +67,17 @@
               "suggestedWeight": "70kg",
               "notes": "Torso paralelo al suelo",
               "order": 2,
-              "sets": [
-                { "number": 1, "repetitions": "10-12" },
-                { "number": 2, "repetitions": "10-12" },
-                { "number": 3, "repetitions": "10-12" },
-                { "number": 4, "repetitions": "10-12" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             },
             {
@@ -76,10 +91,17 @@
               "suggestedWeight": "60kg",
               "notes": "Banco a 30-45 grados",
               "order": 3,
-              "sets": [
-                { "number": 1, "repetitions": "10-12" },
-                { "number": 2, "repetitions": "10-12" },
-                { "number": 3, "repetitions": "10-12" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             }
           ]
@@ -101,11 +123,17 @@
               "suggestedWeight": "100kg",
               "notes": "Mantener espalda recta, bajar hasta paralelo",
               "order": 1,
-              "sets": [
-                { "number": 1, "repetitions": "10-12" },
-                { "number": 2, "repetitions": "10-12" },
-                { "number": 3, "repetitions": "10-12" },
-                { "number": 4, "repetitions": "10-12" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             },
             {
@@ -119,11 +147,17 @@
               "suggestedWeight": "90kg",
               "notes": "Mantener espalda recta",
               "order": 2,
-              "sets": [
-                { "number": 1, "repetitions": "8-10" },
-                { "number": 2, "repetitions": "8-10" },
-                { "number": 3, "repetitions": "8-10" },
-                { "number": 4, "repetitions": "8-10" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             }
           ]
@@ -145,11 +179,17 @@
               "suggestedWeight": "50kg",
               "notes": "Espalda recta, no arquear lumbar",
               "order": 1,
-              "sets": [
-                { "number": 1, "repetitions": "10-12" },
-                { "number": 2, "repetitions": "10-12" },
-                { "number": 3, "repetitions": "10-12" },
-                { "number": 4, "repetitions": "10-12" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "10"
+                }
               ]
             },
             {
@@ -163,17 +203,26 @@
               "suggestedWeight": "30kg",
               "notes": "Sin balanceo",
               "order": 2,
-              "sets": [
-                { "number": 1, "repetitions": "12-15" },
-                { "number": 2, "repetitions": "12-15" },
-                { "number": 3, "repetitions": "12-15" }
+              "sets": 4,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "10"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             }
           ]
         }
       ]
     },
-
     {
       "id": "rut002",
       "name": "Rutina Hipertrofia - Socio2",
@@ -182,14 +231,23 @@
       "weeksDuration": 12,
       "daysPerWeek": 4,
       "goal": "Ganancia de masa muscular",
-      "warmUp": { "durationMinutes": 10, "activities": ["Cardio 5 min", "Movilidad"] },
-      "coolDown": { "durationMinutes": 10, "activities": ["Estiramientos"] },
+      "warmUp": {
+        "durationMinutes": 10,
+        "activities": [
+          "Cardio 5 min",
+          "Movilidad"
+        ]
+      },
+      "coolDown": {
+        "durationMinutes": 10,
+        "activities": [
+          "Estiramientos"
+        ]
+      },
       "generalNotes": [],
-      "tags": [],
       "createdBy": "inst_juan",
       "createdAt": "2025-02-10",
       "isTemplate": false,
-
       "days": [
         {
           "id": "dia004",
@@ -208,11 +266,20 @@
               "suggestedWeight": "85kg",
               "notes": "Explosivo en subida",
               "order": 1,
-              "sets": [
-                { "number": 1, "repetitions": "8-12" },
-                { "number": 2, "repetitions": "8-12" },
-                { "number": 3, "repetitions": "8-12" },
-                { "number": 4, "repetitions": "8-12" }
+              "sets": 4,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "10"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             },
             {
@@ -226,10 +293,17 @@
               "suggestedWeight": "20kg c/u",
               "notes": "Control total",
               "order": 2,
-              "sets": [
-                { "number": 1, "repetitions": "10-12" },
-                { "number": 2, "repetitions": "10-12" },
-                { "number": 3, "repetitions": "10-12" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             }
           ]
@@ -251,19 +325,23 @@
               "suggestedWeight": "120kg",
               "notes": "Máxima profundidad",
               "order": 1,
-              "sets": [
-                { "number": 1, "repetitions": "10-12" },
-                { "number": 2, "repetitions": "10-12" },
-                { "number": 3, "repetitions": "10-12" },
-                { "number": 4, "repetitions": "10-12" },
-                { "number": 5, "repetitions": "10-12" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             }
           ]
         }
       ]
     },
-
     {
       "id": "1762977944833",
       "name": "rutina maty",
@@ -272,14 +350,18 @@
       "goal": "eqweqw",
       "weeksDuration": 12,
       "daysPerWeek": 1,
-      "warmUp": { "durationMinutes": 10, "activities": [] },
-      "coolDown": { "durationMinutes": 10, "activities": [] },
+      "warmUp": {
+        "durationMinutes": 10,
+        "activities": []
+      },
+      "coolDown": {
+        "durationMinutes": 10,
+        "activities": []
+      },
       "generalNotes": [],
-      "tags": [],
       "createdBy": "member_marcos",
       "createdAt": "2025-11-12",
       "isTemplate": false,
-
       "days": [
         {
           "id": "dia006",
@@ -298,19 +380,215 @@
               "suggestedWeight": "",
               "notes": "",
               "order": 1,
-              "sets": [
-                { "number": 1, "repetitions": "8-12" },
-                { "number": 2, "repetitions": "8-12" },
-                { "number": 3, "repetitions": "8-12" },
-                { "number": 4, "repetitions": "8-12" }
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
               ]
             }
           ]
         }
       ]
+    },
+    {
+      "id": "1763334275675",
+      "name": "Rutina de Tomás",
+      "description": "Revienta las patas",
+      "level": "Principiante",
+      "goal": "Hipertrofia",
+      "durationWeeks": 4,
+      "daysPerWeek": 2,
+      "warmup": {
+        "durationMinutes": 10,
+        "activities": [
+          "Bicicleta"
+        ]
+      },
+      "cooldown": {
+        "durationMinutes": 20,
+        "activities": [
+          "Cinta",
+          "Estiramiento"
+        ]
+      },
+      "routineDays": [
+        {
+          "id": "day1763334160025",
+          "dayNumber": 1,
+          "name": "Piernas",
+          "description": "Haste que tiemble",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej1763334225837",
+              "name": "Prensa",
+              "muscleGroup": "Piernas",
+              "type": "Compuesto",
+              "sets": 3,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "8"
+                }
+              ],
+              "restSeconds": 120,
+              "suggestedWeight": "100",
+              "notes": ""
+            }
+          ]
+        }
+      ],
+      "generalNotes": [],
+      "createdBy": "inst_juan",
+      "createdAt": "2025-11-16",
+      "active": true,
+      "isTemplate": false
+    },
+    {
+      "id": "1763334632128",
+      "name": "Rutina para Maty",
+      "description": "No tengas miedo",
+      "level": "Avanzado",
+      "goal": "Hipertrofia",
+      "durationWeeks": 4,
+      "daysPerWeek": 4,
+      "warmup": {
+        "durationMinutes": 10,
+        "activities": [
+          "Bicicleta"
+        ]
+      },
+      "cooldown": {
+        "durationMinutes": 20,
+        "activities": [
+          "Cinta",
+          "Estiramiento"
+        ]
+      },
+      "routineDays": [
+        {
+          "id": "day1763334582566",
+          "dayNumber": 1,
+          "name": "Piernas",
+          "description": "Hasta que tiemblen",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej1763334596362",
+              "name": "Prensa",
+              "muscleGroup": "Piernas",
+              "type": "Compuesto",
+              "sets": 4,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "12"
+                },
+                {
+                  "repetitions": "10"
+                },
+                {
+                  "repetitions": "8"
+                }
+              ],
+              "restSeconds": 120,
+              "suggestedWeight": "100",
+              "notes": ""
+            }
+          ]
+        }
+      ],
+      "generalNotes": [],
+      "createdBy": "inst_juan",
+      "createdAt": "2025-11-16",
+      "active": true,
+      "isTemplate": false
+    },
+    {
+      "id": "1763342443202",
+      "name": "Rutina de Juan",
+      "description": "Enfocada en mejora de basquet",
+      "level": "Principiante",
+      "goal": "Resistencia",
+      "durationWeeks": 4,
+      "daysPerWeek": 5,
+      "warmup": {
+        "durationMinutes": 10,
+        "activities": [
+          "Trote"
+        ]
+      },
+      "cooldown": {
+        "durationMinutes": 10,
+        "activities": [
+          "Estiramiento"
+        ]
+      },
+      "routineDays": [
+        {
+          "id": "day1763342370389",
+          "dayNumber": 1,
+          "name": "Explosion",
+          "description": "",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej1763342406361",
+              "name": "Sentadilla con Salto",
+              "muscleGroup": "Piernas",
+              "type": "Compuesto",
+              "sets": 2,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "15"
+                }
+              ],
+              "restSeconds": 45,
+              "suggestedWeight": "0",
+              "notes": ""
+            },
+            {
+              "id": "ej1763342490158",
+              "name": "Estocadas",
+              "muscleGroup": "Piernas",
+              "type": "Compuesto",
+              "sets": 1,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "20"
+                }
+              ],
+              "restSeconds": 40,
+              "suggestedWeight": "10",
+              "notes": "El peso sugerido y las repeticiones por serie son individuales por pierna"
+            }
+          ]
+        }
+      ],
+      "generalNotes": [],
+      "createdBy": "member_marcos",
+      "createdAt": "2025-11-17",
+      "active": true,
+      "isTemplate": false
     }
   ],
-
   "routineAssignments": [
     {
       "id": "asig001",
@@ -324,7 +602,6 @@
       "notes": "Rutina avanzada para hipertrofia"
     }
   ],
-
   "trainingHistory": [
     {
       "id": "hist001",
@@ -333,10 +610,30 @@
       "exerciseId": "ej001",
       "date": "2025-03-01",
       "sets": [
-        {"number": 1, "repetitions": 10, "weight": 75, "completed": true},
-        {"number": 2, "repetitions": 8, "weight": 80, "completed": true},
-        {"number": 3, "repetitions": 8, "weight": 80, "completed": true},
-        {"number": 4, "repetitions": 6, "weight": 75, "completed": true}
+        {
+          "number": 1,
+          "repetitions": 10,
+          "weight": 75,
+          "completed": true
+        },
+        {
+          "number": 2,
+          "repetitions": 8,
+          "weight": 80,
+          "completed": true
+        },
+        {
+          "number": 3,
+          "repetitions": 8,
+          "weight": 80,
+          "completed": true
+        },
+        {
+          "number": 4,
+          "repetitions": 6,
+          "weight": 75,
+          "completed": true
+        }
       ],
       "notes": "Buen entrenamiento, subí peso en segunda serie"
     },
@@ -360,10 +657,26 @@
       "routineId": "rut001",
       "exerciseId": "ej001",
       "sets": [
-        {"number": 1, "weight": 85, "repetitions": 8},
-        {"number": 2, "weight": 85, "repetitions": 8},
-        {"number": 3, "weight": 90, "repetitions": 8},
-        {"number": 4, "weight": 90, "repetitions": 8}
+        {
+          "number": 1,
+          "weight": 85,
+          "repetitions": 8
+        },
+        {
+          "number": 2,
+          "weight": 85,
+          "repetitions": 8
+        },
+        {
+          "number": 3,
+          "weight": 90,
+          "repetitions": 8
+        },
+        {
+          "number": 4,
+          "weight": 90,
+          "repetitions": 8
+        }
       ]
     },
     {
