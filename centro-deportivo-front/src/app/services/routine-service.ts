@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
-import { Routine, RoutineResponse } from '../models/Routine';
+import { Routine, RoutineResponse, RoutineAssignment } from '../models/Routine';
 import { AuthService } from './auth-service';
 
 
@@ -10,7 +10,8 @@ import { AuthService } from './auth-service';
   providedIn: 'root'
 })
 export class RoutineService {
-  private readonly URLroutine = "http://localhost:3000/routines"; 
+  private readonly URLroutine = "http://localhost:3000/routines";
+  private readonly URLassignments = "http://localhost:3000/routineAssignments"; 
 
 
   constructor(private http: HttpClient, private authService: AuthService){}
@@ -36,6 +37,10 @@ export class RoutineService {
 
   deleteRoutine(id: string): Observable<void> {
     return this.http.delete<void>(`${this.URLroutine}/${id}`);
+  }
+
+  getAllRoutineAssignments(): Observable<RoutineAssignment[]> {
+    return this.http.get<RoutineAssignment[]>(this.URLassignments);
   }
 
   getCurrentUserUsername(): string {

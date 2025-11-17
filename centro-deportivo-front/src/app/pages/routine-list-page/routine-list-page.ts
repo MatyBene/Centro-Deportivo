@@ -1,37 +1,56 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RoutineService } from '../../services/routine-service';
-import { Routine } from '../../models/Routine';
-import { Observable, catchError, of } from 'rxjs';
+import { Routine, RoutineAssignment } from '../../models/Routine';
+import { forkJoin } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-routine-list-page',
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './routine-list-page.html',
   styleUrl: './routine-list-page.css'
 })
 export class RoutineListPage {
-  routines$!: Observable<Routine[]>; 
-  errorMessage = '';
+  routines = signal<Routine[]>([]);
+  errorMessage = signal<string>('');
+  currentUsername = signal<string>('');
 
   constructor(
     private routineService: RoutineService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
+    this.currentUsername.set(this.routineService.getCurrentUserUsername());
     this.loadRoutines();
   }
 
   loadRoutines(): void {
-    this.routines$ = this.routineService.getRoutines().pipe(
-      catchError(error => {
-        this.errorMessage = 'Error al conectar o cargar las rutinas. Verifica el backend (JSON Server).';
+    forkJoin({
+      routines: this.routineService.getRoutines(),
+      assignments: this.routineService.getAllRoutineAssignments()
+    }).subscribe({
+      next: ({ routines, assignments }) => {
+        const assignedRoutineIds = assignments
+          .filter(assignment => assignment.memberUsername === this.currentUsername() && assignment.active)
+          .map(assignment => assignment.routineId);
+
+        const filteredRoutines = routines.filter(routine => 
+          routine.createdBy === this.currentUsername() || 
+          assignedRoutineIds.includes(routine.id)
+        );
+        
+        this.routines.set(filteredRoutines);
+        this.errorMessage.set('');
+      },
+      error: (error) => {
+        this.errorMessage.set('Error al conectar o cargar las rutinas. Verifica el backend (JSON Server).');
         console.error('Error al obtener rutinas:', error);
-        return of([]); 
-      })
-    );
+        this.routines.set([]);
+      }
+    });
   }
 
   editRoutine(id: string): void {
@@ -40,6 +59,10 @@ export class RoutineListPage {
 
   createRoutine(): void {
     this.router.navigate(['/routines/new']);
+  }
+
+  isCreator(routine: Routine): boolean {
+    return routine.createdBy === this.currentUsername();
   }
 
   deleteRoutine(id: string, name: string): void {
@@ -52,7 +75,7 @@ export class RoutineListPage {
           this.loadRoutines(); 
         },
         error: (err) => {
-          this.errorMessage = `Error al eliminar la rutina: ${err.message || 'Error de conexión.'}`;
+          this.errorMessage.set(`Error al eliminar la rutina: ${err.message || 'Error de conexión.'}`);
           console.error('Error al eliminar:', err);
         }
       });

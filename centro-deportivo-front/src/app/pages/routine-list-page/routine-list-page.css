@@ -41,24 +41,27 @@
   padding: 14px 32px;
   font-size: 1.05rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ff2d2d, #d11f1f);
-  color: #fff;
-  border: none;
-  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.35);
-  backdrop-filter: blur(4px);
+  background: linear-gradient(135deg, #c9a83e, #e6c563);
+  color: #000;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #000;
   cursor: pointer;
- 
+  transition: all 0.2s ease-in-out;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .create-button:hover {
-  background: linear-gradient(135deg, #ffb300, #d49b00);
-  color: #000;
-  transform: translateY(-3px) scale(1.03);
+  background: linear-gradient(135deg, #d12c2c, #ff3838);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 0 #000;
+  text-shadow: 2px 2px 0 #000;
 }
 
 .create-button:active {
-  transform: translateY(-1px) scale(0.98);
-  box-shadow: 0 3px 10px rgba(255, 193, 7, 0.3);
+  transform: translateY(1px);
+  box-shadow: 4px 4px 0 #000;
 }
 
 .routine-table {
@@ -169,7 +172,6 @@
 
     .routine-table td {
         text-align: right;
-        /* Ajuste: Más espacio para el valor */
         padding-left: 45%; 
         border-bottom: 3px solid rgba(201, 168, 62, 0.1);
         position: relative;
@@ -180,7 +182,6 @@
         content: attr(data-label);
         position: absolute;
         left: 6px;
-        /* Ajuste: Ancho para la etiqueta */
         width: 48%; 
         padding-right: 10px;
         white-space: nowrap;
@@ -189,7 +190,6 @@
         color: #c9a83e;
     }
 
-    /* Última celda (Contenedor de Grupos de Botones) */
     .routine-table td:last-child {
         border-bottom: none;
         padding-left: 43%;
@@ -199,7 +199,6 @@
         padding-bottom: 12px;
     }
     
-    /* 💥 Nuevo Estilo Clave: Agrupa y Centra los Botones */
     .button-group {
         display: flex;
         flex-direction: column;
@@ -209,7 +208,6 @@
         margin-bottom: 15px; 
     }
 
-    /* Botones uniformes (DETALLE, GRÁFICOS, EDITAR, ELIMINAR) */
     .btn-uniform {
         width: 90%; 
         max-width: 200px;
@@ -285,7 +283,7 @@
 @media (max-width: 420px) {
     
     .routine-table td {
-        padding-left: 65%; /* Más espacio para el valor en pantallas muy pequeñas */
+        padding-left: 65%;
         font-size: 13px; 
     }
 
@@ -370,21 +368,28 @@
 }
 
 .btn-detail {
-  background-color: #3a8fd0;
-  color: #fff;
+  background: linear-gradient(135deg, #c9a83e, #e6c563);
+  color: #000;
+  border: 2px solid #000;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.2);
 }
 .btn-detail:hover {
-  background-color: #fff;
-  color: #3a8fd0;
+  background: linear-gradient(135deg, #e6c563, #ffd700);
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 #000;
 }
 
 .btn-graphs {
-  background-color: #6c3ad0;
+  background: linear-gradient(135deg, #d12c2c, #ff3838);
   color: #fff;
+  border: 2px solid #000;
 }
 .btn-graphs:hover {
-  background-color: #fff;
-  color: #6c3ad0;
+  background: linear-gradient(135deg, #ff3838, #ff5555);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 #000;
 }
 
 .btn-edit {

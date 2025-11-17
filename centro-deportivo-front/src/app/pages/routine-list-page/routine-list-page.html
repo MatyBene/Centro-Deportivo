@@ -6,9 +6,11 @@
     </button>
   </div>
 
-  <div *ngIf="errorMessage" class="alert error-message">
-    {{ errorMessage }}
-  </div>
+  @if (errorMessage()) {
+    <div class="alert error-message">
+      {{ errorMessage() }}
+    </div>
+  }
 
   <table class="routine-table">
     <thead>
@@ -24,7 +26,8 @@
       </tr>
     </thead>
     <tbody>
-  <tr *ngFor="let routine of routines$ | async" class="routine-row-link">
+  @for (routine of routines(); track routine.id) {
+    <tr class="routine-row-link">
      <!-- agregar ruta de detalle de rutina -->
     <td data-label="Nombre">{{ routine.name }}</td>
     <td data-label="Nivel">{{ routine.level }}</td>
@@ -46,21 +49,29 @@
 
     <td data-label="Acción">
       <div class="action-column">
-        <button class="btn-uniform btn-edit"
-          (click)="$event.stopPropagation(); editRoutine(routine.id)">
-          Editar
-        </button>
+        @if (isCreator(routine)) {
+          <button class="btn-uniform btn-edit"
+            (click)="$event.stopPropagation(); editRoutine(routine.id)">
+            Editar
+          </button>
 
-        <button class="btn-uniform btn-delete"
-          (click)="$event.stopPropagation(); deleteRoutine(routine.id, routine.name)">
-          Eliminar
-        </button>
+          <button class="btn-uniform btn-delete"
+            (click)="$event.stopPropagation(); deleteRoutine(routine.id, routine.name)">
+            Eliminar
+          </button>
+        } @else {
+          <span class="text-muted">Rutina asignada</span>
+        }
       </div>
     </td>
-</tbody>
+    </tr>
+  }
+  </tbody>
 </table>
 
-  <div *ngIf="!(routines$ | async)?.length && !errorMessage" class="no-data-message">
-    No se encontraron rutinas. 
-  </div>
+  @if (routines().length === 0 && !errorMessage()) {
+    <div class="no-data-message">
+      No se encontraron rutinas. 
+    </div>
+  }
 </div>
