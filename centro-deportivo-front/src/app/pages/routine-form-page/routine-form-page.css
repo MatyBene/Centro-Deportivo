@@ -347,8 +347,6 @@ textarea.ng-invalid.ng-touched {
     border: 1px solid #d12c2c;
 }
 
-/* 7. Acciones Finales */
-/* ===================== */
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -374,7 +372,6 @@ textarea.ng-invalid.ng-touched {
 }
 
 .btn-submit {
-    /* Estilos copiados de tu ejemplo para el botón principal */
     background-color: #d12c2c;
     color: #fff;
     border: none;
@@ -410,13 +407,8 @@ textarea.ng-invalid.ng-touched {
     box-shadow: none;
 }
 
-
-/* 8. Media Queries (Adaptación a Dispositivos) */
-/* ========================================== */
-
 @media (min-width: 768px) {
     .form-row {
-        /* Para que los inputs dentro de form-row estén lado a lado */
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         gap: 20px;
@@ -487,7 +479,6 @@ textarea.ng-invalid.ng-touched {
     }
     
     .form-row {
-        /* Fuerza a que vuelvan a ser una columna */
         flex-direction: column;
         gap: 10px;
     }
