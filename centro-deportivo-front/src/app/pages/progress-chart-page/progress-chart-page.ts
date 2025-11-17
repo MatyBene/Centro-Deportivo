@@ -48,13 +48,17 @@ export class ProgressChartPage implements OnInit {
       trainingHistory: this.routineService.getTrainingHistory()
     }).subscribe({
       next: ({ routine, trainingHistory }) => {
-        this.routineName.set(routine.name);
+        this.routineName.set(routine.routine.name);
         
         const allExercises: Exercise[] = [];
-        if (routine.days) {
-          routine.days.forEach(day => {
-            if (day.exercises) {
-              day.exercises.forEach(exercise => {
+        
+        // Normalizar: puede venir como routineDays o days
+        const days = routine.routine.routineDays || (routine.routine as any).days || [];
+        
+        if (days && days.length > 0) {
+          days.forEach((day: any) => {
+            if (day.exercises && day.exercises.length > 0) {
+              day.exercises.forEach((exercise: Exercise) => {
                 exercise.history = trainingHistory.filter(
                   h => h.exerciseId === exercise.id && h.routineId === routineId
                 );
