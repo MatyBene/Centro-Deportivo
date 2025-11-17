@@ -48,7 +48,7 @@
                   <div class="exercises-list">
                     <h4>Ejercicios ({{ day.exercises.length }})</h4>
                     @for (exercise of day.exercises; track exercise.id) {
-                      <app-exercise-table [exercise]="exercise" />
+                      <app-exercise-table [exercise]="exercise" [routineId]="routine()!.id" />
                     }
                   </div>
                 } @else {

@@ -635,9 +635,21 @@
       "exerciseId": "ej002",
       "date": "2025-03-01",
       "sets": [
-        {"number": 1, "weight": 70, "repetitions": 15},
-        {"number": 2, "weight": 75, "repetitions": 12},
-        {"number": 3, "weight": 75, "repetitions": 8}
+        {
+          "number": 1,
+          "weight": 70,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 75,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 75,
+          "repetitions": 8
+        }
       ]
     },
     {
@@ -671,9 +683,21 @@
       "routineId": "rut001",
       "exerciseId": "ej002",
       "sets": [
-        {"number": 1, "weight": 85, "repetitions": 15},
-        {"number": 2, "weight": 85, "repetitions": 12},
-        {"number": 3, "weight": 90, "repetitions": 8}
+        {
+          "number": 1,
+          "weight": 85,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 85,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 90,
+          "repetitions": 8
+        }
       ]
     },
     {
@@ -683,10 +707,97 @@
       "routineId": "rut001",
       "exerciseId": "ej002",
       "sets": [
-        {"number": 1, "weight": 90, "repetitions": 15},
-        {"number": 2, "weight": 90, "repetitions": 12},
-        {"number": 3, "weight": 100, "repetitions": 8}
+        {
+          "number": 1,
+          "weight": 90,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 90,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 100,
+          "repetitions": 8
+        }
       ]
+    },
+    {
+      "id": "hist1763356452913",
+      "date": "2025-11-17",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej001",
+      "sets": [
+        {
+          "number": 1,
+          "weight": 90,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 90,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 100,
+          "repetitions": 8
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "hist1763359464792",
+      "date": "2025-11-17",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej002",
+      "sets": [
+        {
+          "number": 1,
+          "weight": 95,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 95,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 100,
+          "repetitions": 8
+        }
+      ],
+      "notes": "Aumente poco peso, pero tuve buenas sensaciones"
+    },
+    {
+      "id": "hist1763359606236",
+      "date": "2025-11-17",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej003",
+      "sets": [
+        {
+          "number": 1,
+          "weight": 60,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 65,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 65,
+          "repetitions": 8
+        }
+      ],
+      "notes": "dolor en el hombre en la ultima serie"
     }
   ]
 }

@@ -47,6 +47,10 @@ export class RoutineService {
     return this.http.get<TrainingHistory[]>(this.URLtrainingHistory)
   }
 
+  createTrainingHistory(trainingHistory: TrainingHistory): Observable<TrainingHistory> {
+    return this.http.post<TrainingHistory>(this.URLtrainingHistory, trainingHistory);
+  }
+
   getUserRoutineAssignments(username: string) {
     return this.http.get<any[]>(`${this.URLroutine}/routineAssignments?memberUsername=${username}&active=true`);
   }
