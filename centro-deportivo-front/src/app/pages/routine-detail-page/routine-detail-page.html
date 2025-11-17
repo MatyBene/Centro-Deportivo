@@ -48,22 +48,7 @@
                   <div class="exercises-list">
                     <h4>Ejercicios ({{ day.exercises.length }})</h4>
                     @for (exercise of day.exercises; track exercise.id) {
-                      <div class="exercise-item">
-                        <div class="exercise-info">
-                          <strong>{{ exercise.name }}</strong>
-                          <span class="muscle-group">{{ exercise.muscleGroup }}</span>
-                        </div>
-                        <div class="exercise-details">
-                          <span>{{ exercise.sets }} series</span>
-                          @if (exercise.seriesRepetitions && exercise.seriesRepetitions.length > 0) {
-                            <span>{{ exercise.seriesRepetitions[0].repetitions }} reps</span>
-                          }
-                          <span>{{ exercise.restSeconds }}s descanso</span>
-                        </div>
-                        @if (exercise.notes) {
-                          <p class="exercise-notes">{{ exercise.notes }}</p>
-                        }
-                      </div>
+                      <app-exercise-table [exercise]="exercise" />
                     }
                   </div>
                 } @else {

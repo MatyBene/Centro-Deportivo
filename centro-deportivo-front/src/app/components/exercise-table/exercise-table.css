@@ -1,0 +1,202 @@
+.exercise-table-container {
+  margin: 15px 0;
+  background-color: rgba(40, 40, 40, 0.9);
+  border: 2px solid #c9a83e;
+  border-left: 6px solid #d12c2c;
+  box-shadow: 5px 5px 0 #000;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.exercise-table-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 7px 7px 0 #000;
+}
+
+.exercise-header {
+  padding: 20px;
+  border-bottom: 2px solid #c9a83e;
+}
+
+.exercise-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.exercise-title strong {
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'MiSans', sans-serif;
+}
+
+.muscle-group {
+  background-color: #c9a83e;
+  color: #000;
+  padding: 6px 15px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 3px 3px 0 #000;
+  font-family: 'MiSans', sans-serif;
+}
+
+.exercise-meta {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.exercise-meta span {
+  color: #c9a83e;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.exercise-notes {
+  padding: 15px 20px;
+  margin: 0;
+  background-color: rgba(139, 0, 0, 0.3);
+  border-bottom: 2px solid #c9a83e;
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.last-training-info {
+  padding: 12px 20px;
+  background-color: rgba(201, 168, 62, 0.15);
+  border-bottom: 2px solid #c9a83e;
+  text-align: center;
+}
+
+.last-training-info span {
+  color: #c9a83e;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.exercise-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'MiSans', sans-serif;
+}
+
+.exercise-table thead {
+  background-color: #d12c2c;
+}
+
+.exercise-table th {
+  padding: 15px;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border: 1px solid #000;
+}
+
+.exercise-table tbody tr {
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: background-color 0.2s ease;
+}
+
+.exercise-table tbody tr:nth-child(even) {
+  background-color: rgba(40, 40, 40, 0.5);
+}
+
+.exercise-table tbody tr:hover {
+  background-color: rgba(201, 168, 62, 0.2);
+}
+
+.exercise-table td {
+  padding: 12px 15px;
+  text-align: center;
+  color: #fff;
+  border: 1px solid #444;
+  font-size: 15px;
+}
+
+.serie-number {
+  font-weight: bold;
+  color: #c9a83e;
+  font-size: 16px;
+}
+
+.repetitions {
+  color: #fff;
+  font-weight: 500;
+}
+
+.previous-weight {
+  color: #888;
+}
+
+.current-weight {
+  color: #c9a83e;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .exercise-header {
+    padding: 15px;
+  }
+
+  .exercise-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .exercise-title strong {
+    font-size: 18px;
+  }
+
+  .exercise-table th,
+  .exercise-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .exercise-meta {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exercise-table-container {
+    box-shadow: 4px 4px 0 #000;
+  }
+
+  .exercise-header {
+    padding: 12px;
+  }
+
+  .exercise-title strong {
+    font-size: 16px;
+  }
+
+  .muscle-group {
+    font-size: 12px;
+    padding: 5px 12px;
+  }
+
+  .exercise-table th,
+  .exercise-table td {
+    padding: 8px 5px;
+    font-size: 12px;
+  }
+
+  .exercise-table th {
+    font-size: 11px;
+  }
+}

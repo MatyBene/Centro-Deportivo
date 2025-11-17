@@ -1,0 +1,57 @@
+<div class="exercise-table-container">
+  <div class="exercise-header">
+    <div class="exercise-title">
+      <strong>{{ exercise().name }}</strong>
+      <span class="muscle-group">{{ exercise().muscleGroup }}</span>
+    </div>
+    <div class="exercise-meta">
+      <span>{{ exercise().restSeconds }}s descanso</span>
+      @if (exercise().suggestedWeight) {
+        <span>Peso sugerido: {{ exercise().suggestedWeight }}</span>
+      }
+    </div>
+  </div>
+
+  @if (exercise().notes) {
+    <p class="exercise-notes">{{ exercise().notes }}</p>
+  }
+
+  @if (getLastTrainingDate()) {
+    <div class="last-training-info">
+      <span>Último entrenamiento: {{ getLastTrainingDate() }}</span>
+    </div>
+  }
+
+  <table class="exercise-table">
+    <thead>
+      <tr>
+        <th>Serie</th>
+        <th>Repeticiones</th>
+        <th>Peso Anterior (kg)</th>
+        <th>Peso Hoy (kg)</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (series of exercise().seriesRepetitions; track $index) {
+        <tr>
+          <td class="serie-number">{{ $index + 1 }}</td>
+          <td class="repetitions">{{ series.repetitions }}</td>
+          <td class="previous-weight">
+            @if (getPreviousWeight($index + 1) !== null) {
+              {{ getPreviousWeight($index + 1) }}
+            } @else {
+              -
+            }
+          </td>
+          <td class="current-weight">
+            @if (exercise().seriesRecord && exercise().seriesRecord![$index]) {
+              {{ exercise().seriesRecord![$index].currentWeight || '-' }}
+            } @else {
+              -
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
