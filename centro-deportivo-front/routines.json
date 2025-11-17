@@ -457,68 +457,6 @@
       "isTemplate": false
     },
     {
-      "id": "1763334632128",
-      "name": "Rutina para Maty",
-      "description": "No tengas miedo",
-      "level": "Avanzado",
-      "goal": "Hipertrofia",
-      "durationWeeks": 4,
-      "daysPerWeek": 4,
-      "warmup": {
-        "durationMinutes": 10,
-        "activities": [
-          "Bicicleta"
-        ]
-      },
-      "cooldown": {
-        "durationMinutes": 20,
-        "activities": [
-          "Cinta",
-          "Estiramiento"
-        ]
-      },
-      "routineDays": [
-        {
-          "id": "day1763334582566",
-          "dayNumber": 1,
-          "name": "Piernas",
-          "description": "Hasta que tiemblen",
-          "order": 1,
-          "exercises": [
-            {
-              "id": "ej1763334596362",
-              "name": "Prensa",
-              "muscleGroup": "Piernas",
-              "type": "Compuesto",
-              "sets": 4,
-              "seriesRepetitions": [
-                {
-                  "repetitions": "15"
-                },
-                {
-                  "repetitions": "12"
-                },
-                {
-                  "repetitions": "10"
-                },
-                {
-                  "repetitions": "8"
-                }
-              ],
-              "restSeconds": 120,
-              "suggestedWeight": "100",
-              "notes": ""
-            }
-          ]
-        }
-      ],
-      "generalNotes": [],
-      "createdBy": "inst_juan",
-      "createdAt": "2025-11-16",
-      "active": true,
-      "isTemplate": false
-    },
-    {
       "id": "1763342443202",
       "name": "Rutina de Juan",
       "description": "Enfocada en mejora de basquet",
@@ -584,6 +522,63 @@
       ],
       "generalNotes": [],
       "createdBy": "member_marcos",
+      "createdAt": "2025-11-17",
+      "active": true,
+      "isTemplate": false
+    },
+    {
+      "id": "1763346613375",
+      "name": "Rutina para Martin",
+      "description": "Bajar grasa",
+      "level": "Principiante",
+      "goal": "Resistencia",
+      "durationWeeks": 1,
+      "daysPerWeek": 1,
+      "warmup": {
+        "durationMinutes": "",
+        "activities": []
+      },
+      "cooldown": {
+        "durationMinutes": "",
+        "activities": []
+      },
+      "routineDays": [
+        {
+          "id": "day1763346566350",
+          "dayNumber": 1,
+          "name": "Resistencia",
+          "description": "Correr",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej1763346584111",
+              "name": "Trote",
+              "muscleGroup": "Piernas",
+              "type": "Compuesto",
+              "sets": 4,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "15"
+                }
+              ],
+              "restSeconds": 90,
+              "suggestedWeight": "0",
+              "notes": ""
+            }
+          ]
+        }
+      ],
+      "generalNotes": [],
+      "createdBy": "inst_juan",
       "createdAt": "2025-11-17",
       "active": true,
       "isTemplate": false

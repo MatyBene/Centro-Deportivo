@@ -1,0 +1,291 @@
+:host {
+    display: block;
+    padding: 40px 20px;
+    position: relative;
+    min-height: calc(100vh - 200px);
+}
+
+.routine-list-container {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.85); 
+    border: 3px solid #c9a83e; 
+    box-shadow: 8px 8px 0 #000;
+    opacity: 1; 
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.header-section h2 {
+    font-family: 'AlimamaBold', sans-serif;
+    font-size: 30px;
+    color: #c9a83e; 
+    text-shadow: 2px 2px 0 #000;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    -webkit-text-stroke: 0.5px #d12c2c; 
+    margin: 0;
+}
+
+.btn {
+    padding: 12px 30px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 2px;
+    font-family: 'MiSans', sans-serif;
+    border-radius: 2px;
+}
+
+.create-button {
+    background-color: #d12c2c;
+    color: #fff;
+    border: 3px solid #c9a83e;
+    box-shadow: 6px 6px 0 #000;
+}
+
+.create-button:hover {
+    background-color: #c9a83e;
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 8px 8px 0 #000;
+}
+
+.create-button:active {
+    transform: translateY(-1px);
+    box-shadow: 4px 4px 0 #000;
+}
+
+.routine-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(138, 85, 85, 0.05);
+}
+
+.routine-table th, .routine-table td {
+    vertical-align: middle;
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid rgba(201, 168, 62, 0.2);
+    color: #f0f0f0;
+}
+
+.routine-table th {
+    background-color: #2e2d2d;
+    font-weight: bold;
+    color: #c9a83e;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    border-top: 3px solid #d12c2c;
+}
+
+.routine-row-link {
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.routine-row-link:hover {
+    background-color: rgba(209, 44, 44, 0.2);
+    transform: scale(1.005);
+}
+
+.routine-table td:last-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;      
+  justify-content: center;
+  white-space: nowrap;
+  padding: 10px;            
+}
+
+.btn-edit,
+.btn-delete {
+  display: inline-flex;      
+  align-items: center;
+  justify-content: center;
+  height: 36px;              
+  line-height: 1;
+  padding: 0 12px;           
+  box-sizing: border-box;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-edit {
+    background-color: #c9a83e;
+    color: #000;
+    padding: 6px 10px;
+    border: 2px solid #000;
+    font-size: 0.8em;
+    box-shadow: 3px 3px 0 #000;
+}
+
+.btn-edit:hover {
+    background-color: #d12c2c; 
+    color: #fff;
+    box-shadow: 4px 4px 0 #000;
+}
+
+.btn-delete {
+    background-color: #d12c2c; 
+    color: #fff;
+    padding: 6px 10px;
+    border: 2px solid #c9a83e; 
+    font-size: 0.8em;
+    box-shadow: 3px 3px 0 #000;
+    margin-left: 0; 
+}
+
+.btn-delete:hover {
+    background-color: #c9a83e;
+    color: #000;
+    box-shadow: 4px 4px 0 #000;
+}
+
+.routine-table tr {
+  min-height: 52px;
+}
+
+
+.btn-edit:focus,
+.btn-delete:focus {
+  outline: 2px solid rgba(201,168,62,0.25);
+  outline-offset: 2px;
+}
+
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.error-message {
+    background-color: #721c24;
+    color: #f8d7da;
+    border: 2px solid #d12c2c;
+}
+
+.no-data-message {
+    text-align: center;
+    font-size: 20px;
+    color: #c9a83e;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 3px solid #c9a83e;
+    padding: 30px;
+    margin: 30px auto;
+    max-width: 600px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 2px;
+    box-shadow: 6px 6px 0 #000;
+    position: relative;
+}
+
+.no-data-message::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 2px solid #d12c2c;
+    pointer-events: none;
+}
+
+
+@media (max-width: 768px) {
+    .routine-table thead {
+        display: none;
+    }
+    .routine-table, .routine-table tbody, .routine-table tr, .routine-table td {
+        display: block;
+        width: 100%;
+    }
+    .routine-table tr { 
+        margin-bottom: 15px;
+        border: 2px solid #d12c2c;
+        box-shadow: 4px 4px 0 #000;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+    .routine-table td {
+        text-align: right;
+        padding-left: 50%;
+        border-bottom: 1px solid rgba(201, 168, 62, 0.1);
+        position: relative;
+    }
+    .routine-table td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #c9a83e;
+    }
+    .routine-table td:last-child {
+        border-bottom: none;
+        text-align: center;
+        padding-left: 0;
+        display: flex; 
+        justify-content: center;
+        align-items: center; 
+        gap: 10px;
+    }
+    .header-section h2 {
+        font-size: 24px;
+    }
+    .create-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    .btn-edit,
+    .btn-delete {
+    height: 34px;
+    padding: 0 10px;
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+    .routine-list-container {
+        padding: 10px;
+    }
+    .header-section h2 {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+    .create-button {
+        padding: 6px 12px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    .no-data-message {
+        font-size: 16px;
+        padding: 20px;
+    }
+    .routine-table td {
+        font-size: 14px;
+    }
+    .routine-table td:last-child {
+        display: flex;
+        justify-content: center;
+        gap: 10px; 
+    }
+    .btn-edit, .btn-delete {
+        font-size: 0.75em;
+        padding: 4px 8px;
+    }
+}
