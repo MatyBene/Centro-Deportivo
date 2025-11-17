@@ -21,7 +21,7 @@ export const routineOwnerGuard: CanActivateFn = (route, state) => {
 
   return routineService.getRoutine(routineId).pipe(
   switchMap(routine => {
-    if (routine.createdBy === currentUsername) {
+    if (routine.routine.createdBy === currentUsername) {
       return of(true);
     }
     

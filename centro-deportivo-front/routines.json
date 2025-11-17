@@ -5,7 +5,7 @@
       "name": "Mi Rutina Personal - Socio1",
       "description": "Rutina que creé para entrenar 3 veces por semana enfocada en fuerza",
       "level": "principiante",
-      "weeksDuration": 8,
+      "durationWeeks": 8,
       "daysPerWeek": 3,
       "goal": "Ganar fuerza base y tonificar",
       "warmUp": {
@@ -25,7 +25,7 @@
       "createdBy": "member_marcos",
       "createdAt": "2025-01-15",
       "isTemplate": false,
-      "days": [
+      "routineDays": [
         {
           "id": "dia001",
           "dayNumber": 1,
@@ -228,7 +228,7 @@
       "name": "Rutina Hipertrofia - Socio2",
       "description": "Rutina avanzada asignada por instructor1",
       "level": "intermedio",
-      "weeksDuration": 12,
+      "durationWeeks": 12,
       "daysPerWeek": 4,
       "goal": "Ganancia de masa muscular",
       "warmUp": {
@@ -248,7 +248,7 @@
       "createdBy": "inst_juan",
       "createdAt": "2025-02-10",
       "isTemplate": false,
-      "days": [
+      "routineDays": [
         {
           "id": "dia004",
           "dayNumber": 1,
@@ -348,7 +348,7 @@
       "description": "asddas",
       "level": "principiante",
       "goal": "eqweqw",
-      "weeksDuration": 12,
+      "durationWeeks": 12,
       "daysPerWeek": 1,
       "warmUp": {
         "durationMinutes": 10,
@@ -612,27 +612,18 @@
       "sets": [
         {
           "number": 1,
-          "repetitions": 10,
-          "weight": 75,
-          "completed": true
+          "repetitions": 15,
+          "weight": 75
         },
         {
           "number": 2,
-          "repetitions": 8,
-          "weight": 80,
-          "completed": true
+          "repetitions": 12,
+          "weight": 80
         },
         {
           "number": 3,
           "repetitions": 8,
-          "weight": 80,
-          "completed": true
-        },
-        {
-          "number": 4,
-          "repetitions": 6,
-          "weight": 75,
-          "completed": true
+          "weight": 80
         }
       ],
       "notes": "Buen entrenamiento, subí peso en segunda serie"
@@ -644,10 +635,21 @@
       "exerciseId": "ej002",
       "date": "2025-03-01",
       "sets": [
-        {"number": 1, "weight": 70, "repetitions": 12},
-        {"number": 2, "weight": 75, "repetitions": 10},
-        {"number": 3, "weight": 75, "repetitions": 10},
-        {"number": 4, "weight": 70, "repetitions": 12}
+        {
+          "number": 1,
+          "weight": 70,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 75,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 75,
+          "repetitions": 8
+        }
       ]
     },
     {
@@ -660,20 +662,15 @@
         {
           "number": 1,
           "weight": 85,
-          "repetitions": 8
+          "repetitions": 15
         },
         {
           "number": 2,
           "weight": 85,
-          "repetitions": 8
+          "repetitions": 12
         },
         {
           "number": 3,
-          "weight": 90,
-          "repetitions": 8
-        },
-        {
-          "number": 4,
           "weight": 90,
           "repetitions": 8
         }
@@ -686,10 +683,21 @@
       "routineId": "rut001",
       "exerciseId": "ej002",
       "sets": [
-        {"number": 1, "weight": 85, "repetitions": 8},
-        {"number": 2, "weight": 85, "repetitions": 8},
-        {"number": 3, "weight": 90, "repetitions": 8},
-        {"number": 4, "weight": 90, "repetitions": 8}
+        {
+          "number": 1,
+          "weight": 85,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 85,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 90,
+          "repetitions": 8
+        }
       ]
     },
     {
@@ -699,11 +707,97 @@
       "routineId": "rut001",
       "exerciseId": "ej002",
       "sets": [
-        {"number": 1, "weight": 90, "repetitions": 8},
-        {"number": 2, "weight": 90, "repetitions": 8},
-        {"number": 3, "weight": 100, "repetitions": 8},
-        {"number": 4, "weight": 100, "repetitions": 8}
+        {
+          "number": 1,
+          "weight": 90,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 90,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 100,
+          "repetitions": 8
+        }
       ]
+    },
+    {
+      "id": "hist1763356452913",
+      "date": "2025-11-17",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej001",
+      "sets": [
+        {
+          "number": 1,
+          "weight": 90,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 90,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 100,
+          "repetitions": 8
+        }
+      ],
+      "notes": ""
+    },
+    {
+      "id": "hist1763359464792",
+      "date": "2025-11-17",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej002",
+      "sets": [
+        {
+          "number": 1,
+          "weight": 95,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 95,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 100,
+          "repetitions": 8
+        }
+      ],
+      "notes": "Aumente poco peso, pero tuve buenas sensaciones"
+    },
+    {
+      "id": "hist1763359606236",
+      "date": "2025-11-17",
+      "username": "member_marcos",
+      "routineId": "rut001",
+      "exerciseId": "ej003",
+      "sets": [
+        {
+          "number": 1,
+          "weight": 60,
+          "repetitions": 15
+        },
+        {
+          "number": 2,
+          "weight": 65,
+          "repetitions": 12
+        },
+        {
+          "number": 3,
+          "weight": 65,
+          "repetitions": 8
+        }
+      ],
+      "notes": "dolor en el hombre en la ultima serie"
     }
   ]
 }
