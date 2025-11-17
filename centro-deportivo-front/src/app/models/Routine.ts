@@ -29,8 +29,8 @@ export interface Exercise {
   order: number;
   muscleGroup: string;
   type: string;
-  sets: number;
-  repetitions: string;
+  sets: number; 
+  seriesRepetitions: { repetitions: string }[];
   restSeconds: number;
   suggestedWeight?: string;
   notes?: string;
@@ -46,6 +46,7 @@ export interface RoutineDay {
   name: string;
   description?: string;
   order: number;
+  exercises?: Exercise[];
 }
 
 
@@ -79,10 +80,7 @@ export interface Routine {
   createdBy: string;
   createdAt: string;
   active: boolean;
-
-  days?: Day[];
   routineDays?: RoutineDay[];
-  tags?: string[];
   generalNotes?: string[];
   warmup?: Warmup;
   cooldown?: Cooldown;
