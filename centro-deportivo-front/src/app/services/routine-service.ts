@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
-import { Routine, RoutineResponse, RoutineAssignment } from '../models/Routine';
+import { Routine, RoutineResponse, RoutineAssignment, TrainingHistory } from '../models/Routine';
 import { AuthService } from './auth-service';
 
 
@@ -12,7 +12,7 @@ import { AuthService } from './auth-service';
 export class RoutineService {
   private readonly URLroutine = "http://localhost:3000/routines";
   private readonly URLassignments = "http://localhost:3000/routineAssignments"; 
-
+  private readonly URLtrainingHistory = "http://localhost:3000/trainingHistory"; 
 
   constructor(private http: HttpClient, private authService: AuthService){}
 
@@ -46,5 +46,16 @@ export class RoutineService {
   getCurrentUserUsername(): string {
     const decodedToken = this.authService.getDecodedToken();
     return decodedToken?.sub || ''; 
+  }
+  getTrainingHistory(){
+    return this.http.get<TrainingHistory[]>(this.URLtrainingHistory)
+  }
+
+  createTrainingHistory(trainingHistory: TrainingHistory): Observable<TrainingHistory> {
+    return this.http.post<TrainingHistory>(this.URLtrainingHistory, trainingHistory);
+  }
+
+  getUserRoutineAssignments(username: string) {
+    return this.http.get<any[]>(`${this.URLroutine}/routineAssignments?memberUsername=${username}&active=true`);
   }
 }
