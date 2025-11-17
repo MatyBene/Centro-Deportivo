@@ -1,0 +1,57 @@
+<section class="title-section">
+  <h1>PROGRESO DE ENTRENAMIENTO</h1>
+  @if (routineName()) {
+    <p class="routine-name">{{ routineName() }}</p>
+  }
+</section>
+
+<section class="progress-container">
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Cargando datos de rutina...</p>
+    </div>
+  }
+
+  @if (!loading() && exercises().length === 0) {
+    <div class="empty-state">
+      <p>No se encontraron ejercicios en esta rutina</p>
+    </div>
+  }
+
+  @if (!loading() && exercises().length > 0) {
+    <div class="selector-container">
+      <label for="exercise-select">Selecciona un ejercicio para ver su progreso:</label>
+      <select 
+        id="exercise-select"
+        class="exercise-select"
+        (change)="onExerciseChange($event)"
+        [value]="selectedExerciseId()">
+        <option value="" disabled selected>Elige un ejercicio</option>
+        @for (exercise of exercises(); track exercise.id) {
+          <option [value]="exercise.id">
+            {{ exercise.name }} ({{ exercise.muscleGroup }})
+          </option>
+        }
+      </select>
+    </div>
+
+    @if (showChart() && selectedExerciseId()) {
+      <div class="chart-section">
+        @if (exerciseHistory().length > 0) {
+          <app-routine-progress-chart
+            [exerciseId]="selectedExerciseId()"
+            [exerciseName]="selectedExerciseName()"
+            [history]="exerciseHistory()"
+          />
+        } @else {
+          <div class="no-history-message">
+            <h3>Sin datos históricos</h3>
+            <p>No hay registros de entrenamiento para <strong>{{ selectedExerciseName() }}</strong></p>
+            <p class="hint">¡Empieza a entrenar y registrar tus pesos para ver tu progreso!</p>
+          </div>
+        }
+      </div>
+    }
+  }
+</section>

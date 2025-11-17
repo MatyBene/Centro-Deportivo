@@ -1,0 +1,44 @@
+<div class="grafico-container">
+      <div class="grafico-header">
+        <h3>Gráfico de Progreso - {{ exerciseName() }}</h3>
+        <button class="btn-cerrar" (click)="close()">✕</button>
+      </div>
+      
+      @if (loading()) {
+        <div class="loading-grafico">
+          <div class="spinner-small"></div>
+          <p>Cargando datos...</p>
+        </div>
+      }
+
+      @if (!loading() && !hasData()) {
+        <div class="sin-datos">
+          <p>No hay datos históricos para este ejercicio</p>
+          <p class="hint">¡Empieza a entrenar y registrar tus pesos para ver tu progreso!</p>
+        </div>
+      }
+
+      @if (!loading() && hasData()) {
+        <div class="chart-wrapper">
+          <canvas #chartCanvas></canvas>
+        </div>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-label">Entrenamientos:</span>
+            <span class="stat-value">{{ totalWorkouts() }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Peso Máximo:</span>
+            <!-- <span class="stat-value">{{ pesoMaximo() }} kg</span> -->
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Promedio:</span>
+            <!-- <span class="stat-value">{{ pesoPromedio() }} kg</span> -->
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Mejora Total:</span>
+            <!-- <span class="stat-value mejora">+{{ mejoraTotal() }} kg</span> -->
+          </div>
+        </div>
+      }
+    </div>
