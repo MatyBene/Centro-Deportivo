@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { Routine, TrainingHistory } from '../models/Routine';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
@@ -41,5 +43,12 @@ export class RoutineService {
   getCurrentUserUsername(): string {
     const decodedToken = this.authService.getDecodedToken();
     return decodedToken?.sub || ''; 
+  }
+  getTrainingHistory(){
+    return this.http.get<TrainingHistory[]>(`${this.URLroutine}/trainingHistory`)
+  }
+
+  getUserRoutineAssignments(username: string) {
+    return this.http.get<any[]>(`${this.URLroutine}/routineAssignments?memberUsername=${username}&active=true`);
   }
 }
