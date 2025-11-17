@@ -16,6 +16,7 @@ import { MotivationPage } from './pages/motivation-page/motivation-page';
 import { MemberListPage } from './pages/member-list-page/member-list-page';
 import { MemberDetailPage } from './pages/member-detail-page/member-detail-page';
 import { RoutineFormPage } from './pages/routine-form-page/routine-form-page';
+import { RoutineListPage } from './pages/routine-list-page/routine-list-page';
 
 export const routes: Routes = [
     {path: '', component: HomePage},
@@ -40,6 +41,7 @@ export const routes: Routes = [
     {path: 'profile', component: ProfilePage, canActivate: [authGuard]},
     {path: 'profile/edit', component: FormPage, canActivate: [authGuard]},
 
-    { path: 'routines/new', component: RoutineFormPage, canActivate: [authGuard] }, 
-    { path: 'routines/edit/:id', component: RoutineFormPage, canActivate: [authGuard] },
+    {path: 'routines', component: RoutineListPage, canActivate: [authGuard]},
+    {path: 'routines/new', component: RoutineFormPage, canActivate: [authGuard] }, 
+    {path: 'routines/edit/:id', component: RoutineFormPage, canActivate: [authGuard] },
 ];
