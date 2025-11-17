@@ -517,6 +517,76 @@
       "createdAt": "2025-11-16",
       "active": true,
       "isTemplate": false
+    },
+    {
+      "id": "1763342443202",
+      "name": "Rutina de Juan",
+      "description": "Enfocada en mejora de basquet",
+      "level": "Principiante",
+      "goal": "Resistencia",
+      "durationWeeks": 4,
+      "daysPerWeek": 5,
+      "warmup": {
+        "durationMinutes": 10,
+        "activities": [
+          "Trote"
+        ]
+      },
+      "cooldown": {
+        "durationMinutes": 10,
+        "activities": [
+          "Estiramiento"
+        ]
+      },
+      "routineDays": [
+        {
+          "id": "day1763342370389",
+          "dayNumber": 1,
+          "name": "Explosion",
+          "description": "",
+          "order": 1,
+          "exercises": [
+            {
+              "id": "ej1763342406361",
+              "name": "Sentadilla con Salto",
+              "muscleGroup": "Piernas",
+              "type": "Compuesto",
+              "sets": 2,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "15"
+                },
+                {
+                  "repetitions": "15"
+                }
+              ],
+              "restSeconds": 45,
+              "suggestedWeight": "0",
+              "notes": ""
+            },
+            {
+              "id": "ej1763342490158",
+              "name": "Estocadas",
+              "muscleGroup": "Piernas",
+              "type": "Compuesto",
+              "sets": 1,
+              "seriesRepetitions": [
+                {
+                  "repetitions": "20"
+                }
+              ],
+              "restSeconds": 40,
+              "suggestedWeight": "10",
+              "notes": "El peso sugerido y las repeticiones por serie son individuales por pierna"
+            }
+          ]
+        }
+      ],
+      "generalNotes": [],
+      "createdBy": "member_marcos",
+      "createdAt": "2025-11-17",
+      "active": true,
+      "isTemplate": false
     }
   ],
   "routineAssignments": [
