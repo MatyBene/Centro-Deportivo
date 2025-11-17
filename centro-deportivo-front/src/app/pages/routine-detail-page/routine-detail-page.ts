@@ -95,6 +95,6 @@ export class RoutineDetailPage implements OnInit{
   }
 
   goBack(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/routines']);
   }
 }

@@ -41,7 +41,7 @@ header {
 }
 
 .logo {
- width: 130px;
+ width: 6rem;
 }
 
 nav ul {
@@ -84,9 +84,9 @@ nav ul li a:hover {
         font-size: 14px;
     }
 
-    .logo {
+    /* .logo {
         width: 110px;
-    }
+    } */
 }
 
 @media (max-width: 768px) {
@@ -98,9 +98,9 @@ nav ul li a:hover {
         padding: 15px 20px;
     }
 
-    .logo {
+    /* .logo {
         width: 110px;
-    }
+    } */
 
     nav {
         position: fixed;
@@ -139,9 +139,9 @@ nav ul li a:hover {
 }
 
 @media (max-width: 480px) {
-    .logo {
+    /* .logo {
         width: 90px;
-    }
+    } */
 
     nav {
         width: 250px;

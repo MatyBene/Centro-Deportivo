@@ -28,7 +28,6 @@
     <tbody>
   @for (routine of routines(); track routine.id) {
     <tr class="routine-row-link">
-     <!-- agregar ruta de detalle de rutina -->
     <td data-label="Nombre">{{ routine.name }}</td>
     <td data-label="Nivel">{{ routine.level }}</td>
     <td data-label="Objetivo">{{ routine.goal }}</td>
@@ -38,10 +37,10 @@
     
     <td data-label="Información">
       <div class="action-column">
-        <button class="btn-uniform btn-detail">
+        <button class="btn-uniform btn-detail" (click)="$event.stopPropagation(); goToDetail(routine.id)">
           Detalle
         </button>
-        <button class="btn-uniform btn-graphs">
+        <button class="btn-uniform btn-graphs" (click)="$event.stopPropagation(); goToChart(routine.id)">
           Gráficos
         </button>
       </div>

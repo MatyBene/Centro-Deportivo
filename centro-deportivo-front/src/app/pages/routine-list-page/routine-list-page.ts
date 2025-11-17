@@ -81,4 +81,12 @@ export class RoutineListPage {
       });
     }
   }
+
+  goToDetail(routineId: string) {
+    this.router.navigate([`/routines/${routineId}`]);
+  }
+
+  goToChart(routineId: string) {
+    this.router.navigate([`/routines/${routineId}/progress`]);
+  }
 }
