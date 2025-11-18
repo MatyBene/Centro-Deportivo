@@ -2,9 +2,7 @@ package com.utn.API_CentroDeportivo.controller;
 
 import com.utn.API_CentroDeportivo.model.dto.request.MemberRequestDTO;
 
-import com.utn.API_CentroDeportivo.model.dto.response.InstructorSummaryDTO;
-import com.utn.API_CentroDeportivo.model.dto.response.MembersDetailsDTO;
-import com.utn.API_CentroDeportivo.model.dto.response.SportActivityDetailsDTO;
+import com.utn.API_CentroDeportivo.model.dto.response.*;
 import com.utn.API_CentroDeportivo.model.entity.Instructor;
 import com.utn.API_CentroDeportivo.service.IAuthService;
 import com.utn.API_CentroDeportivo.service.IInstructorService;
@@ -290,5 +288,46 @@ public class InstructorController {
 
         authService.registerMember(memberDTO);
         return ResponseEntity.ok("Socio registrado correctamente por el instructor");
+    }
+
+    @Operation(
+            summary = "Obtener detalle completo de instructor por ID",
+            description = "Permite obtener todos los datos personales del usuario, su especialidad y la lista completa de actividades asignadas a un instructor específico por su ID. Accesible para cualquier usuario autenticado.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Detalle completo del instructor recuperado exitosamente",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = InstructorDetailsDTO.class) // ⬅️ DTO COMPLETO
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Instructor no encontrado con el ID proporcionado"
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "No autenticado"
+                    ),
+                    @ApiResponse(
+                            responseCode = "500",
+                            description = "Error interno del servidor"
+                    )
+            }
+    )
+    @GetMapping("/{id}/details")
+    public ResponseEntity<InstructorDetailsDTO> getInstructorDetails(@PathVariable Long id) {
+        return instructorService.getInstructorDetailsById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PreAuthorize("hasRole('INSTRUCTOR')")
+    @GetMapping("/profile")
+    public ResponseEntity<Optional<UserDetailsDTO>> getProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserDetailsDTO> dto = instructorService.findUserDetailsByUsername(username);
+        return ResponseEntity.ok(dto);
     }
 }

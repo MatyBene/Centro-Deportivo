@@ -1,0 +1,43 @@
+<section class="title-section">
+    <h1>USUARIOS</h1>
+</section>
+
+<div class="filter-toggle-container">
+    <button class="filter-toggle-btn" (click)="toggleFilters()">
+        {{ showFilters ? 'Ocultar Filtros' : 'Ver filtros' }}
+    </button>
+</div>
+
+@if (showFilters) {
+    <app-user-filters (filterChange)="onFilterChange($event)" (clearFilters)="onClearFilters()"></app-user-filters>
+}
+
+@if (isLoading) {
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Cargando usuarios...</p>
+    </div>
+}
+
+<section class="users-container" [class.fade-in]="!isLoading">
+    @if (!isLoading && users.length > 0) {
+        @for (user of users; track $index) {
+            <app-user-summary-item [user]="user"></app-user-summary-item>
+        }
+    } @else if(!isLoading) {
+        <p class="no-users">No hay usuarios disponibles</p>
+    }
+</section>
+
+<section class="pagination-container" [class.visible]="!isLoading">
+    @if (!isLoading && totalPages > 1) {
+        <app-pagination
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            [hasPreviousPage]="hasPreviousPage"
+            [hasNextPage]="hasNextPage"
+            (previousPageEvent)="previousPage()"
+            (nextPageEvent)="nextPage()"
+        ></app-pagination>
+    }
+</section>

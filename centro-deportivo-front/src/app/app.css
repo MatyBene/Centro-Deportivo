@@ -1,0 +1,5 @@
+.content-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  min-height: calc(100vh - 120px);
+  padding: 20px;
+}

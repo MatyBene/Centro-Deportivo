@@ -9,11 +9,21 @@ import { AuthService } from '../../services/auth-service';
   styleUrl: './header.css'
 })
 export class Header {
+  menuOpen: boolean = false;
   
   constructor(public authService: AuthService, private router: Router){}
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
 
   logout(){
     this.authService.logout();
     this.router.navigate(['/']);
+    this.closeMenu();
   }
 }

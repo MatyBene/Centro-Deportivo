@@ -1,0 +1,88 @@
+<!-- <section class="title-section">
+    <h1>MIS ACTIVIDADES INSCRIPTAS</h1>
+</section>
+
+@if (isLoading) {
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Cargando mis actividades...</p>
+    </div>
+} 
+
+@else if (error) {
+    <div class="error-message-container">
+        <p class="error-message">Error al cargar las actividades: {{ error }}</p>
+    </div>
+}
+
+@else {
+    @if (activities.length === 0) {
+        <div class="no-activities-msg-container">
+            <p class="no-activities">Aún no estás inscrito en ninguna actividad.</p>
+        </div>
+    }
+
+    <section class="activities-container fade-in">
+        @for (activity of activities; track activity) {
+            <div class="activity-card">    
+                <h2 class="activity-name">{{ activity.activityName }}</h2>    
+                <div class="button-group-card">
+                    <button [routerLink]="['/activity-list', activity.activityId]" class="button-base view-detail-btn">
+                        Ver Detalle
+                    </button>
+                </div>
+            </div>
+        }
+    </section>
+} -->
+
+<section class="title-section">
+    <h1>MIS ACTIVIDADES INSCRIPTAS</h1>
+</section>
+
+@if (unenrollmentMessage) {
+    <div class="unenrollment-message-container">
+        <p class="unenrollment-message">{{ unenrollmentMessage }}</p>
+    </div>
+}
+
+@if (isLoading) {
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Cargando mis actividades...</p>
+    </div>
+} 
+
+@else if (error) {
+    <div class="error-message-container">
+        <p class="error-message">Error al cargar las actividades: {{ error }}</p>
+    </div>
+}
+
+@else {
+    @if (activities.length === 0) {
+        <div class="no-activities-msg-container">
+            <p class="no-activities">Aún no estás inscrito en ninguna actividad.</p>
+        </div>
+    }
+
+    <section class="activities-container fade-in">
+        @for (activity of activities; track activity.activityId) { 
+            <div class="activity-card">
+                <h2 class="activity-name">{{ activity.activityName }}</h2> 
+                
+                <div class="button-group-card multiple-buttons"> 
+                    <button [routerLink]="['/activity-list', activity.activityId]" class="button-base view-detail-btn">
+                        Ver Detalle
+                    </button>
+                    
+                    <button 
+                        (click)="unsubscribe(activity.activityId, activity.activityName)" 
+                        class="button-base unsubscribe-btn">
+                        Darse de Baja
+                    </button>
+                </div>
+            </div>
+        }
+    </section>
+}

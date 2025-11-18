@@ -13,4 +13,6 @@ public class MemberEditDTO {
     private String phone;
     private String email;
     private String birthdate;
+    private String dni;
+    private String username;
 }

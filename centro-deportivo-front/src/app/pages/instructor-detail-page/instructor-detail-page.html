@@ -1,0 +1,53 @@
+@if (isLoading) {
+    <div class="loading-container">
+        <p>Cargando detalles del instructor...</p>
+        </div>
+    } 
+
+@if (error) {
+    <div class="error-message-container">
+        <p class="error-message">{{ error }}</p>
+    </div>
+}
+
+@if (instructor && !isLoading) {
+    <section class="detail-container fade-in">
+        
+        <h1 class="page-title">{{ instructor.name }} {{ instructor.lastname }}</h1>
+        
+        <div class="instructor-detail-card">
+            
+            <div class="info-grid">
+                
+                <div class="detail-item">
+                    <strong>Especialidad:</strong> 
+                    <span>{{ instructor.specialty }}</span>
+                </div>
+                
+                <div class="detail-item">
+                    <strong>Fecha Nac.:</strong> 
+                    <span>{{ instructor.birthdate }}</span>
+                </div>
+                
+            </div>
+            
+            <h2 class="section-subtitle activities-title">Actividades Asignadas ({{ instructor.activities.length }})</h2>
+            
+            @if (instructor.activities.length > 0) {
+                <div class="activities-list-chips">
+                    @for (activity of instructor.activities; track activity.id) {
+                        <div class="activity-chip">
+                            <span>{{ activity.name }}</span>
+                            <button [routerLink]="['/activity-list', activity.id]" class="view-detail-chip-btn">
+                                Ver
+                            </button>
+                        </div>
+                    }
+                </div>
+            } @else {
+                <p class="no-activities-msg">Este instructor no tiene clases asignadas actualmente.</p>
+            }
+
+        </div>
+    </section>
+}

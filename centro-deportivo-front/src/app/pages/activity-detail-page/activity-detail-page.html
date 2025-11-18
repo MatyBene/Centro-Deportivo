@@ -1,0 +1,116 @@
+@if (isLoading) {
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Cargando detalles de actividad...</p>
+    </div>
+} @else if (error) {
+    <div class="error-message-container">
+        <p class="error-message">{{error}}</p>
+        <button [routerLink]="['/activity-list']" class="btn">Volver al listado</button>
+    </div>
+} @else if (activity) {
+    <section class="title-section">
+        <h2 class="activity-name">{{ activity.name }}</h2>
+    </section>
+    <section class = "detail-container fade-in">
+        <div class = "activity-detail-card">
+            <div class="detail-grid">
+            
+                <div class="detail-item">
+                    <strong>Instructor: </strong> 
+                    @if (authService.isLoggedIn()) {
+                        <a (click)="getInstructor(activity.instructorId)" class="instructor-link">
+                            {{activity.instructorName}}
+                        </a>
+                    } @else {
+                        <span>{{activity.instructorName}}</span>
+                    }
+                    
+                </div>
+                <div class="detail-item">
+                    <strong>Cupo Actual: </strong> <span>{{activity.currentMembers}}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Hora Inicio: </strong> <span>{{activity.startTime}}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Cupo Maximo: </strong> <span>{{activity.maxMembers}}</span>
+                </div>
+                <div class="detail-item">
+                    <strong>Hora Fin: </strong> <span>{{activity.endTime}}</span>
+                </div>
+                
+                <div class="detail-item full-width">
+                    <strong>Días de Clase: </strong> 
+                        <span>
+                        @for (day of activity.classDays; track day) {  {{ day }} @if (!$last) { {{', '}}
+                        }
+                        }
+    </span>
+                </div>
+                
+                <div class="detail-item full-width">
+                    <strong>Descripción: </strong> <span>{{activity.description}}</span>
+                </div>
+                
+            </div>
+            <div class = "button-group">
+                
+                @if (authService.isLoggedIn() && authService.getUserRole() === 'MEMBER') {
+                    @if (isEnrolled) {
+                        <button class="button-base action-btn unsubscribe-btn" (click)="unenrollToActivity()">Darse de baja</button>
+                    } @else if(activity.currentMembers < activity.maxMembers) {
+                        <button class="button-base action-btn subscribe-btn" (click)="enrollToActivity()">Inscribirse</button>
+                    }
+                }
+
+                @if (authService.isLoggedIn() && authService.getUserRole() === 'INSTRUCTOR') {
+                    @if (activity.currentMembers < activity.maxMembers) {
+                        <div class="instructor-enroll-wrapper admin-enroll-wrapper"> 
+                            <div class="admin-enroll-container">
+                                <input 
+                                    type="text" 
+                                    id="member-username" 
+                                    placeholder="Username Socio"
+                                    [value]="memberUsernameToEnroll"
+                                    (input)="memberUsernameToEnroll = $any($event.target).value"
+                                >
+                                <button class="button-base action-btn subscribe-btn" 
+                                        (click)="enrollMemberByUsernameByInstructor()"
+                                        [disabled]="!memberUsernameToEnroll.trim() || activity.currentMembers >= activity.maxMembers">
+                                    Inscribir
+                                </button>
+                                <button class="button-base action-btn unsubscribe-btn" 
+                                        (click)="unenrollMemberByInstructor()"
+                                        [disabled]="!memberUsernameToEnroll.trim()">
+                                    Dar de Baja
+                                </button>
+                            </div>
+                            @if (instructorActionMessage) { 
+                                <p class="admin-action-message" [class.error]="isInstructorActionError">{{instructorActionMessage}}</p>
+                            }
+                        </div>
+                    }
+                }
+
+                @if (authService.isLoggedIn() && authService.getPermission() === 'PERMISSION_USER_MANAGER' || authService.getPermission() === 'PERMISSION_SUPER_ADMIN') {
+                    @if (activity.currentMembers < activity.maxMembers) {
+                        <div class="admin-enroll-wrapper">
+                            <div class="admin-enroll-container">
+                                <input type="text" id="admin-username" placeholder="Usuario (username)"
+                                    [value]="memberUsername"
+                                    (input)="memberUsername = $any($event.target).value">
+                                <button class="button-base action-btn subscribe-btn" (click)="enrollMemberAsAdmin(memberUsername)">Inscribir</button>
+                            </div>
+                            @if (adminActionMessage) {
+                                <p class="admin-action-message" [class.error]="isAdminActionError">{{adminActionMessage}}</p>
+                            }
+                        </div>
+                    }
+                }
+                
+                <button [routerLink]="['/activity-list']" class="button-base back-to-list-btn">Volver al Listado</button>
+            </div>    
+        </div>
+    </section>
+}

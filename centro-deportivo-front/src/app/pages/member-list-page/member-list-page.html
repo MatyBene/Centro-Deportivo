@@ -1,0 +1,36 @@
+<section class="title-section">
+  <h1>SOCIOS</h1>
+</section>
+
+
+@if (isLoading) {
+  <div class="loading-container">
+    <div class="loading-spinner"></div>
+    <p class="loading-text">Cargando socios...</p>
+  </div>
+}
+
+<section class="members-container" [class.fade-in]="!isLoading">
+  @if (!isLoading && members.length > 0) {
+    @for (member of members; track $index) {
+      <div class="member-card">
+        <app-user-summary-item [user]="member"></app-user-summary-item>
+      </div>
+    }
+  } @else if (!isLoading && !error) {
+    <p class="no-members">No hay socios disponibles</p>
+  }
+</section>
+
+<section class="pagination-container" [class.visible]="!isLoading">
+  @if (!isLoading && totalPages > 1) {
+    <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      [hasPreviousPage]="hasPreviousPage"
+      [hasNextPage]="hasNextPage"
+      (previousPageEvent)="prevPage()"
+      (nextPageEvent)="nextPage()">
+    </app-pagination>
+  }
+</section>

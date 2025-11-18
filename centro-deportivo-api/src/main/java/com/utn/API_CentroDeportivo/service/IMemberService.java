@@ -16,4 +16,5 @@ public interface IMemberService {
     void updateMemberProfile(String username, MemberEditDTO dto);
     Page<MembersDetailsDTO> getAllMembers(int page, int size);
     MembersDetailsDTO getMemberDetailsById(Long memberId);
+    MembersDetailsDTO getMemberDetailsByUsername(String username);
 }

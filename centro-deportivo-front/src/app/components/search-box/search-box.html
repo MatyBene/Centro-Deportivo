@@ -1,0 +1,10 @@
+<section>
+    <label for="search">Buscar actividad: </label>
+    <input 
+        type="search" 
+        id="search" 
+        [value]="searchTerm()"
+        (input)="searchTerm.set($any($event.target).value)"
+        (keyup.enter)="onSearch()">
+    <button (click)="onSearch()">Buscar</button>
+</section>

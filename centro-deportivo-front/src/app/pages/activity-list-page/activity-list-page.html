@@ -1,0 +1,47 @@
+<section class="title-section">
+    <h1>LISTADO DE ACTIVIDADES</h1>
+</section>
+
+<div class="filter-toggle-container">
+    <button class="filter-toggle-btn" (click)="toggleFilters()">
+        {{ showFilters ? 'Ocultar Filtros' : 'Buscar Actividad' }}
+    </button>
+</div>
+
+@if (showFilters) {
+    <div class="filters-container">
+        <app-search-box (searchEvent)="onSearch($event)"></app-search-box>
+        <app-time-range-search-box (searchEvent)="onTimeRangeSearch($event)"></app-time-range-search-box>
+    </div>
+}
+
+@if (isLoading) {
+    <div class="loading-container">
+        <div class="loading-spinner"></div>
+        <p class="loading-text">Cargando actividades...</p>
+    </div>
+}
+
+<section class="activities-container" [class.fade-in]="!isLoading">
+    @if (!isLoading && activities.length > 0) {
+        @for (activity of activities; track $index) {
+            <app-activity-summary-item [activity] = 'activity'></app-activity-summary-item>
+        }
+    } @else if (!isLoading) {
+        <p class="no-activities">No hay actividades disponibles</p>
+    }
+</section>
+
+<section class="pagination-container" [class.visible]="!isLoading">
+    @if (!isLoading && totalPages > 1) {
+        <app-pagination
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            [hasPreviousPage]="hasPreviousPage"
+            [hasNextPage]="hasNextPage"
+            (previousPageEvent)="previousPage()"
+            (nextPageEvent)="nextPage()"
+        ></app-pagination>
+    }
+</section>
+

@@ -15,4 +15,5 @@ public class EnrollmentDTO {
     private String activityName;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Long activityId;
 }

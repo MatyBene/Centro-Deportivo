@@ -1,0 +1,16 @@
+import { Component, output, signal } from '@angular/core';
+
+@Component({
+  selector: 'app-search-box',
+  imports: [],
+  templateUrl: './search-box.html',
+  styleUrl: './search-box.css'
+})
+export class SearchBox {
+  searchEvent = output<string>();
+  searchTerm = signal('');
+
+  onSearch() {
+    this.searchEvent.emit(this.searchTerm());
+  }
+}

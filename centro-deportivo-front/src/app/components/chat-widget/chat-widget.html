@@ -1,0 +1,73 @@
+<!-- Botón flotante -->
+<button class="chat-button" (click)="toggleChat()" [class.open]="isOpen()">
+  @if (!isOpen()) {
+    <span class="chat-icon">💬</span>
+  }
+  @if (isOpen()) {
+    <span class="close-icon">✕</span>
+  }
+</button>
+
+<!-- Ventana de chat -->
+<div class="chat-window" [class.open]="isOpen()">
+  <div class="chat-header">
+    <div class="chat-header-content">
+      <h3>ChatBum</h3>
+      <p>¿En qué puedo ayudarte?</p>
+    </div>
+    <button class="clear-button" (click)="clearHistory()" title="Borrar historial">
+      🗑️
+    </button>
+  </div>
+
+  <div class="chat-messages">
+    @if (messages().length === 0) {
+      <div class="welcome-message">
+        <p>👋 ¡Hola! Soy tu asistente virtual.</p>
+        <p>Pregúntame sobre las actividades deportivas disponibles.</p>
+      </div>
+    }
+
+    @for (message of messages(); track message.timestamp) {
+      <div class="message" 
+           [class.user]="message.isUser"
+           [class.bot]="!message.isUser">
+        <div class="message-content">
+          <p>{{ message.text }}</p>
+          <span class="message-time">
+            {{ message.timestamp | date:'HH:mm' }}
+          </span>
+        </div>
+      </div>
+    }
+
+    @if (isLoading()) {
+      <div class="message bot">
+        <div class="message-content">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="chat-input">
+    <input 
+      type="text" 
+      [value]="newMessage()"
+      (input)="updateMessage($any($event.target).value)"
+      (keypress)="onKeyPress($event)"
+      placeholder="Escribe tu mensaje..."
+      [disabled]="isLoading()"
+    />
+    <button 
+      (click)="sendMessage()" 
+      [disabled]="!newMessage().trim() || isLoading()"
+    >
+      ➤
+    </button>
+  </div>
+</div>

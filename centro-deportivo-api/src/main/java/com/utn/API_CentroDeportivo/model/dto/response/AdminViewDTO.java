@@ -19,6 +19,6 @@ public class AdminViewDTO {
     private String username;
     private Role role;
     private Status status;
-    private String speciality;
+    private String specialty;
     private PermissionLevel permissionLevel;
 }

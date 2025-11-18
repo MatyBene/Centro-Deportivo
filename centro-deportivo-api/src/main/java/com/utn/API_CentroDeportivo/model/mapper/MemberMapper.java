@@ -24,6 +24,7 @@ public class MemberMapper {
     }
     public static MembersDetailsDTO mapToMemberDetailsDTO(Member member) {
         return MembersDetailsDTO.builder()
+                .id(member.getId())
                 .name(member.getName())
                 .lastname(member.getLastname())
                 .dni(member.getDni())
@@ -38,6 +39,7 @@ public class MemberMapper {
                                 .activityName(enrollment.getActivity().getName())
                                 .startDate(enrollment.getStartDate())
                                 .endDate(enrollment.getEndDate())
+                                .activityId(enrollment.getActivity().getId())
                                 .build())
                         .collect(Collectors.toList()))
                 .build();

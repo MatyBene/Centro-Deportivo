@@ -1,6 +1,6 @@
 <section class="title-section">
-    <h1>REGISTRO DE NUEVO MIEMBRO</h1>
-    <p>Completa el siguiente formulario para unirte a nuestra comunidad. Forjamos campeones y te ayudamos a alcanzar tus objetivos deportivos.</p>
+    <h1>{{ isEditMode ? 'EDITAR PERFIL' : 'REGISTRO DE NUEVO MIEMBRO' }}</h1>
+    <p>{{ isEditMode ? 'Actualiza tu información personal.' : 'Completa el siguiente formulario para unirte a nuestra comunidad. Forjamos campeones y te ayudamos a alcanzar tus objetivos deportivos.' }}</p>
 </section>
 
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
@@ -46,21 +46,59 @@
         </fieldset>
     </div>
 
-    <div class="form-row">
+    @if (isAdminRegisterMode) {
         <fieldset>
-            <label for="username">Nombre de usuario</label>
-            <input type="text" id="username" formControlName="username">
-            <app-field-error [control]="username" [serverError]="serverErrors['username']"></app-field-error>
+            <label for="role">Tipo de usuario</label>
+            <select id="role" formControlName="role">
+            <option value="MEMBER">Socio</option>
+            @if (currentAdmin?.permissionLevel === 'SUPER_ADMIN' || currentAdmin?.permissionLevel === 'USER_MANAGER' ) {
+                <option value="INSTRUCTOR">Instructor</option>
+            }
+            @if (currentAdmin?.permissionLevel === 'SUPER_ADMIN') {
+                <option value="ADMIN">Administrador</option>
+            }
+            </select>
+            <app-field-error [control]="role"></app-field-error>
         </fieldset>
+    }
 
-        <fieldset>
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" formControlName="password">
-            <app-field-error [control]="password" [customErrors]="{
-                'pattern': 'La contraseña debe contener al menos: 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial y no tener espacios'
-            }"></app-field-error>
+    @if (!isEditMode) {
+        @if (isAdminRegisterMode && role?.value === 'ADMIN') {
+            <fieldset>
+            <label for="permissionLevel">Tipo de administrador</label>
+            <select id="permissionLevel" formControlName="permissionLevel">
+            <option value="USER_MANAGER">Administrador de usuarios</option>
+            <option value="FINANCE_ADMIN">Administrador de finanzas</option>
+            <option value="SUPER_ADMIN">Administrador control total</option>
+            </select>
+            <app-field-error [control]="permissionLevel"></app-field-error>
         </fieldset>
-    </div>
+        }
 
-    <button type="submit" [disabled]="userForm.invalid">Crear cuenta</button>
+        @if (isAdminRegisterMode && role?.value === 'INSTRUCTOR') {
+            <fieldset>
+                <label for="specialty">Especialidad</label>
+                <input type="text" id="specialty" formControlName="specialty">
+                <app-field-error [control]="specialty"></app-field-error>
+            </fieldset>
+        }
+
+        <div class="form-row">
+            <fieldset>
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username" formControlName="username">
+                <app-field-error [control]="username" [serverError]="serverErrors['username']"></app-field-error>
+            </fieldset>
+
+            <fieldset>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" formControlName="password">
+                <app-field-error [control]="password" [customErrors]="{
+                    'pattern': 'La contraseña debe contener al menos: 1 mayúscula, 1 minúscula, 1 número, 1 carácter especial y no tener espacios'
+                }"></app-field-error>
+            </fieldset>
+        </div>
+    }
+
+    <button type="submit" [disabled]="userForm.invalid">{{ isEditMode ? 'Guardar cambios' : 'Crear cuenta' }}</button>
 </form>

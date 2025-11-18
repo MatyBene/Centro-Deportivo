@@ -1,0 +1,370 @@
+
+<div class="crear-rutina-container">
+  
+  <div class="header">
+    <button class="btn-back" (click)="goBack()">← Volver a Rutinas</button>
+    <h1>
+      @if (isEditMode()) {
+        <span> Editar Rutina</span>
+      } @else {
+        <span> Crear Nueva Rutina</span>
+      }
+    </h1>
+  </div>
+
+  <form [formGroup]="routineForm" (ngSubmit)="saveRoutine()" class="rutina-form">
+    
+    <div class="seccion">
+      <h2>Información General</h2>
+      
+      <div class="form-group">
+        <label for="name">Nombre de la Rutina *</label>
+        <input 
+          id="name" 
+          type="text" 
+          formControlName="name" 
+          placeholder="Ej: Rutina de Fuerza Full Body"
+        />
+        @if (routineForm.get('name')?.invalid && routineForm.get('name')?.touched) {
+          <span class="error">El nombre es obligatorio</span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción *</label>
+        <textarea 
+          id="description" 
+          formControlName="description" 
+          placeholder="Describe el objetivo y características de la rutina..."
+          rows="3"
+        ></textarea>
+        @if (routineForm.get('description')?.invalid && routineForm.get('description')?.touched) {
+          <span class="error">La descripción es obligatoria</span>
+        }
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="level">Nivel </label>
+          <select id="level" formControlName="level">
+            <option value="">Seleccionar...</option>
+            @for (option of levelOptions; track option) {
+              <option [value]="option">{{ option }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="goal">Objetivo </label>
+          <select id="goal" formControlName="goal">
+            <option value="">Seleccionar...</option>
+            @for (option of goalOptions; track option) {
+              <option [value]="option">{{ option }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="durationWeeks">Duración (semanas) </label>
+          <input 
+            id="durationWeeks" 
+            type="number" 
+            formControlName="durationWeeks" 
+            min="1"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="daysPerWeek">Días por semana</label>
+          <input 
+            id="daysPerWeek" 
+            type="number" 
+            formControlName="daysPerWeek" 
+            min="1"
+            max="7"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="seccion">
+      <h2>Calentamiento</h2>
+      
+      <div class="form-group">
+        <label for="warmupDuration">Duración (minutos)</label>
+        <input 
+          id="warmupDuration" 
+          type="number" 
+          formControlName="warmupDuration" 
+          min="0"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Actividades</label>
+        <div formArrayName="warmupActivities">
+          @for (control of warmupActivities.controls; track $index) {
+            <div class="array-item">
+              <input 
+                type="text" 
+                [formControlName]="$index" 
+                placeholder="Ej: 5 minutos de cardio ligero"
+              />
+              <button 
+                type="button" 
+                class="btn-remove" 
+                (click)="removeWarmupActivity($index)"
+              >Eliminar</button>
+            </div>
+          }
+        </div>
+        <button type="button" class="btn-add" (click)="addWarmupActivity()">
+          + Agregar Actividad
+        </button>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <h2>Enfriamiento</h2>
+      
+      <div class="form-group">
+        <label for="cooldownDuration">Duración (minutos)</label>
+        <input 
+          id="cooldownDuration" 
+          type="number" 
+          formControlName="cooldownDuration" 
+          min="0"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Actividades</label>
+        <div formArrayName="cooldownActivities">
+          @for (control of cooldownActivities.controls; track $index) {
+            <div class="array-item">
+              <input 
+                type="text" 
+                [formControlName]="$index" 
+                placeholder="Ej: Estiramientos estáticos"
+              />
+              <button 
+                type="button" 
+                class="btn-remove" 
+                (click)="removeCooldownActivity($index)"
+              >Eliminar</button>
+            </div>
+          }
+        </div>
+        <button type="button" class="btn-add" (click)="addCooldownActivity()">
+          + Agregar Actividad
+        </button>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <h2>Días de Entrenamiento</h2>
+      
+      <div formArrayName="routineDays">
+        @for (dayControl of routineDays.controls; track $index; let i = $index) {
+          <div class="dia-card" [formGroupName]="i">
+            
+            <div class="dia-header">
+              <h3>Día {{ dayControl.get('dayNumber')?.value }}</h3>
+              <button 
+                type="button" 
+                class="btn-remove" 
+                (click)="removeDay(i)"
+              >Eliminar Día</button>
+            </div>
+
+            <div class="form-group">
+              <label>Nombre del Día *</label>
+              <input 
+                type="text" 
+                formControlName="name" 
+                placeholder="Ej: Pecho y Tríceps"
+              />
+               @if (dayControl.get('name')?.invalid && dayControl.get('name')?.touched) {
+                <span class="error">El nombre del día es obligatorio.</span>
+              }
+            </div>
+
+            <div class="form-group">
+              <label>Descripción</label>
+              <textarea 
+                formControlName="description" 
+                placeholder="Descripción opcional del día"
+                rows="1"
+              ></textarea>
+            </div>
+
+            <div class="ejercicios-section">
+  <h4>Ejercicios</h4>
+  <div formArrayName="exercises">
+    @for (exerciseControl of getExercises(i).controls; track $index; let j = $index) {
+      <div class="ejercicio-card" [formGroupName]="j">
+        
+        <div class="ejercicio-header">
+          <span class="ejercicio-numero">{{ j + 1 }}</span>
+          <button 
+            type="button" 
+            class="btn-remove-small" 
+            (click)="removeExercise(i, j)"
+          >Eliminar</button>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre del Ejercicio </label>
+            <input 
+              type="text" 
+              formControlName="name" 
+              placeholder="Ej: Press de banca"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Grupo Muscular </label>
+            <select formControlName="muscleGroup">
+              <option value="">Seleccionar...</option>
+              @for (group of muscleGroupOptions; track group) {
+                <option [value]="group">{{ group }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Cantidad de Series *</label>
+            <input 
+              type="number" 
+              formControlName="sets" 
+              min="1"
+              placeholder="Ej: 4"
+              (input)="onSetsChange(i, j, $event)" 
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Descanso (seg) *</label>
+            <input 
+              type="number" 
+              formControlName="restSeconds" 
+              min="0"
+              placeholder="Ej: 90"
+            />
+          </div>
+        </div>
+
+        <div class="series-repetitions-section full-width">
+          <label class="series-label">Repeticiones por Serie:</label>
+          
+          <div formArrayName="seriesRepetitions">
+            
+            @for (repControl of getSeriesRepetitions(i, j).controls; track $index; let k = $index) {
+              <div class="array-item series-item" [formGroupName]="k"> 
+                <span class="series-number">Serie {{ k + 1 }}</span>
+                <div class="form-group serie-repetitions">
+                  <input 
+                    type="text" 
+                    formControlName="repetitions" 
+                    placeholder="Repeticiones Ej: 8-12"
+                  />
+                </div>
+              </div>
+            }
+            
+            @if (getSeriesRepetitions(i, j).length === 0 && exerciseControl.get('sets')?.value > 0) {
+              <span class="error-series">El número de series es mayor a cero, pero no hay campos de repeticiones. Ingresa un número válido.</span>
+            }
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tipo </label>
+            <select formControlName="type">
+              <option value="">Seleccionar...</option>
+              @for (type of exerciseTypeOptions; track type) {
+                <option [value]="type">{{ type }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Peso Sugerido</label>
+            <input 
+              type="text" 
+              formControlName="suggestedWeight" 
+              placeholder="Ej: 60-80kg"
+            />
+          </div>
+        </div>
+
+        <div class="form-group full-width">
+          <label>Notas</label>
+          <input 
+            type="text" 
+            formControlName="notes" 
+            placeholder="Instrucciones o tips adicionales"
+          />
+        </div>
+      </div> }
+  </div>
+  
+  <button type="button" class="btn-add" (click)="addExercise(i)">
+    + Agregar Ejercicio
+  </button>
+</div>
+          </div>
+        }
+      </div>
+
+      <button type="button" class="btn-add-large" (click)="addDay()">
+        + Agregar Día de Entrenamiento
+      </button>
+    </div>
+
+    <div class="seccion">
+      <h2>Notas Generales</h2>
+      
+      <div class="form-group">
+        <div formArrayName="generalNotes">
+          @for (control of generalNotes.controls; track $index) {
+            <div class="array-item">
+              <input 
+                type="text" 
+                [formControlName]="$index" 
+                placeholder="Ej: Aumentar peso cada 2 semanas"
+              />
+              <button 
+                type="button" 
+                class="btn-remove" 
+                (click)="removeGeneralNote($index)"
+              >Eliminar</button>
+            </div>
+          }
+        </div>
+        <button type="button" class="btn-add" (click)="addGeneralNote()">
+          + Agregar Nota
+        </button>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="goBack()">Cancelar</button>
+      <button type="submit" class="btn-submit" [disabled]="!routineForm.valid || isSaving()">
+        @if (isSaving()) {
+          <span>Guardando...</span>
+        } @else if (isEditMode()) {
+          <span>Actualizar Rutina</span>
+        } @else {
+          <span>Crear Rutina</span>
+        }
+      </button>
+    </div>
+  </form>
+</div>

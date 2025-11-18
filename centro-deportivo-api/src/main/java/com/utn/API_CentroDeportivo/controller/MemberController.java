@@ -2,6 +2,7 @@ package com.utn.API_CentroDeportivo.controller;
 
 import com.utn.API_CentroDeportivo.model.dto.request.MemberEditDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.EnrollmentDTO;
+import com.utn.API_CentroDeportivo.model.dto.response.MembersDetailsDTO;
 import com.utn.API_CentroDeportivo.service.IEnrollmentService;
 import com.utn.API_CentroDeportivo.service.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -152,6 +153,14 @@ public class MemberController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         memberService.updateMemberProfile(username, dto);
         return ResponseEntity.ok("Se modifico el usuario correctamente");
+    }
+
+    @PreAuthorize("hasRole('MEMBER')")
+    @GetMapping("/profile")
+    public ResponseEntity<MembersDetailsDTO> getProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        MembersDetailsDTO dto = memberService.getMemberDetailsByUsername(username);
+        return ResponseEntity.ok(dto);
     }
 
     @Operation(

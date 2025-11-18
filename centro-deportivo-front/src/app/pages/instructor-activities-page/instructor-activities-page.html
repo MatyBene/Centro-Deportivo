@@ -1,0 +1,27 @@
+<section class="activity-list-container">
+    @if (activities.length > 0) {
+        @for (activity of activities; track activity.id) {
+            <div class="activity-card fade-in">
+                
+                <h2 class="activity-name">{{ activity.name }}</h2>
+                
+                <div class="activity-details-grid">
+                    <div class="detail-item-small">
+                        <strong>Cupo Máximo: </strong> <span>{{ activity.maxMembers }}</span>
+                    </div>
+                    <div class="detail-item-small">
+                        <strong>Instructor: </strong> <span>{{ activity.instructorName }}</span>
+                    </div>
+                </div>
+                
+                <div class="button-group-card">
+                    <button [routerLink]="['/activity-list', activity.id]" class="button-base view-detail-btn">
+                        Ver Detalle
+                    </button>
+                </div>
+            </div>
+        }
+    } @else {
+        <h2>No tiene actividades</h2>
+    }
+</section>

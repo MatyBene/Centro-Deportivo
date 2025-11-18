@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -24,6 +25,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
+import java.util.Optional;
 
 
 @RestController
@@ -459,5 +462,13 @@ public class AdminController {
     public ResponseEntity<String> deleteUserByUsername(@PathVariable String username) {
         adminService.deleteUserByUsername(username);
         return ResponseEntity.ok("Usuario fue eliminado correctamente.");
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/profile")
+    public ResponseEntity<Optional<UserDetailsDTO>> getProfile() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<UserDetailsDTO> dto = adminService.findUserDetailsByUsername(username);
+        return ResponseEntity.ok(dto);
     }
 }

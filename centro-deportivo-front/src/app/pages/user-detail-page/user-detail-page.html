@@ -1,0 +1,48 @@
+<section class="title-section">
+    <h1>PERFIL DE USUARIO</h1>
+</section>
+
+<section class="profile-container">
+    @if (member) {
+        <app-member-profile-card [member]="member" (memberUpdated)="loadUser()"></app-member-profile-card>
+    }
+
+    @if (instructor) {
+        <app-instructor-profile-card [instructor]="instructor"></app-instructor-profile-card>
+    }
+
+    @if (admin) {
+        <app-admin-profile-card [admin]="admin"></app-admin-profile-card>
+    }
+
+    <div class="actions-container">
+        <button class="delete-btn" (click)="removeUser()">Eliminar usuario</button>
+    </div>
+</section>
+
+@if (showDeleteModal) {
+    <div class="modal-overlay" (click)="cancelDelete()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>Confirmar eliminación</h2>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar este usuario?</p>
+                <p class="warning-text">Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" (click)="cancelDelete()" [disabled]="isDeleting">
+                    Cancelar
+                </button>
+                <button class="btn-confirm" (click)="confirmDelete()" [disabled]="isDeleting">
+                    @if (isDeleting) {
+                        <span class="spinner"></span>
+                        Eliminando...
+                    } @else {
+                        Eliminar
+                    }
+                </button>
+            </div>
+        </div>
+    </div>
+}

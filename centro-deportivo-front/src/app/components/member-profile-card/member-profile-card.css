@@ -1,0 +1,452 @@
+:host {
+    display: block;
+    margin-bottom: 30px;
+}
+
+.profile-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 3px solid #c9a83e;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 6px 6px 0 #000;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 2px solid #d12c2c;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.profile-header {
+    background: linear-gradient(135deg, #d12c2c 0%, #a01f1f 100%);
+    padding: 25px 30px;
+    border-bottom: 3px solid #c9a83e;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.profile-name {
+    font-family: 'AlimamaBold', sans-serif;
+    font-size: 32px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+    margin: 0 0 10px 0;
+    -webkit-text-stroke: 0.5px #c9a83e;
+}
+
+.profile-status {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 0 #000;
+}
+
+.profile-status.active {
+    background-color: #2ecc71;
+    color: #000;
+}
+
+.profile-status.inactive {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.profile-details {
+    padding: 30px 30px 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    position: relative;
+    z-index: 1;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid #c9a83e;
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    background-color: rgba(201, 168, 62, 0.1);
+    border-left-color: #d12c2c;
+}
+
+.detail-label {
+    font-size: 13px;
+    color: #c9a83e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+}
+
+.detail-value {
+    font-size: 18px;
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    word-break: break-word;
+}
+
+.activities-section {
+    padding: 20px 30px 30px;
+    position: relative;
+    z-index: 1;
+    border-top: 3px solid #c9a83e;
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.activities-title {
+    font-family: 'AlimamaBold', sans-serif;
+    font-size: 20px;
+    color: #c9a83e;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 20px 0;
+    text-align: center;
+    -webkit-text-stroke: 0.3px #d12c2c;
+}
+
+.activities-list {
+    display: grid;
+    gap: 15px;
+}
+
+.activity-item {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #c9a83e;
+    padding: 15px 20px;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0 #000;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.activity-item::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px solid #d12c2c;
+    pointer-events: none;
+}
+
+.activity-item:hover {
+    background-color: rgba(201, 168, 62, 0.1);
+    border-color: #d12c2c;
+    box-shadow: 5px 5px 0 #000;
+}
+
+.activity-info-wrapper {
+    flex: 1;
+}
+
+.activity-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.activity-info {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.activity-detail {
+    font-size: 14px;
+    color: #c9a83e;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.btn-unenroll {
+    background-color: #8b0000;
+    color: #fff;
+    border: 2px solid #d12c2c;
+    padding: 10px 20px;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 0 #000;
+    letter-spacing: 1.5px;
+    font-family: 'MiSans', sans-serif;
+    white-space: nowrap;
+}
+
+.btn-unenroll:hover {
+    background-color: #d12c2c;
+    border-color: #c9a83e;
+    transform: translateY(-2px);
+    box-shadow: 5px 5px 0 #000;
+}
+
+.btn-unenroll:active {
+    transform: translateY(0);
+    box-shadow: 2px 2px 0 #000;
+}
+
+.btn-unenroll:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.no-activities {
+    padding: 20px 30px 30px;
+    position: relative;
+    z-index: 1;
+    border-top: 3px solid #c9a83e;
+    text-align: center;
+}
+
+.no-activities p {
+    font-size: 18px;
+    color: #c9a83e;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin: 0;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #c9a83e;
+    box-shadow: 3px 3px 0 #000;
+}
+
+@media (max-width: 768px) {
+    .profile-card {
+        box-shadow: 5px 5px 0 #000;
+    }
+
+    .profile-card::before {
+        top: 6px;
+        left: 6px;
+        right: 6px;
+        bottom: 6px;
+    }
+
+    .profile-header {
+        padding: 20px 25px;
+    }
+
+    .profile-name {
+        font-size: 26px;
+        letter-spacing: 1.5px;
+    }
+
+    .profile-status {
+        padding: 6px 16px;
+        font-size: 13px;
+    }
+
+    .profile-details {
+        padding: 25px 25px 20px;
+        gap: 20px;
+    }
+
+    .activities-section {
+        padding: 15px 25px 25px;
+    }
+
+    .activities-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .activities-list {
+        gap: 12px;
+    }
+
+    .activity-item {
+        padding: 12px 15px;
+    }
+
+    .activity-name {
+        font-size: 16px;
+    }
+
+    .activity-detail {
+        font-size: 13px;
+    }
+
+    .btn-unenroll {
+        padding: 8px 16px;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    .no-activities {
+        padding: 15px 25px 25px;
+    }
+
+    .no-activities p {
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    .detail-item {
+        padding: 12px;
+    }
+
+    .detail-value {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    :host {
+        margin-bottom: 20px;
+    }
+
+    .profile-card {
+        border-width: 2px;
+        box-shadow: 4px 4px 0 #000;
+    }
+
+    .profile-card::before {
+        top: 5px;
+        left: 5px;
+        right: 5px;
+        bottom: 5px;
+    }
+
+    .profile-header {
+        padding: 15px 20px;
+        border-bottom-width: 2px;
+    }
+
+    .profile-name {
+        font-size: 22px;
+        letter-spacing: 1px;
+        -webkit-text-stroke: 0.3px #c9a83e;
+    }
+
+    .profile-status {
+        padding: 5px 12px;
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .profile-details {
+        padding: 20px 15px 15px;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .activities-section {
+        padding: 12px 15px 20px;
+        border-top-width: 2px;
+    }
+
+    .activities-title {
+        font-size: 16px;
+        margin-bottom: 12px;
+        letter-spacing: 1px;
+    }
+
+    .activities-list {
+        gap: 10px;
+    }
+
+    .activity-item {
+        padding: 10px 12px;
+        border-width: 2px;
+        box-shadow: 2px 2px 0 #000;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .activity-item::before {
+        top: 3px;
+        left: 3px;
+        right: 3px;
+        bottom: 3px;
+    }
+
+    .activity-item:hover {
+        box-shadow: 3px 3px 0 #000;
+    }
+
+    .activity-name {
+        font-size: 15px;
+        margin-bottom: 6px;
+    }
+
+    .activity-info {
+        gap: 10px;
+    }
+
+    .activity-detail {
+        font-size: 12px;
+    }
+
+    .btn-unenroll {
+        width: 100%;
+        padding: 10px 16px;
+        font-size: 13px;
+        box-shadow: 2px 2px 0 #000;
+    }
+
+    .btn-unenroll:hover {
+        box-shadow: 3px 3px 0 #000;
+    }
+
+    .btn-unenroll:active {
+        box-shadow: 1px 1px 0 #000;
+    }
+
+    .no-activities {
+        padding: 12px 15px 20px;
+        border-top-width: 2px;
+    }
+
+    .no-activities p {
+        font-size: 14px;
+        padding: 12px;
+        border-width: 2px;
+        letter-spacing: 1px;
+    }
+
+    .detail-item {
+        padding: 10px;
+        border-left-width: 2px;
+    }
+
+    .detail-label {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .detail-value {
+        font-size: 16px;
+    }
+}

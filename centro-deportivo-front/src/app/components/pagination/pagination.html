@@ -1,0 +1,7 @@
+<button (click)="onPreviousPage()" [disabled]="!hasPreviousPage()">Anterior</button>
+
+    <p>
+        Pagina {{currentPage() + 1}} de {{totalPages()}}
+    </p>
+
+<button (click)="onNextPage()" [disabled]="!hasNextPage()">Siguiente</button>

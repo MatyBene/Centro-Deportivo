@@ -1,0 +1,70 @@
+<article class="profile-card">
+    <div class="profile-header">
+        <h3 class="profile-name">{{member().name}} {{member().lastname}}</h3>
+        <span class="profile-status" [class.active]="member().status === 'ACTIVE'" [class.inactive]="member().status !== 'ACTIVE'">
+            {{member().status}}
+        </span>
+    </div>
+
+    <div class="profile-details">
+        <div class="detail-item">
+            <span class="detail-label">Usuario:</span>
+            <span class="detail-value">{{member().username}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Rol:</span>
+            <span class="detail-value">{{member().role}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">DNI:</span>
+            <span class="detail-value">{{member().dni}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Fecha de nacimiento:</span>
+            <span class="detail-value">{{member().birthdate}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Teléfono:</span>
+            <span class="detail-value">{{member().phone}}</span>
+        </div>
+
+        <div class="detail-item">
+            <span class="detail-label">Email:</span>
+            <span class="detail-value">{{member().email}}</span>
+        </div>
+    </div>
+
+    @if (member().enrollments && member().enrollments!.length > 0) {
+        <div class="activities-section">
+            <h4 class="activities-title">Actividades inscriptas</h4>
+            <div class="activities-list">
+                @for (enrollment of member().enrollments; track enrollment.activityId) {
+                    <div class="activity-item">
+                        <div class="activity-info-wrapper">
+                            <div class="activity-name">{{enrollment.activityName}}</div>
+                            <div class="activity-info">
+                                <span class="activity-detail">Inicio: {{enrollment.startDate}}</span>
+                                <span class="activity-detail">Fin: {{enrollment.endDate}}</span>
+                            </div>
+                        </div>
+                        <button 
+                            class="btn-unenroll" 
+                            [disabled]="!canUnenroll(enrollment.activityId)" 
+                            (click)="unerollment(enrollment.activityId.toString())">
+                            Dar de baja
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    } @else {
+        <div class="no-activities">
+            <p>No estás inscripto en ninguna actividad</p>
+        </div>
+    }
+</article>
+

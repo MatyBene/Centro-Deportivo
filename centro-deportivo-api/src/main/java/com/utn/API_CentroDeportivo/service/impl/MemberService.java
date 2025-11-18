@@ -6,12 +6,12 @@ import com.utn.API_CentroDeportivo.model.entity.Member;
 import com.utn.API_CentroDeportivo.model.entity.User;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.MemberNotFoundException;
+import com.utn.API_CentroDeportivo.model.exception.FieldAlreadyExistsException;
 import com.utn.API_CentroDeportivo.model.mapper.MemberMapper;
 import com.utn.API_CentroDeportivo.model.repository.IMemberRepository;
 import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import com.utn.API_CentroDeportivo.service.IMemberService;
-import com.utn.API_CentroDeportivo.model.mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -67,10 +67,19 @@ public class MemberService implements IMemberService {
             member.setPhone(dto.getPhone());
         }
         if (dto.getEmail() != null) {
+            if (!dto.getEmail().equals(member.getEmail()) && userRepository.existsByEmail(dto.getEmail())) {
+                throw new FieldAlreadyExistsException("email", "El campo ya está registrado");
+            }
             member.setEmail(dto.getEmail());
         }
         if (dto.getBirthdate() != null) {
             member.setBirthdate(dto.getBirthdate());
+        }
+        if (dto.getDni() != null) {
+            if (!dto.getDni().equals(member.getDni()) && userRepository.existsByDni(dto.getDni())) {
+                throw new FieldAlreadyExistsException("dni", "El campo ya está registrado");
+            }
+            member.setDni(dto.getDni());
         }
 
         userRepository.save(member);
@@ -97,6 +106,15 @@ public class MemberService implements IMemberService {
 
         return MemberMapper.mapToMemberDetailsDTO(member);
     }
+
+    @Override
+    public MembersDetailsDTO getMemberDetailsByUsername(String username) {
+        Member member = (Member) userRepository.findById(credentialService.getUserByUsername(username).getId())
+                .orElseThrow(() -> new MemberNotFoundException("Socio no encontrado"));
+
+        return MemberMapper.mapToMemberDetailsDTO(member);
+    }
+
     @Override
     public void saveMember(User member) {
         userRepository.save(member);

@@ -11,7 +11,9 @@ import lombok.experimental.SuperBuilder;
 @ToString
 
 public class SportActivitySummaryDTO {
+    private Long id;
     private String name;
     private int maxMembers;
+    private Long instructorId;
     private String instructorName;
 }

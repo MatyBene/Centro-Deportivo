@@ -1,0 +1,105 @@
+<div class="exercise-table-container">
+  <div class="exercise-header">
+    <div class="exercise-title">
+      <strong>{{ exercise().name }}</strong>
+      <span class="muscle-group">{{ exercise().muscleGroup }}</span>
+    </div>
+    <div class="exercise-meta">
+      <span>{{ exercise().restSeconds }}s descanso</span>
+      @if (exercise().suggestedWeight) {
+        <span>Peso sugerido: {{ exercise().suggestedWeight }}</span>
+      }
+    </div>
+  </div>
+
+  @if (exercise().notes) {
+    <p class="exercise-notes">{{ exercise().notes }}</p>
+  }
+
+  @if (getLastTrainingDate()) {
+    <div class="last-training-info">
+      <span>Último entrenamiento: {{ getLastTrainingDate() }}</span>
+    </div>
+  }
+
+  @if (wasTrainedToday()) {
+    <div class="already-trained-banner">
+      <strong>Ejercicio completado hoy</strong>
+    </div>
+  }
+
+  <table class="exercise-table">
+    <thead>
+      <tr>
+        <th>Serie</th>
+        <th>Repeticiones</th>
+        <th>Peso Anterior (kg)</th>
+        <th>Peso Hoy (kg)</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (series of exercise().seriesRepetitions; track $index) {
+        <tr>
+          <td class="serie-number">{{ $index + 1 }}</td>
+          <td class="repetitions">{{ series.repetitions }}</td>
+          <td class="previous-weight">
+            @if (getPreviousWeight($index + 1) !== null) {
+              {{ getPreviousWeight($index + 1) }}
+            } @else {
+              -
+            }
+          </td>
+          <td class="current-weight">
+            <input 
+              type="number" 
+              class="weight-input"
+              [value]="currentWeights()[$index + 1] || ''"
+              (input)="updateWeight($index + 1, $any($event.target).value ? +$any($event.target).value : null)"
+              placeholder="kg"
+              min="0"
+              step="0.5"
+              [disabled]="wasTrainedToday()"
+            />
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
+  <div class="action-section">
+    @if (saveSuccess()) {
+      <div class="success-message">
+        Entrenamiento guardado correctamente
+      </div>
+    }
+    @if (saveError()) {
+      <div class="error-message">
+        {{ saveError() }}
+      </div>
+    }
+    @if (!wasTrainedToday()) {
+      <div class="notes-container">
+        <label for="training-notes" class="notes-label">Notas del entrenamiento (opcional)</label>
+        <textarea 
+          id="training-notes"
+          class="notes-input"
+          [value]="trainingNotes()"
+          (input)="trainingNotes.set($any($event.target).value)"
+          placeholder="Ej: Me sentí con buena energía, aumenté peso en las últimas series..."
+          rows="3"
+          maxlength="500"
+        ></textarea>
+      </div>
+      <button 
+        class="save-btn" 
+        (click)="saveTraining()"
+        [disabled]="isSaving() || !hasAllWeights()">
+        @if (isSaving()) {
+          Guardando...
+        } @else {
+          Guardar Entrenamiento
+        }
+      </button>
+    }
+  </div>
+</div>
