@@ -1,63 +1,66 @@
 <header>
     <a routerLink="/"> 
-        <img src="https://assets-persist.lovart.ai/agent_images/828d45c7-f4b4-4c15-a4a5-a65bcb3edaf4.png" class="logo" >
+        <img src="\assets\img\logo.png" class="logo" >
     </a>
     
-    <nav>
+    <button class="hamburger" (click)="toggleMenu()" [class.active]="menuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <nav [class.active]="menuOpen">
         <ul>
             @if (authService.getUserRole() === 'INSTRUCTOR') {
                 <li>
-                    <a routerLink="/activity-list/my-activities">Mis actividades</a>
+                    <a routerLink="/activity-list/my-activities" (click)="closeMenu()">Mis actividades</a>
                 </li>
 
                 <li>
-                    <a routerLink="/instructors/members">Socios</a>
+                    <a routerLink="/instructors/members" (click)="closeMenu()">Socios</a>
                 </li>
 
                 <li>
-                    <a routerLink="/instructors/register-member">Registrar socio</a>
+                    <a routerLink="/instructors/register-member" (click)="closeMenu()">Registrar socio</a>
                 </li>
             } @else {
                 <li>
-                    <a routerLink="/activity-list">Actividades</a>
+                    <a routerLink="/activity-list" (click)="closeMenu()">Actividades</a>
                 </li>
             }
 
             @if (authService.getUserRole() !== 'ADMIN') {
-                <li class="dropdown">
-                    <button class="dropdown-btn">Gimnasio ▾</button>
-                    <ul class="dropdown-menu">
-                        <li><a routerLink="/motivation">Motivación</a></li> 
-                        @if (authService.isLoggedIn()) {
-                            <li><a routerLink="#">Rutinas</a></li> 
-                        }
-                    </ul>
+                <li>
+                    <a routerLink="/motivation" (click)="closeMenu()">Motivación</a>
                 </li>
+                @if (authService.isLoggedIn()) {
+                    <li>
+                        <a routerLink="/routines" (click)="closeMenu()">Rutinas</a>
+                    </li>
+                }
             }
 
             @if(authService.getUserRole() === 'ADMIN') {
                 <li>
-                    <a routerLink="/users">Usuarios</a>
+                    <a routerLink="/users" (click)="closeMenu()">Usuarios</a>
                 </li>
                 <li>
-                    <a routerLink="/admin/register">Registrar</a>
+                    <a routerLink="/admin/register" (click)="closeMenu()">Registrar</a>
                 </li>
             }
             
             @if (!authService.isLoggedIn()) {
-                <li class="dropdown">
-                    <button class="dropdown-btn">Cuenta ▾</button>
-
-                    <ul class="dropdown-menu">
-                        <li><a routerLink="/public/login">Iniciar sesión</a></li>
-                        <li><a routerLink="/public/register">Registrarse</a></li>
-                    </ul>
+                <li>
+                    <a routerLink="/public/login" (click)="closeMenu()">Iniciar sesión</a>
+                </li>
+                <li>
+                    <a routerLink="/public/register" (click)="closeMenu()">Registrarse</a>
                 </li>
             }
             
             @if (authService.isLoggedIn()) {
                 <li>
-                    <a routerLink="/profile">Perfil</a>
+                    <a routerLink="/profile" (click)="closeMenu()">Perfil</a>
                 </li>
                 <li>
                     <a (click)="logout()" style="cursor: pointer;">Cerrar sesión</a>

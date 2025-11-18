@@ -1,0 +1,99 @@
+<div class="routine-detail-container">
+  @if (isLoading()) {
+    <div class="loading">
+      <p>Cargando rutina...</p>
+    </div>
+  } @else if (error()) {
+    <div class="error">
+      <p>{{ error() }}</p>
+      <button (click)="goBack()">Volver</button>
+    </div>
+  } @else if (routine()) {
+    <button class="back-button" (click)="goBack()">← Volver</button>
+    <div class="routine-header">
+      <h1>{{ routine()!.name }}</h1>
+      <p class="description">{{ routine()!.description }}</p>
+      <div class="routine-info">
+        <span class="badge">{{ routine()!.level }}</span>
+        <span class="badge">{{ routine()!.goal }}</span>
+        <span>{{ routine()!.durationWeeks }} semanas</span>
+        <span>{{ routine()!.daysPerWeek }} días/semana</span>
+      </div>
+    </div>
+
+    <div class="routine-days">
+      <h2>Días de entrenamiento</h2>
+      @if (routine()!.routineDays && routine()!.routineDays!.length > 0) {
+        @for (day of routine()!.routineDays; track day.id) {
+          <div class="day-card">
+            <div class="day-header" (click)="toggleDay(day.id)">
+              <div class="day-title-row">
+                <h3>Día {{ day.dayNumber }}: {{ day.name }}</h3>
+                <button class="toggle-btn" [class.expanded]="isDayExpanded(day.id)">
+                  {{ isDayExpanded(day.id) ? '▲' : '▼' }}
+                </button>
+              </div>
+              @if (day.description && !isDayExpanded(day.id)) {
+                <p class="day-description">{{ day.description }}</p>
+              }
+            </div>
+            
+            @if (isDayExpanded(day.id)) {
+              <div class="day-content">
+                @if (day.description) {
+                  <p class="day-description-expanded">{{ day.description }}</p>
+                }
+                
+                @if (day.exercises && day.exercises.length > 0) {
+                  <div class="exercises-list">
+                    <h4>Ejercicios ({{ day.exercises.length }})</h4>
+                    @for (exercise of day.exercises; track exercise.id) {
+                      <app-exercise-table [exercise]="exercise" [routineId]="routine()!.id" />
+                    }
+                  </div>
+                } @else {
+                  <p class="no-exercises">No hay ejercicios para este día</p>
+                }
+              </div>
+            }
+          </div>
+        }
+      } @else {
+        <p class="no-days">Esta rutina no tiene días configurados</p>
+      }
+    </div>
+
+    @if (routine()!.warmup && routine()!.warmup!.activities && routine()!.warmup!.activities.length > 0) {
+      <div class="warmup-section">
+        <h3>Calentamiento ({{ routine()!.warmup!.durationMinutes }} min)</h3>
+        <ul>
+          @for (activity of routine()!.warmup!.activities; track $index) {
+            <li>{{ activity }}</li>
+          }
+        </ul>
+      </div>
+    }
+
+    @if (routine()!.cooldown && routine()!.cooldown!.activities && routine()!.cooldown!.activities.length > 0) {
+      <div class="cooldown-section">
+        <h3>Enfriamiento ({{ routine()!.cooldown!.durationMinutes }} min)</h3>
+        <ul>
+          @for (activity of routine()!.cooldown!.activities; track $index) {
+            <li>{{ activity }}</li>
+          }
+        </ul>
+      </div>
+    }
+
+    @if (routine()!.generalNotes && routine()!.generalNotes!.length > 0) {
+      <div class="general-notes">
+        <h3>Notas generales</h3>
+        <ul>
+          @for (note of routine()!.generalNotes; track $index) {
+            <li>{{ note }}</li>
+          }
+        </ul>
+      </div>
+    }
+  }
+</div>

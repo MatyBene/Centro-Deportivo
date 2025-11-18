@@ -1,0 +1,76 @@
+<div class="routine-list-container">
+  <div class="header-section">
+    <h2>Listado de Rutinas</h2>
+    <button class="btn btn-primary create-button" (click)="createRoutine()">
+      + Crear Nueva Rutina
+    </button>
+  </div>
+
+  @if (errorMessage()) {
+    <div class="alert error-message">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <table class="routine-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Nivel</th>
+        <th>Objetivo</th>
+        <th>Semanas</th>
+        <th>Días/Semana</th>
+        <th>Creado Por</th>
+        <th>Información</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+  @for (routine of routines(); track routine.id) {
+    <tr class="routine-row-link">
+    <td data-label="Nombre">{{ routine.name }}</td>
+    <td data-label="Nivel">{{ routine.level }}</td>
+    <td data-label="Objetivo">{{ routine.goal }}</td>
+    <td data-label="Semanas">{{ routine.durationWeeks }}</td>
+    <td data-label="Días/Semana">{{ routine.daysPerWeek }}</td>
+    <td data-label="Creado Por">{{ routine.createdBy }}</td>
+    
+    <td data-label="Información">
+      <div class="action-column">
+        <button class="btn-uniform btn-detail" (click)="$event.stopPropagation(); goToDetail(routine.id)">
+          Detalle
+        </button>
+        <button class="btn-uniform btn-graphs" (click)="$event.stopPropagation(); goToChart(routine.id)">
+          Gráficos
+        </button>
+      </div>
+    </td>
+
+    <td data-label="Acción">
+      <div class="action-column">
+        @if (isCreator(routine)) {
+          <button class="btn-uniform btn-edit"
+            (click)="$event.stopPropagation(); editRoutine(routine.id)">
+            Editar
+          </button>
+
+          <button class="btn-uniform btn-delete"
+            (click)="$event.stopPropagation(); deleteRoutine(routine.id, routine.name)">
+            Eliminar
+          </button>
+        } @else {
+          <span class="text-muted">Rutina asignada</span>
+        }
+      </div>
+    </td>
+    </tr>
+  }
+  </tbody>
+</table>
+
+  @if (routines().length === 0 && !errorMessage()) {
+    <div class="no-data-message">
+      No se encontraron rutinas. 
+    </div>
+  }
+</div>
