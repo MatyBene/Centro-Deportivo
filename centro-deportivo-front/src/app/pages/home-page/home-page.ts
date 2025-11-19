@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { AuthService } from '../../services/auth-service';
 
 
 @Component({
@@ -11,4 +12,5 @@ import { RouterLink } from "@angular/router";
 export class HomePage {
   baseUrl = 'http://localhost:8080/activity-list';
 
+  constructor(public authService: AuthService) {}
 }

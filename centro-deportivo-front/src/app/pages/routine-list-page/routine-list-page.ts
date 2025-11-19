@@ -46,7 +46,7 @@ export class RoutineListPage {
         this.errorMessage.set('');
       },
       error: (error) => {
-        this.errorMessage.set('Error al conectar o cargar las rutinas. Verifica el backend (JSON Server).');
+        this.errorMessage.set('Error al conectar o cargar las rutinas.');
         console.error('Error al obtener rutinas:', error);
         this.routines.set([]);
       }
