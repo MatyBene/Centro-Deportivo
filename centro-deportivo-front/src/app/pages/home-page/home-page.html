@@ -4,14 +4,16 @@
   <div class="hero-content">
     <h1>CENTRO DEPORTIVO</h1>
     <p>DONDE EL HIERRO SE ENCUENTRA CON LA DETERMINACIÓN DESDE 1978</p>
-    <a routerLink="/public/register" class="hero-button">¡ÚNETE AHORA!</a>
+    @if(!authService.isLoggedIn()){
+      <a routerLink="/public/register" class="hero-button">¡ÚNETE AHORA!</a>
+    }
   </div>
 </section>
 
 <section class="history-section">
   <h2>NUESTRA HISTORIA</h2>
   <p>
-    Fundado en 1978, Old School Gym ha sido el hogar de campeones y
+    Fundado en 1978, Centro Deportivo ha sido el hogar de campeones y
     entusiastas del fitness por más de cuatro décadas. Nos enorgullecemos de
     mantener la esencia del culturismo clásico, con equipamiento de hierro auténtico y una
     atmósfera que inspira grandeza. Nada de máquinas complicadas o distracciones modernas:

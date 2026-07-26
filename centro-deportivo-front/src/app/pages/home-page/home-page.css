@@ -63,6 +63,7 @@
     justify-content: center;
     align-items: center;
     width: auto; 
+    text-decoration: none;
 }
 
 .hero-button:hover {

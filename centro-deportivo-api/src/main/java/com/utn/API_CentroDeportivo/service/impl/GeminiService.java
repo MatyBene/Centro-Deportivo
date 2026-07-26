@@ -106,8 +106,8 @@ public class GeminiService {
                         break;
                     }
                 } else {
-                    log.error("Servidor de Gemini sobrecargado después de {} intentos", maxRetries);
-                    return "El servidor de Gemini está experimentando alta demanda en este momento. Por favor, intenta de nuevo en unos segundos.";
+                    log.error("Servidor de ChatBum sobrecargado después de {} intentos", maxRetries);
+                    return "El servidor de ChatBum está experimentando alta demanda en este momento. Por favor, intenta de nuevo en unos segundos.";
                 }
             } catch (Exception e) {
                 log.error("Error al llamar a Gemini API (intento {}): {}", attempt, e.getMessage());
