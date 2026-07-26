@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -20,6 +22,8 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @Autowired
     private MessageSource messageSource;
@@ -161,6 +165,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGenericException(Exception ex, Locale locale) {
+        log.error("Unhandled exception caught by generic handler", ex);
         Map<String, String> details = new HashMap<>();
         details.put("message", messageSource.getMessage("error.generic.detail", null, locale));
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,

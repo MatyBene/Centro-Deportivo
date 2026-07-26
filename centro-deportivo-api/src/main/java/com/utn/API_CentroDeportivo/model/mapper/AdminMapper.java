@@ -3,8 +3,7 @@ package com.utn.API_CentroDeportivo.model.mapper;
 import com.utn.API_CentroDeportivo.model.dto.request.UserRequestDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.AdminDetailsDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.AdminViewDTO;
-import com.utn.API_CentroDeportivo.model.dto.response.UserDetailsDTO;
-import com.utn.API_CentroDeportivo.model.entity.Admin;
+import com.utn.API_CentroDeportivo.model.entity.users.Admin;
 
 import java.time.LocalDate;
 

@@ -1,4 +1,4 @@
-package com.utn.API_CentroDeportivo.model.entity;
+package com.utn.API_CentroDeportivo.model.entity.users;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

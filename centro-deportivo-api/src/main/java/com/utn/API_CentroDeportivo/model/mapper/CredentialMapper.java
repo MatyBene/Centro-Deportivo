@@ -1,8 +1,8 @@
 package com.utn.API_CentroDeportivo.model.mapper;
 
 import com.utn.API_CentroDeportivo.model.dto.request.CredentialRequestDTO;
-import com.utn.API_CentroDeportivo.model.entity.Credential;
-import com.utn.API_CentroDeportivo.model.entity.User;
+import com.utn.API_CentroDeportivo.model.entity.users.Credential;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
 
 public class CredentialMapper {
 
