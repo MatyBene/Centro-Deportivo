@@ -5,7 +5,7 @@ import com.utn.API_CentroDeportivo.model.dto.response.AdminViewDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.EnrollmentDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivitySummaryDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.UserDetailsDTO;
-import com.utn.API_CentroDeportivo.model.entity.*;
+import com.utn.API_CentroDeportivo.model.entity.users.*;
 import com.utn.API_CentroDeportivo.model.enums.PermissionLevel;
 import com.utn.API_CentroDeportivo.model.enums.Role;
 import com.utn.API_CentroDeportivo.model.enums.Status;

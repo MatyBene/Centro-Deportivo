@@ -1,9 +1,9 @@
 package com.utn.API_CentroDeportivo.service.impl;
 
 import com.utn.API_CentroDeportivo.model.dto.response.InstructorSummaryDTO;
-import com.utn.API_CentroDeportivo.model.entity.Instructor;
-import com.utn.API_CentroDeportivo.model.entity.Member;
-import com.utn.API_CentroDeportivo.model.entity.SportActivity;
+import com.utn.API_CentroDeportivo.model.entity.users.Instructor;
+import com.utn.API_CentroDeportivo.model.entity.users.Member;
+import com.utn.API_CentroDeportivo.model.entity.users.SportActivity;
 import com.utn.API_CentroDeportivo.model.exception.InstructorNotFoundException;
 import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;

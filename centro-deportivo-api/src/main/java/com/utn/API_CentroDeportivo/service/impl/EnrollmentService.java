@@ -1,7 +1,7 @@
 package com.utn.API_CentroDeportivo.service.impl;
 
 import com.utn.API_CentroDeportivo.model.dto.response.EnrollmentDTO;
-import com.utn.API_CentroDeportivo.model.entity.*;
+import com.utn.API_CentroDeportivo.model.entity.users.*;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.*;
 import com.utn.API_CentroDeportivo.model.repository.users.IEnrollmentRepository;

@@ -1,6 +1,6 @@
 package com.utn.API_CentroDeportivo.model.repository.users;
 
-import com.utn.API_CentroDeportivo.model.entity.Credential;
+import com.utn.API_CentroDeportivo.model.entity.users.Credential;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
