@@ -7,7 +7,7 @@ import com.utn.API_CentroDeportivo.model.entity.Instructor;
 import com.utn.API_CentroDeportivo.model.entity.SportActivity;
 import com.utn.API_CentroDeportivo.model.exception.InvalidTimeFormatException;
 import com.utn.API_CentroDeportivo.model.exception.SportActivityNotFoundException;
-import com.utn.API_CentroDeportivo.model.repository.ISportActivityRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.ISportActivityRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

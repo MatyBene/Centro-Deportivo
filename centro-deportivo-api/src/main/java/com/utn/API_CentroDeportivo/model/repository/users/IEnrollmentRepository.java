@@ -1,4 +1,4 @@
-package com.utn.API_CentroDeportivo.model.repository;
+package com.utn.API_CentroDeportivo.model.repository.users;
 
 import com.utn.API_CentroDeportivo.model.entity.Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;

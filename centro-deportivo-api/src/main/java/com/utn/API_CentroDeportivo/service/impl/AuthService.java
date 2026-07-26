@@ -11,7 +11,7 @@ import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.FieldAlreadyExistsException;
 import com.utn.API_CentroDeportivo.model.mapper.CredentialMapper;
 import com.utn.API_CentroDeportivo.model.mapper.MemberMapper;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.IAuthService;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import org.springframework.beans.factory.annotation.Autowired;

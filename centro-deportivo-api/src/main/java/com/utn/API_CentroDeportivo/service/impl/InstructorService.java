@@ -12,7 +12,7 @@ import com.utn.API_CentroDeportivo.model.mapper.AdminMapper;
 import com.utn.API_CentroDeportivo.model.mapper.InstructorMapper;
 import com.utn.API_CentroDeportivo.model.mapper.MemberMapper;
 import com.utn.API_CentroDeportivo.model.mapper.SportActivityMapper;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import com.utn.API_CentroDeportivo.service.IEnrollmentService;
 import com.utn.API_CentroDeportivo.service.IInstructorService;

@@ -3,7 +3,7 @@ package com.utn.API_CentroDeportivo.service.impl;
 import com.utn.API_CentroDeportivo.model.entity.Credential;
 import com.utn.API_CentroDeportivo.model.entity.Member;
 import com.utn.API_CentroDeportivo.model.entity.User;
-import com.utn.API_CentroDeportivo.model.repository.ICredentialRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.ICredentialRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

@@ -9,7 +9,7 @@ import com.utn.API_CentroDeportivo.model.enums.Role;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.InvalidFilterCombinationException;
 import com.utn.API_CentroDeportivo.model.exception.UserNotFoundException;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.model.validation.AdminValidation;
 import com.utn.API_CentroDeportivo.model.validation.InstructorValidation;
 import com.utn.API_CentroDeportivo.service.IAuthService;
