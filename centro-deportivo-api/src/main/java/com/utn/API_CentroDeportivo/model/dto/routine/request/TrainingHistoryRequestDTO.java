@@ -12,9 +12,3 @@ public class TrainingHistoryRequestDTO {
     private List<TrainingSetRequestDTO> sets;
 }
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @ToString
-class TrainingSetRequestDTO {
-    private Integer number;
-    private Integer weight;
-    private Integer repetitions;
-}

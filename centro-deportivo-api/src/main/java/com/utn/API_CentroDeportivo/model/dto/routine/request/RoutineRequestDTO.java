@@ -18,14 +18,3 @@ public class RoutineRequestDTO {
     private List<RoutineDayRequestDTO> routineDays;
 }
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @ToString
-class WarmupRequestDTO {
-    private Integer durationMinutes;
-    private List<String> activities;
-}
-
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @ToString
-class CooldownRequestDTO {
-    private Integer durationMinutes;
-    private List<String> activities;
-}
