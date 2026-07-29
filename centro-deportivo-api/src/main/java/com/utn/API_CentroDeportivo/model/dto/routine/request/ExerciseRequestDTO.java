@@ -15,7 +15,3 @@ public class ExerciseRequestDTO {
     private List<SeriesRepetitionRequestDTO> seriesRepetitions;
 }
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @ToString
-class SeriesRepetitionRequestDTO {
-    private String repetitions;
-}
