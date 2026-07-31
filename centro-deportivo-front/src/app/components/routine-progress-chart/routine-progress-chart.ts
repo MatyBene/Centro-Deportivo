@@ -12,7 +12,7 @@ Chart.register(...registerables);
 })
 export class RoutineProgressChart implements AfterViewInit{
   chartCanvas = viewChild<ElementRef<HTMLCanvasElement>>('chartCanvas');
-  exerciseId = input.required<string>();
+  exerciseId = input.required<number>();
   exerciseName = input.required<string>();
   history = input<TrainingHistory[]>([]);
 

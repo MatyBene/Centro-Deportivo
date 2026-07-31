@@ -26,19 +26,19 @@
       @if (routine()!.routineDays && routine()!.routineDays!.length > 0) {
         @for (day of routine()!.routineDays; track day.id) {
           <div class="day-card">
-            <div class="day-header" (click)="toggleDay(day.id)">
+            <div class="day-header" (click)="toggleDay(day.id!)">
               <div class="day-title-row">
                 <h3>Día {{ day.dayNumber }}: {{ day.name }}</h3>
-                <button class="toggle-btn" [class.expanded]="isDayExpanded(day.id)">
-                  {{ isDayExpanded(day.id) ? '▲' : '▼' }}
+                <button class="toggle-btn" [class.expanded]="isDayExpanded(day.id!)">
+                  {{ isDayExpanded(day.id!) ? '▲' : '▼' }}
                 </button>
               </div>
-              @if (day.description && !isDayExpanded(day.id)) {
+              @if (day.description && !isDayExpanded(day.id!)) {
                 <p class="day-description">{{ day.description }}</p>
               }
             </div>
             
-            @if (isDayExpanded(day.id)) {
+            @if (isDayExpanded(day.id!)) {
               <div class="day-content">
                 @if (day.description) {
                   <p class="day-description-expanded">{{ day.description }}</p>

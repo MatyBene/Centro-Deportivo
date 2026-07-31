@@ -12,7 +12,7 @@ import { AuthService } from '../../services/auth-service';
 })
 export class ExerciseTable {
   exercise = input.required<Exercise>();
-  routineId = input.required<string>();
+  routineId = input.required<number>();
 
   currentWeights = signal<{ [key: number]: number | null }>({});
   trainingNotes = signal<string>('');
@@ -77,11 +77,10 @@ export class ExerciseTable {
     }));
 
     const trainingHistory: TrainingHistory = {
-      id: `hist${Date.now()}`,
       date: new Date().toISOString().split('T')[0],
       username: username,
       routineId: this.routineId(),
-      exerciseId: ex.id,
+      exerciseId: ex.id!,
       sets: sets,
       notes: this.trainingNotes()
     };

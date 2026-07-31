@@ -50,7 +50,7 @@
       <div class="action-column">
         @if (isCreator(routine)) {
           <button class="btn-uniform btn-edit"
-            (click)="$event.stopPropagation(); editRoutine(routine.id)">
+            (click)="$event.stopPropagation(); editRoutine(routine.id, routine.name)">
             Editar
           </button>
 
