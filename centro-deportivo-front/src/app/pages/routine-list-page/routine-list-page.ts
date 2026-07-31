@@ -30,12 +30,12 @@ export class RoutineListPage {
   loadRoutines(): void {
     forkJoin({
       routines: this.routineService.getRoutines(),
-      assignments: this.routineService.getAllRoutineAssignments()
+      assignments: this.routineService.getRoutineAssignments(this.currentUsername())
     }).subscribe({
       next: ({ routines, assignments }) => {
-        const assignedRoutineIds = assignments
-          .filter(assignment => assignment.memberUsername === this.currentUsername() && assignment.active)
-          .map(assignment => assignment.routineId);
+        const assignedRoutineIds: number[] = assignments
+          .filter((assignment: RoutineAssignment) => assignment.memberUsername === this.currentUsername() && assignment.active)
+          .map((assignment: RoutineAssignment) => assignment.routineId);
 
         const filteredRoutines = routines.filter(routine => 
           routine.createdBy === this.currentUsername() || 
@@ -46,14 +46,14 @@ export class RoutineListPage {
         this.errorMessage.set('');
       },
       error: (error) => {
-        this.errorMessage.set('Error al conectar o cargar las rutinas.');
+        this.errorMessage.set('Error al conectar o cargar las rutinas. Verifica el backend (JSON Server).');
         console.error('Error al obtener rutinas:', error);
         this.routines.set([]);
       }
     });
   }
 
-  editRoutine(id: string): void {
+  editRoutine(id: number, name: string): void {
     this.router.navigate(['/routines/edit', id]);
   }
 
@@ -65,7 +65,7 @@ export class RoutineListPage {
     return routine.createdBy === this.currentUsername();
   }
 
-  deleteRoutine(id: string, name: string): void {
+  deleteRoutine(id: number, name: string): void {
     const confirmed = window.confirm(`¿Estás seguro de que deseas eliminar la rutina "${name}" (ID: ${id})? Esta acción es irreversible.`);
 
     if (confirmed) {
@@ -82,11 +82,11 @@ export class RoutineListPage {
     }
   }
 
-  goToDetail(routineId: string) {
+  goToDetail(routineId: number) {
     this.router.navigate([`/routines/${routineId}`]);
   }
 
-  goToChart(routineId: string) {
+  goToChart(routineId: number) {
     this.router.navigate([`/routines/${routineId}/progress`]);
   }
 }

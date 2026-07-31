@@ -39,13 +39,13 @@ export class MemberActivitiesPageComponent implements OnInit {
   }
 
   unsubscribe(activityId: number, activityName: string): void {
-    if (!confirm(`¿Estás seguro de que quieres darte de baja de ${activityName}? Esta acción es irreversible.`)) {
+    if (!confirm(¿Estás seguro de que quieres darte de baja de ${activityName}? Esta acción es irreversible.)) {
       return;
     }
 
     this.memberService.unsubscribeFromActivity(activityId).subscribe({
       next: (response) => {
-        this.unenrollmentMessage = `¡Te has dado de baja de ${activityName} con éxito!`; 
+        this.unenrollmentMessage = ¡Te has dado de baja de ${activityName} con éxito!; 
         this.loadActivities(); 
         setTimeout(() => {
            this.unenrollmentMessage = null;
@@ -53,7 +53,7 @@ export class MemberActivitiesPageComponent implements OnInit {
       },
       error: (e) => {
         console.error('Error al darse de baja:', e);
-        this.unenrollmentMessage = `Error: No se pudo completar la baja. Por favor, intenta más tarde.`;
+        this.unenrollmentMessage = Error: No se pudo completar la baja. Por favor, intenta más tarde.;
       }
     });
   }

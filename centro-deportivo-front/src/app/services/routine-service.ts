@@ -1,61 +1,58 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; 
-import { Routine, RoutineResponse, RoutineAssignment, TrainingHistory } from '../models/Routine';
-import { AuthService } from './auth-service';
+import { environment } from '../../environments/environment';
+import { Routine, RoutineAssignment, TrainingHistory } from '../models/Routine';
+import { TokenPayLoad } from '../models/Auth';
+import { jwtDecode } from 'jwt-decode';
 
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class RoutineService {
-  private readonly URLroutine = "http://localhost:3000/routines";
-  private readonly URLassignments = "http://localhost:3000/routineAssignments"; 
-  private readonly URLtrainingHistory = "http://localhost:3000/trainingHistory"; 
-
-  constructor(private http: HttpClient, private authService: AuthService){}
+  constructor(private http: HttpClient) {}
 
   getRoutines(): Observable<Routine[]> {
-    return this.http.get<Routine[]>(this.URLroutine);
+    return this.http.get<Routine[]>(`${environment.apiUrl}/routines`);
   }
-  getRoutine(id: string): Observable<RoutineResponse> {   
-    return this.http.get<Routine>(`${this.URLroutine}/${id}`).pipe(
-      map(routine => {
-        return { routine: routine } as RoutineResponse;
-      })
-    );
+  getRoutine(id: number): Observable<Routine> {
+    return this.http.get<Routine>(`${environment.apiUrl}/routines/${id}`);
   }
-
   createRoutine(routine: Routine): Observable<Routine> {
-    return this.http.post<Routine>(this.URLroutine, routine);
+    return this.http.post<Routine>(`${environment.apiUrl}/routines`, routine);
   }
-
-  updateRoutine(id: string, routine: Routine): Observable<Routine> {
-    return this.http.put<Routine>(`${this.URLroutine}/${id}`, routine);
+  updateRoutine(id: number, routine: Routine): Observable<Routine> {
+    return this.http.put<Routine>(`${environment.apiUrl}/routines/${id}`, routine);
   }
-
-  deleteRoutine(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.URLroutine}/${id}`);
+  deleteRoutine(id: number): Observable<void> {
+    return this.http.delete<void>(`${environment.apiUrl}/routines/${id}`);
   }
-
-  getAllRoutineAssignments(): Observable<RoutineAssignment[]> {
-    return this.http.get<RoutineAssignment[]>(this.URLassignments);
+  getRoutineAssignments(memberUsername?: string, active = true): Observable<RoutineAssignment[]> {
+    const params: string[] = [];
+    if (memberUsername) params.push(`memberUsername=${memberUsername}`);
+    params.push(`active=${active}`);
+    const qs = params.length ? `?${params.join('&')}` : '';
+    return this.http.get<RoutineAssignment[]>(`${environment.apiUrl}/routineAssignments${qs}`);
   }
-
+  assign(routineId: number, memberUsername: string): Observable<RoutineAssignment> {
+    return this.http.post<RoutineAssignment>(`${environment.apiUrl}/routineAssignments`, { routineId, memberUsername });
+  }
+  deactivateAssignment(id: number): Observable<void> {
+    return this.http.put<void>(`${environment.apiUrl}/routineAssignments/${id}/deactivate`, {});
+  }
+  getTrainingHistory(username?: string): Observable<TrainingHistory[]> {
+    const qs = username ? `?username=${username}` : '';
+    return this.http.get<TrainingHistory[]>(`${environment.apiUrl}/trainingHistory${qs}`);
+  }
+  createTrainingHistory(dto: TrainingHistory): Observable<TrainingHistory> {
+    return this.http.post<TrainingHistory>(`${environment.apiUrl}/trainingHistory`, dto);
+  }
   getCurrentUserUsername(): string {
-    const decodedToken = this.authService.getDecodedToken();
-    return decodedToken?.sub || ''; 
-  }
-  getTrainingHistory(){
-    return this.http.get<TrainingHistory[]>(this.URLtrainingHistory)
-  }
-
-  createTrainingHistory(trainingHistory: TrainingHistory): Observable<TrainingHistory> {
-    return this.http.post<TrainingHistory>(this.URLtrainingHistory, trainingHistory);
-  }
-
-  getUserRoutineAssignments(username: string) {
-    return this.http.get<any[]>(`${this.URLroutine}/routineAssignments?memberUsername=${username}&active=true`);
+    const token = localStorage.getItem('token');
+    if (!token) return '';
+    try {
+      const decoded = jwtDecode<TokenPayLoad>(token);
+      return decoded.sub;
+    } catch {
+      return '';
+    }
   }
 }

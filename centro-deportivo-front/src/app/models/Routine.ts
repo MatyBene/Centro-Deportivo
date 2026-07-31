@@ -1,104 +1,66 @@
-export interface SeriesRecord {
-  number: number;
-  repetitions: string;
-  previousWeight: number | null;
-  previousDate: string | null;
-  currentWeight: number | null;
-  alreadyLoggedToday?: boolean;
-}
-
-export interface TrainingHistory {
-  id: string;
-  date: string;
-  username: string;
-  routineId: string;
-  exerciseId: string;
-  sets: {
-    number: number;
-    weight: number;
-    repetitions: number;
-  }[];
-  notes?: string;
-}
-
-
-export interface Exercise {
-  id: string;
-  routineDayId: string;
-  name: string;
-  order: number;
-  muscleGroup: string;
-  type: string;
-  sets: number; 
-  seriesRepetitions: { repetitions: string }[];
-  restSeconds: number;
-  suggestedWeight?: string;
-  notes?: string;
-  seriesRecord?: SeriesRecord[];
-  history?: TrainingHistory[];
-  completedToday?: boolean;
-}
-
-export interface RoutineDay {
-  id: string;
-  routineId: string;
-  dayNumber: number;
-  name: string;
-  description?: string;
-  order: number;
-  exercises?: Exercise[];
-}
-
-
-export interface Day {
-  day: number;
-  name: string;
-  exercises: Exercise[];
-}
-
-
-export interface Warmup {
-  durationMinutes: number;
-  activities: string[];
-}
-
-
-export interface Cooldown {
-  durationMinutes: number;
-  activities: string[];
-}
-
-
 export interface Routine {
-  id: string;
+  id: number;
+  createdBy: string;
   name: string;
   description: string;
   level: string;
+  goal: string;
   durationWeeks: number;
   daysPerWeek: number;
-  goal: string;
-  createdBy: string;
-  createdAt: string;
-  active: boolean;
-  routineDays?: RoutineDay[];
-  generalNotes?: string[];
-  warmup?: Warmup;
-  cooldown?: Cooldown;
-  isTemplate?: boolean;
+  createdAt?: string;
+  isTemplate: boolean;
+  generalNotes: string[];
+  warmup: Warmup | null;
+  cooldown: Cooldown | null;
+  routineDays: RoutineDay[];
+}
+
+export interface RoutineDay {
+  id?: number;
+  routineId?: number;
+  dayOrder?: number;
+  day?: string;
+  dayNumber: number;
+  name: string;
+  description: string;
+  order: number;
+  exercises: Exercise[];
+}
+
+export interface Exercise {
+  id?: number;
+  name: string;
+  muscleGroup: string;
+  type: string;
+  notes: string;
+  suggestedWeight: string;
+  restSeconds: number;
+  exerciseOrder: number;
+  seriesRepetitions: { repetitions: string }[];
+  sets: number;
+  history?: TrainingHistory[];
 }
 
 export interface RoutineAssignment {
-  id: string;
-  routineId: string;
+  id: number;
+  routineId: number;
+  routineName: string;
   memberUsername: string;
   instructorUsername: string;
-  assignedDate: string;
   active: boolean;
-  notes?: string;
-  startDate: string;
-  endDate: string;
+  assignedAt: string;
 }
 
-export interface RoutineResponse {
-  routine: Routine;
+export interface TrainingHistory {
+  id?: number;
+  username: string;
+  date: string;
+  routineId: number;
+  exerciseId: number;
+  sets: SeriesRecord[];
+  notes: string;
 }
+
+export interface Warmup { durationMinutes: number; activities: string[]; }
+export interface Cooldown { durationMinutes: number; activities: string[]; }
+export interface SeriesRecord { number: number; weight: number; repetitions: number; }
