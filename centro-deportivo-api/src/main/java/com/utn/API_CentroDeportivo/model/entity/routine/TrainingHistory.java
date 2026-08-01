@@ -29,6 +29,9 @@ public class TrainingHistory {
     @JoinColumn(name = "exercise_id")
     private Exercise exercise;
 
+    @Column(columnDefinition = "TEXT")
+    private String notes;
+
     @OneToMany(mappedBy = "trainingHistory", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TrainingSet> sets = new ArrayList<>();
 }

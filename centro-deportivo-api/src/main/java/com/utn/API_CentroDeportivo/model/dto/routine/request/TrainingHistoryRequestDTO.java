@@ -10,5 +10,5 @@ public class TrainingHistoryRequestDTO {
     private Long exerciseId;
     private LocalDate date;
     private List<TrainingSetRequestDTO> sets;
+    private String notes;
 }
-

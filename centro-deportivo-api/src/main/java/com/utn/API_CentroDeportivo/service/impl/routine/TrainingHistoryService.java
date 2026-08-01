@@ -64,6 +64,7 @@ public class TrainingHistoryService implements ITrainingHistoryService {
         history.setDate(dto.getDate() != null ? dto.getDate() : LocalDate.now());
         history.setRoutine(routine);
         history.setExercise(exercise);
+        history.setNotes(dto.getNotes());
 
         List<TrainingSet> sets = new ArrayList<>();
         if (dto.getSets() != null) {

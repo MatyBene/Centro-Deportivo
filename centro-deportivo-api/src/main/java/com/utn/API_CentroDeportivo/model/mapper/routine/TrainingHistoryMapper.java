@@ -19,6 +19,7 @@ public final class TrainingHistoryMapper {
                 .routineId(entity.getRoutine() != null ? entity.getRoutine().getId() : null)
                 .exerciseId(entity.getExercise() != null ? entity.getExercise().getId() : null)
                 .sets(toTrainingSetDTOList(entity.getSets()))
+                .notes(entity.getNotes())
                 .build();
     }
 

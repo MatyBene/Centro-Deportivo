@@ -12,10 +12,9 @@ export const routineOwnerGuard: CanActivateFn = (route, state) => {
 
   const routineIdParam = route.paramMap.get('id');
   const decodedToken = authService.getDecodedToken();
-  const currentUsername = decodedToken?.sub  '';
+  const currentUsername = decodedToken?.sub || '';
 
-  if (!routineIdParam 
- !currentUsername) {
+  if (!routineIdParam || !currentUsername) {
     router.navigate(['/']);
     return false;
   }

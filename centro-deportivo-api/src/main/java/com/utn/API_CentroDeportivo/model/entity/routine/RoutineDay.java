@@ -22,6 +22,12 @@ public class RoutineDay {
 
     private String day;
 
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column(name = "display_order")
+    private Integer order;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "routine_id")
     private Routine routine;
