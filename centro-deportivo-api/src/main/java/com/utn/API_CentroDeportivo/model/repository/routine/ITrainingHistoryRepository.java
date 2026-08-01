@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface ITrainingHistoryRepository extends JpaRepository<TrainingHistory, Long> {
     List<TrainingHistory> findByUsername(String username);
+    List<TrainingHistory> findByRoutineId(Long routineId);
+    List<TrainingHistory> findByExerciseId(Long exerciseId);
 }

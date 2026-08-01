@@ -12,4 +12,5 @@ public class TrainingHistoryDTO {
     private Long routineId;
     private Long exerciseId;
     private List<TrainingSetDTO> sets;
+    private String notes;
 }

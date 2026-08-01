@@ -63,12 +63,12 @@ public final class RoutineMapper {
         entity.setDaysPerWeek(dto.getDaysPerWeek());
         entity.setWarmup(toWarmupEntity(dto.getWarmup()));
         entity.setCooldown(toCooldownEntity(dto.getCooldown()));
-        entity.setGeneralNotes(dto.getGeneralNotes());
+        entity.setGeneralNotes(dto.getGeneralNotes() == null ? new ArrayList<>() : new ArrayList<>(dto.getGeneralNotes()));
         if (dto.getRoutineDays() != null) {
             java.util.List<RoutineDay> days = dto.getRoutineDays().stream()
                     .map(RoutineMapper::toRoutineDayEntity).toList();
             days.forEach(day -> day.setRoutine(entity));
-            entity.setRoutineDays(days);
+            entity.setRoutineDays(new ArrayList<>(days));
         }
     }
 
@@ -76,20 +76,24 @@ public final class RoutineMapper {
         if (entity == null) return null;
         return RoutineDayDTO.builder()
                 .id(entity.getId())
-                .dayOrder(entity.getDayOrder())
-                .day(entity.getDay())
+                .dayNumber(entity.getDayOrder())
+                .name(entity.getDay())
+                .description(entity.getDescription())
+                .order(entity.getOrder())
                 .exercises(toExerciseDTOList(entity.getExercises()))
                 .build();
     }
 
-    private static RoutineDay toRoutineDayEntity(RoutineDayRequestDTO dto) {
+    public static RoutineDay toRoutineDayEntity(RoutineDayRequestDTO dto) {
         if (dto == null) return null;
         RoutineDay entity = new RoutineDay();
-        entity.setDayOrder(dto.getDayOrder());
-        entity.setDay(dto.getDay());
+        entity.setDayOrder(dto.getDayNumber());
+        entity.setDay(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setOrder(dto.getOrder());
         if (dto.getExercises() != null) {
-            List<Exercise> exercises = dto.getExercises().stream()
-                    .map(RoutineMapper::toExerciseEntity).toList();
+            List<Exercise> exercises = new ArrayList<>(dto.getExercises().stream()
+                    .map(RoutineMapper::toExerciseEntity).toList());
             exercises.forEach(e -> e.setRoutineDay(entity));
             entity.setExercises(exercises);
         }
@@ -142,11 +146,11 @@ public final class RoutineMapper {
                 .build();
     }
 
-    private static Warmup toWarmupEntity(WarmupRequestDTO dto) {
+    public static Warmup toWarmupEntity(WarmupRequestDTO dto) {
         if (dto == null) return null;
         Warmup w = new Warmup();
         w.setDurationMinutes(dto.getDurationMinutes());
-        w.setActivities(dto.getActivities());
+        w.setActivities(dto.getActivities() == null ? new ArrayList<>() : new ArrayList<>(dto.getActivities()));
         return w;
     }
 
@@ -158,11 +162,11 @@ public final class RoutineMapper {
                 .build();
     }
 
-    private static Cooldown toCooldownEntity(CooldownRequestDTO dto) {
+    public static Cooldown toCooldownEntity(CooldownRequestDTO dto) {
         if (dto == null) return null;
         Cooldown c = new Cooldown();
         c.setDurationMinutes(dto.getDurationMinutes());
-        c.setActivities(dto.getActivities());
+        c.setActivities(dto.getActivities() == null ? new ArrayList<>() : new ArrayList<>(dto.getActivities()));
         return c;
     }
 
@@ -185,11 +189,11 @@ public final class RoutineMapper {
             List<SeriesRepetitionRequestDTO> dtos) {
 
         if (dtos == null) {
-            return Collections.emptyList();
+            return new ArrayList<>();
         }
 
-        return dtos.stream()
+        return new ArrayList<>(dtos.stream()
                 .map(RoutineMapper::toSeriesRepetitionEntity)
-                .toList();
+                .toList());
     }
 }

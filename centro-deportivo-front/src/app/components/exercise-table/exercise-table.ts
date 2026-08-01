@@ -4,6 +4,7 @@ import { Exercise, TrainingHistory } from '../../models/Routine';
 import { RoutineService } from '../../services/routine-service';
 import { AuthService } from '../../services/auth-service';
 
+
 @Component({
   selector: 'app-exercise-table',
   imports: [FormsModule],

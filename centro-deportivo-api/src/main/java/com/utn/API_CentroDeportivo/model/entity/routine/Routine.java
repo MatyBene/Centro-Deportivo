@@ -38,6 +38,13 @@ public class Routine {
     @Column(name = "created_at")
     private LocalDate createdAt;
 
+    @PrePersist
+    public void prePersist() {
+        if (this.createdAt == null) {
+            this.createdAt = LocalDate.now();
+        }
+    }
+
     @Column(name = "is_template")
     private boolean isTemplate;
 

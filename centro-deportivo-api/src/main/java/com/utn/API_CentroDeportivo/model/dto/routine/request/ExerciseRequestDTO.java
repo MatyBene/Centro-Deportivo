@@ -5,6 +5,7 @@ import java.util.List;
 
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder @ToString
 public class ExerciseRequestDTO {
+    private Long id;
     private String name;
     private String muscleGroup;
     private String type;
@@ -14,4 +15,3 @@ public class ExerciseRequestDTO {
     private Integer exerciseOrder;
     private List<SeriesRepetitionRequestDTO> seriesRepetitions;
 }
-
