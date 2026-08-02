@@ -1,6 +1,6 @@
-package com.utn.API_CentroDeportivo.model.repository;
+package com.utn.API_CentroDeportivo.model.repository.users;
 
-import com.utn.API_CentroDeportivo.model.entity.User;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
 import com.utn.API_CentroDeportivo.model.enums.PermissionLevel;
 import com.utn.API_CentroDeportivo.model.enums.Role;
 import com.utn.API_CentroDeportivo.model.enums.Status;

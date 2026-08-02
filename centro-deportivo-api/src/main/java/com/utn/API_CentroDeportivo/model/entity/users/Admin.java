@@ -1,4 +1,4 @@
-package com.utn.API_CentroDeportivo.model.entity;
+package com.utn.API_CentroDeportivo.model.entity.users;
 
 import com.utn.API_CentroDeportivo.model.enums.PermissionLevel;
 import jakarta.persistence.Column;

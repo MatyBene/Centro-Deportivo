@@ -1,6 +1,6 @@
 package com.utn.API_CentroDeportivo.service;
 
-import com.utn.API_CentroDeportivo.model.entity.User;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface ICredentialService extends UserDetailsService {

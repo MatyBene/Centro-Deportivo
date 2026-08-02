@@ -2,14 +2,14 @@ package com.utn.API_CentroDeportivo.service.impl;
 
 import com.utn.API_CentroDeportivo.model.dto.request.MemberEditDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.MembersDetailsDTO;
-import com.utn.API_CentroDeportivo.model.entity.Credential;
-import com.utn.API_CentroDeportivo.model.entity.Instructor;
-import com.utn.API_CentroDeportivo.model.entity.Member;
-import com.utn.API_CentroDeportivo.model.entity.User;
+import com.utn.API_CentroDeportivo.model.entity.users.Credential;
+import com.utn.API_CentroDeportivo.model.entity.users.Instructor;
+import com.utn.API_CentroDeportivo.model.entity.users.Member;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.MemberNotFoundException;
-import com.utn.API_CentroDeportivo.model.repository.IMemberRepository;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IMemberRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -214,6 +214,36 @@ class MemberServiceTest {
 
             // Act & Assert
             assertThrows(MemberNotFoundException.class, () -> memberService.getMemberDetailsById(memberId));
+        }
+    }
+
+    @Nested
+    class MarkInactiveTests {
+        @Test
+        void whenMemberExists_ShouldSetInactive() {
+            // Arrange
+            Member activeMember = new Member();
+            activeMember.setId(2L);
+            activeMember.setStatus(Status.ACTIVE);
+            when(userRepository.findById(2L)).thenReturn(Optional.of(activeMember));
+            ArgumentCaptor<Member> memberCaptor = ArgumentCaptor.forClass(Member.class);
+
+            // Act
+            memberService.markInactive(2L);
+
+            // Assert
+            verify(userRepository, times(1)).save(memberCaptor.capture());
+            assertEquals(Status.INACTIVE, memberCaptor.getValue().getStatus());
+        }
+
+        @Test
+        void whenMemberNotFound_ShouldThrowMemberNotFoundException() {
+            // Arrange
+            when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+            // Act & Assert
+            assertThrows(MemberNotFoundException.class, () -> memberService.markInactive(memberId));
+            verify(userRepository, never()).save(any());
         }
     }
 

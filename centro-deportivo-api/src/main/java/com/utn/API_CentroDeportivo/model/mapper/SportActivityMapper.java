@@ -2,7 +2,7 @@ package com.utn.API_CentroDeportivo.model.mapper;
 
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivityDetailsDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivitySummaryDTO;
-import com.utn.API_CentroDeportivo.model.entity.SportActivity;
+import com.utn.API_CentroDeportivo.model.entity.users.SportActivity;
 
 public class SportActivityMapper {
 

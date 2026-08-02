@@ -1,8 +1,8 @@
 package com.utn.API_CentroDeportivo.service.impl;
 
-import com.utn.API_CentroDeportivo.model.entity.Credential;
-import com.utn.API_CentroDeportivo.model.entity.User;
-import com.utn.API_CentroDeportivo.model.repository.ICredentialRepository;
+import com.utn.API_CentroDeportivo.model.entity.users.Credential;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
+import com.utn.API_CentroDeportivo.model.repository.users.ICredentialRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

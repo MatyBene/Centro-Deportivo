@@ -2,13 +2,13 @@ package com.utn.API_CentroDeportivo.service.impl;
 
 import com.utn.API_CentroDeportivo.config.SecurityConfig;
 import com.utn.API_CentroDeportivo.model.dto.request.MemberRequestDTO;
-import com.utn.API_CentroDeportivo.model.entity.Credential;
-import com.utn.API_CentroDeportivo.model.entity.Member;
-import com.utn.API_CentroDeportivo.model.entity.User;
+import com.utn.API_CentroDeportivo.model.entity.users.Credential;
+import com.utn.API_CentroDeportivo.model.entity.users.Member;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
 import com.utn.API_CentroDeportivo.model.enums.Role;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.FieldAlreadyExistsException;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
