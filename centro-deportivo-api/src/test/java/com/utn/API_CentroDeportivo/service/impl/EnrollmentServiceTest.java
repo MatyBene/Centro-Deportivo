@@ -21,7 +21,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Clock;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -47,6 +50,9 @@ class EnrollmentServiceTest {
     @Mock
     private IUserRepository userRepository;
 
+    @Mock
+    private Clock clock;
+
     @InjectMocks
     private EnrollmentService enrollmentService;
 
@@ -62,9 +68,13 @@ class EnrollmentServiceTest {
     private final Integer maxMembers = 10;
     private final String activityName = "Yoga";
     private final Long instructorId = 1L;
+    private final ZoneId zoneId = ZoneId.of("America/Argentina/Buenos_Aires");
 
     @BeforeEach
     void setUp() {
+        lenient().when(clock.instant()).thenReturn(Instant.now());
+        lenient().when(clock.getZone()).thenReturn(zoneId);
+
         instructor = new Instructor();
         instructor.setId(instructorId);
 
@@ -95,12 +105,15 @@ class EnrollmentServiceTest {
             when(credentialService.getUserByUsername(memberUsername)).thenReturn(member);
             when(sportActivityService.getSportActivityEntityById(activityId)).thenReturn(Optional.of(sportActivity));
             when(enrollmentRepository.findByMemberIdAndActivityId(memberId, activityId)).thenReturn(Optional.empty());
+            ArgumentCaptor<Enrollment> enrollmentCaptor = ArgumentCaptor.forClass(Enrollment.class);
 
             // Act
             enrollmentService.enrollMemberToActivity(memberUsername, activityId);
 
             // Assert
-            verify(enrollmentRepository, times(1)).save(any(Enrollment.class));
+            verify(enrollmentRepository, times(1)).save(enrollmentCaptor.capture());
+            Enrollment saved = enrollmentCaptor.getValue();
+            assertEquals(saved.getStartDate().plusDays(30), saved.getEndDate());
             verify(memberService, times(1)).updateMemberStatus(memberId);
         }
 
@@ -156,6 +169,25 @@ class EnrollmentServiceTest {
 
     @Nested
     class EnrollMemberToActivityByInstructorTests {
+        @Test
+        void whenValidInstructorEnrollment_ShouldSetEndDateToStartDatePlus30() {
+            // Arrange
+            when(credentialService.getUserByUsername(instructorUsername)).thenReturn(instructor);
+            when(sportActivityService.getSportActivityEntityById(activityId)).thenReturn(Optional.of(sportActivity));
+            when(enrollmentRepository.findByMemberIdAndActivityId(memberId, activityId)).thenReturn(Optional.empty());
+            when(userRepository.findById(memberId)).thenReturn(Optional.of(member));
+            ArgumentCaptor<Enrollment> enrollmentCaptor = ArgumentCaptor.forClass(Enrollment.class);
+
+            // Act
+            enrollmentService.enrollMemberToActivityByInstructor(instructorUsername, activityId, memberId);
+
+            // Assert
+            verify(enrollmentRepository, times(1)).save(enrollmentCaptor.capture());
+            Enrollment saved = enrollmentCaptor.getValue();
+            assertEquals(saved.getStartDate().plusDays(30), saved.getEndDate());
+            verify(memberService, times(1)).updateMemberStatus(memberId);
+        }
+
         @Test
         void whenCapacityIsFull_ShouldThrowMaxCapacityException() {
             // Arrange
@@ -254,6 +286,28 @@ class EnrollmentServiceTest {
         }
     }
 
+
+    @Nested
+    class EnrollMemberToActivityByUsernameTests {
+        @Test
+        void whenValidInstructorEnrollmentByUsername_ShouldSetEndDateToStartDatePlus30() {
+            // Arrange
+            when(credentialService.getUserByUsername(instructorUsername)).thenReturn(instructor);
+            when(sportActivityService.getSportActivityEntityById(activityId)).thenReturn(Optional.of(sportActivity));
+            when(credentialService.getUserByUsername(memberUsername)).thenReturn(member);
+            when(enrollmentRepository.findByMemberIdAndActivityId(memberId, activityId)).thenReturn(Optional.empty());
+            ArgumentCaptor<Enrollment> enrollmentCaptor = ArgumentCaptor.forClass(Enrollment.class);
+
+            // Act
+            enrollmentService.enrollMemberToActivityByUsername(instructorUsername, activityId, memberUsername);
+
+            // Assert
+            verify(enrollmentRepository, times(1)).save(enrollmentCaptor.capture());
+            Enrollment saved = enrollmentCaptor.getValue();
+            assertEquals(saved.getStartDate().plusDays(30), saved.getEndDate());
+            verify(memberService, times(1)).updateMemberStatus(memberId);
+        }
+    }
 
     @Nested
     class GetEnrollmentsByUsernameTests {
