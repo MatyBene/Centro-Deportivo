@@ -218,6 +218,36 @@ class MemberServiceTest {
     }
 
     @Nested
+    class MarkInactiveTests {
+        @Test
+        void whenMemberExists_ShouldSetInactive() {
+            // Arrange
+            Member activeMember = new Member();
+            activeMember.setId(2L);
+            activeMember.setStatus(Status.ACTIVE);
+            when(userRepository.findById(2L)).thenReturn(Optional.of(activeMember));
+            ArgumentCaptor<Member> memberCaptor = ArgumentCaptor.forClass(Member.class);
+
+            // Act
+            memberService.markInactive(2L);
+
+            // Assert
+            verify(userRepository, times(1)).save(memberCaptor.capture());
+            assertEquals(Status.INACTIVE, memberCaptor.getValue().getStatus());
+        }
+
+        @Test
+        void whenMemberNotFound_ShouldThrowMemberNotFoundException() {
+            // Arrange
+            when(userRepository.findById(anyLong())).thenReturn(Optional.empty());
+
+            // Act & Assert
+            assertThrows(MemberNotFoundException.class, () -> memberService.markInactive(memberId));
+            verify(userRepository, never()).save(any());
+        }
+    }
+
+    @Nested
     class SaveMemberTests {
         @Test
         void whenCalled_ShouldCallRepositorySave() {

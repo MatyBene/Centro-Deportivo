@@ -17,4 +17,5 @@ public interface IMemberService {
     Page<MembersDetailsDTO> getAllMembers(int page, int size);
     MembersDetailsDTO getMemberDetailsById(Long memberId);
     MembersDetailsDTO getMemberDetailsByUsername(String username);
+    void markInactive(Long memberId);
 }

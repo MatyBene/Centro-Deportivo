@@ -119,6 +119,16 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    public void markInactive(Long memberId) {
+        Member existingMember = (Member) userRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("Socio no encontrado"));
+
+        existingMember.setStatus(Status.INACTIVE);
+
+        userRepository.save(existingMember);
+    }
+
+    @Override
     public void saveMember(User member) {
         userRepository.save(member);
     }

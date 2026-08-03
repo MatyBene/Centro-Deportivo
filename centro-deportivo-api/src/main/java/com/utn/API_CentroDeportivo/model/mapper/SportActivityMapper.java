@@ -3,6 +3,7 @@ package com.utn.API_CentroDeportivo.model.mapper;
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivityDetailsDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivitySummaryDTO;
 import com.utn.API_CentroDeportivo.model.entity.users.SportActivity;
+
 import java.util.ArrayList;
 
 public class SportActivityMapper {
