@@ -5,7 +5,7 @@ import com.utn.API_CentroDeportivo.model.dto.response.AdminViewDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.InstructorDetailsDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.InstructorSummaryDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivitySummaryDTO;
-import com.utn.API_CentroDeportivo.model.entity.Instructor;
+import com.utn.API_CentroDeportivo.model.entity.users.Instructor;
 
 import java.util.List;
 

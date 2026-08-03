@@ -3,7 +3,7 @@ package com.utn.API_CentroDeportivo.controller;
 import com.utn.API_CentroDeportivo.model.dto.request.MemberRequestDTO;
 
 import com.utn.API_CentroDeportivo.model.dto.response.*;
-import com.utn.API_CentroDeportivo.model.entity.Instructor;
+import com.utn.API_CentroDeportivo.model.entity.users.Instructor;
 import com.utn.API_CentroDeportivo.service.IAuthService;
 import com.utn.API_CentroDeportivo.service.IInstructorService;
 import com.utn.API_CentroDeportivo.service.IMemberService;

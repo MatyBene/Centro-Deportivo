@@ -1,14 +1,14 @@
 package com.utn.API_CentroDeportivo.service.impl;
 
 import com.utn.API_CentroDeportivo.model.dto.response.EnrollmentDTO;
-import com.utn.API_CentroDeportivo.model.entity.Enrollment;
-import com.utn.API_CentroDeportivo.model.entity.Instructor;
-import com.utn.API_CentroDeportivo.model.entity.Member;
-import com.utn.API_CentroDeportivo.model.entity.SportActivity;
+import com.utn.API_CentroDeportivo.model.entity.users.Enrollment;
+import com.utn.API_CentroDeportivo.model.entity.users.Instructor;
+import com.utn.API_CentroDeportivo.model.entity.users.Member;
+import com.utn.API_CentroDeportivo.model.entity.users.SportActivity;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.*;
-import com.utn.API_CentroDeportivo.model.repository.IEnrollmentRepository;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IEnrollmentRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import com.utn.API_CentroDeportivo.service.IMemberService;
 import com.utn.API_CentroDeportivo.service.ISportActivityService;
