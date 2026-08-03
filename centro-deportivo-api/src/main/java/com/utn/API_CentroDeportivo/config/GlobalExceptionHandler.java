@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -20,6 +22,8 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @Autowired
     private MessageSource messageSource;
@@ -149,6 +153,36 @@ public class GlobalExceptionHandler {
                 "INVALID_FILTER_COMBINATION");
     }
 
+    @ExceptionHandler(RoutineNotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> handleRoutineNotFoundException(RoutineNotFoundException ex, Locale locale) {
+        Map<String, String> details = new HashMap<>();
+        details.put("message", messageSource.getMessage("error.routine.not.found.detail", null, locale));
+        return buildErrorResponse(HttpStatus.NOT_FOUND,
+                messageSource.getMessage("error.data.not.found", null, locale),
+                details,
+                "ROUTINE_NOT_FOUND");
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponseDTO> handleUserNotFoundExceptionCustom(UserNotFoundException ex, Locale locale) {
+        Map<String, String> details = new HashMap<>();
+        details.put("message", messageSource.getMessage("error.user.not.found.detail", null, locale));
+        return buildErrorResponse(HttpStatus.NOT_FOUND,
+                messageSource.getMessage("error.data.not.found", null, locale),
+                details,
+                "USER_NOT_FOUND");
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponseDTO> handleUnauthorizedException(UnauthorizedException ex, Locale locale) {
+        Map<String, String> details = new HashMap<>();
+        details.put("message", messageSource.getMessage("error.unauthorized.detail", null, locale));
+        return buildErrorResponse(HttpStatus.FORBIDDEN,
+                "Acceso denegado",
+                details,
+                "UNAUTHORIZED");
+    }
+
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponseDTO> handleAccessDeniedException(AccessDeniedException ex, Locale locale) {
         Map<String, String> details = new HashMap<>();
@@ -161,6 +195,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponseDTO> handleGenericException(Exception ex, Locale locale) {
+        log.error("Unhandled exception caught by generic handler", ex);
         Map<String, String> details = new HashMap<>();
         details.put("message", messageSource.getMessage("error.generic.detail", null, locale));
         return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,

@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { RoutineService } from '../../services/routine-service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Exercise, Routine, Day, RoutineResponse, Warmup, Cooldown } from '../../models/Routine';
+import { Exercise, Routine, RoutineDay, Warmup, Cooldown } from '../../models/Routine';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,6 @@ export class RoutineFormPage implements OnInit {
   isEditMode = signal(false);
   routineId: string | null = null;
   
-  // Opciones para selectores
   levelOptions = ['Principiante', 'Intermedio', 'Avanzado'];
   goalOptions = ['Fuerza', 'Hipertrofia', 'Resistencia'];
   muscleGroupOptions = ['Pecho', 'Espalda', 'Piernas', 'Hombros', 'Brazos', 'Abdomen'];
@@ -77,22 +76,11 @@ export class RoutineFormPage implements OnInit {
 
 
   loadRoutine(id: string): void {
-  this.routineService.getRoutine(id).subscribe({
-    next: (res: RoutineResponse) => {
-      if (!res || !res.routine) {
-        console.error('Error al cargar rutina: La rutina no se encontró en la respuesta.', res);
-        alert('Error: La rutina solicitada no existe.');
-        this.router.navigate(['/routines']);
-        return;
-      }
-      
-      const routineData = res.routine as any; 
+  this.routineService.getRoutine(Number(id)).subscribe({
+    next: (routineData: Routine) => {
 
       const normalizedRoutine: Routine = {
         ...routineData,
-        cooldown: routineData.cooldown || routineData.coolDown,
-
-        routineDays: routineData.routineDays || routineData.days,
         generalNotes: routineData.generalNotes || [],
       } as Routine; 
 
@@ -122,21 +110,14 @@ export class RoutineFormPage implements OnInit {
       });
       
       normalizedRoutine.routineDays?.forEach(day => {
-        const dayGroup = this.fb.group({
-          id: [day.id],
-          dayNumber: [day.dayNumber],
-          name: [day.name, Validators.required],
-          description: [day.description], 
-          order: [day.order],  
-          exercises: this.fb.array<FormGroup>([]) 
-        });
+        const dayGroup = this.createDayFormGroup(day);
 
-        if (day.exercises) { 
+        if (day.exercises) {
           const exercisesArray = dayGroup.get('exercises') as FormArray;
           day.exercises.forEach(ej => {
             const exerciseWithSeries = {
                 ...ej,
-                seriesRepetitions: (ej as any).seriesRepetitions || (ej as any).sets 
+                seriesRepetitions: ej.seriesRepetitions
             };
             exercisesArray.push(this.createExerciseFormGroup(exerciseWithSeries));
           });
@@ -153,18 +134,19 @@ export class RoutineFormPage implements OnInit {
     error: (err) => {
       console.error('Error al cargar rutina:', err);
       alert('Error al cargar rutina');
-      // this.router.navigate(['/routines']);  
+      // this.router.navigate(['/routines']); Â 
     }
   });
 }
 
-  createDayFormGroup(dayNumber: number): FormGroup {
+  createDayFormGroup(day?: Partial<RoutineDay>): FormGroup {
+    const dayNumber = day?.dayNumber ?? this.routineDays.length + 1;
     return this.fb.group({
-      id: [`day${Date.now()}`],
+      id: [day?.id],
       dayNumber: [dayNumber],
-      name: ['', Validators.required],
-      description: [''],
-      order: [dayNumber],
+      name: [day?.name || '', Validators.required],
+      description: [day?.description || ''],
+      order: [day?.order ?? dayNumber],
       exercises: this.fb.array<FormGroup>([])
     });
   }
@@ -177,13 +159,14 @@ export class RoutineFormPage implements OnInit {
         : Array(defaultSets).fill(0).map(() => this.createRepetitionsFormGroup(''));
 
     return this.fb.group({
-        id: [exercise?.id || `ej${Date.now()}`],
+        id: [exercise?.id],
         name: [exercise?.name || '', Validators.required],
         muscleGroup: [exercise?.muscleGroup || '', Validators.required],
-        type: [exercise?.type || 'Compound'], 
-        sets: [exercise?.sets , [Validators.required, Validators.min(1)]],
+        type: [exercise?.type || 'Compound'],
+        sets: [exercise?.sets ?? (exercise?.seriesRepetitions?.length || defaultSets), [Validators.required, Validators.min(1)]],
         seriesRepetitions: this.fb.array(initialRepetitions),
-        restSeconds: [exercise?.restSeconds , Validators.required],
+        restSeconds: [exercise?.restSeconds ?? 0 , Validators.required],
+        exerciseOrder: [exercise?.exerciseOrder ?? 0, Validators.required],
         suggestedWeight: [exercise?.suggestedWeight || ''],
         notes: [exercise?.notes || ''],
     });
@@ -206,8 +189,7 @@ export class RoutineFormPage implements OnInit {
   }
 
   addDay(): void {
-    const newDayNumber = this.routineDays.length + 1;
-    this.routineDays.push(this.createDayFormGroup(newDayNumber));
+    this.routineDays.push(this.createDayFormGroup());
   }
 
   removeDay(index: number): void {
@@ -235,26 +217,6 @@ export class RoutineFormPage implements OnInit {
   removeGeneralNote(index: number): void {
     this.generalNotes.removeAt(index);
   }
-
-  private createSeriesFormGroup(repetitions: string = ''): FormGroup {
-        return this.fb.group({
-            repetitions: [repetitions, Validators.required],
-        });
-    }
-
-    getSets(dayIndex: number, exerciseIndex: number): FormArray {
-        const exercisesArray = this.getExercises(dayIndex);
-        const exerciseGroup = exercisesArray.at(exerciseIndex) as FormGroup;
-        return exerciseGroup.get('sets') as FormArray; 
-    }
-
-    addSeries(dayIndex: number, exerciseIndex: number): void {
-        this.getSets(dayIndex, exerciseIndex).push(this.createSeriesFormGroup());
-    }
-
-    removeSeries(dayIndex: number, exerciseIndex: number, seriesIndex: number): void {
-        this.getSets(dayIndex, exerciseIndex).removeAt(seriesIndex);
-    }
 
     private createRepetitionsFormGroup(repetitions: string = ''): FormGroup {
       return this.fb.group({
@@ -289,52 +251,68 @@ export class RoutineFormPage implements OnInit {
   saveRoutine(): void {
     if (this.routineForm.invalid) {
       alert('Completar todos los campos.');
-      this.routineForm.markAllAsTouched(); 
+      this.routineForm.markAllAsTouched();
       return;
     }
 
     this.isSaving.set(true);
 
     const formValue = this.routineForm.value;
-    
+
     const warmup: Warmup = {
       durationMinutes: formValue.warmupDuration,
       activities: formValue.warmupActivities.filter((a: string) => a.trim() !== '')
     };
-    
+
     const cooldown: Cooldown = {
       durationMinutes: formValue.cooldownDuration,
       activities: formValue.cooldownActivities.filter((a: string) => a.trim() !== '')
     };
 
+    const routineDays: RoutineDay[] = (formValue.routineDays ?? []).map((day: any) => ({
+      id: day.id,
+      dayNumber: day.dayNumber,
+      name: day.name,
+      description: day.description,
+      order: day.order,
+      exercises: (day.exercises ?? []).map((ex: any) => ({
+        id: ex.id,
+        name: ex.name,
+        muscleGroup: ex.muscleGroup,
+        type: ex.type,
+        notes: ex.notes,
+        suggestedWeight: ex.suggestedWeight,
+        restSeconds: ex.restSeconds,
+        exerciseOrder: ex.exerciseOrder ?? 0,
+        seriesRepetitions: ex.seriesRepetitions
+      }))
+    }));
+
     const routine: Routine = {
-      id: this.routineId || Date.now().toString(),
+      id: this.isEditMode() ? Number(this.routineId!) : 0,
       name: formValue.name,
       description: formValue.description,
       level: formValue.level,
       goal: formValue.goal,
       durationWeeks: formValue.durationWeeks,
       daysPerWeek: formValue.daysPerWeek,
-      
       warmup: warmup,
       cooldown: cooldown,
-      routineDays: formValue.routineDays, 
+      routineDays: routineDays,
       generalNotes: formValue.generalNotes.filter((n: string) => n.trim() !== ''),
-      createdBy: this.routineService.getCurrentUserUsername(), 
-      createdAt: new Date().toISOString().split('T')[0],
-      active: true,
+      createdBy: this.routineService.getCurrentUserUsername(),
       isTemplate: false,
     };
 
-    const operation = this.isEditMode()  
-      ? this.routineService.updateRoutine(this.routineId!, routine)
+    const operation = this.isEditMode()
+      ? this.routineService.updateRoutine(Number(this.routineId!), routine)
       : this.routineService.createRoutine(routine);
 
     operation.subscribe({
       next: () => {
-        const message = this.isEditMode()  
-          ? '✅ Rutina editada con éxito! '
-          : '✅ Rutina creada con éxito! ';
+        const message = this.isEditMode()
+          ? 'âœ… Rutina editada con Ã©xito! '
+          : 'âœ… Rutina creada con Ã©xito! ';
         alert(message);
         this.router.navigate(['/routines']);
       },

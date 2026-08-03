@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RoutineService } from '../../services/routine-service';
-import { Routine, RoutineResponse, Exercise } from '../../models/Routine';
+import { Routine, Exercise } from '../../models/Routine';
 import { ExerciseTable } from '../../components/exercise-table/exercise-table';
 import { forkJoin } from 'rxjs';
 
@@ -15,7 +15,7 @@ export class RoutineDetailPage implements OnInit{
   routine = signal<Routine | null>(null);
   isLoading = signal(true);
   error = signal<string | null>(null);
-  expandedDays = signal<Set<string>>(new Set());
+  expandedDays = signal<Set<number>>(new Set());
 
   constructor(
     private route: ActivatedRoute,
@@ -28,7 +28,7 @@ export class RoutineDetailPage implements OnInit{
     if (routineId) {
       this.loadRoutine(routineId);
     } else {
-      this.error.set('No se encontró el ID de la rutina');
+      this.error.set('No se encontrÃ³ el ID de la rutina');
       this.isLoading.set(false);
     }
   }
@@ -37,36 +37,24 @@ export class RoutineDetailPage implements OnInit{
     this.isLoading.set(true);
     
     forkJoin({
-      routine: this.routineService.getRoutine(id),
+      routine: this.routineService.getRoutine(Number(id)),
       trainingHistory: this.routineService.getTrainingHistory()
     }).subscribe({
       next: ({ routine, trainingHistory }) => {
-        if (!routine || !routine.routine) {
-          this.error.set('No se encontró la rutina');
-          this.isLoading.set(false);
-          return;
-        }
-
-        const routineData = routine.routine;
+        const routineData = routine as any;
         
-        const days = routineData.routineDays || (routineData as any).days || [];
+        const days = routineData.routineDays ?? [];
         
         if (days && days.length > 0) {
           days.forEach((day: any) => {
             if (day.exercises && day.exercises.length > 0) {
               day.exercises.forEach((exercise: Exercise) => {
                 exercise.history = trainingHistory.filter(
-                  h => h.exerciseId === exercise.id && h.routineId === id
+                  h => h.exerciseId === exercise.id && h.routineId === Number(id)
                 );
               });
             }
           });
-        }
-
-        if (routineData.routineDays) {
-          routineData.routineDays = days;
-        } else {
-          (routineData as any).routineDays = days;
         }
 
         this.routine.set(routineData);
@@ -80,7 +68,7 @@ export class RoutineDetailPage implements OnInit{
     });
   }
 
-  toggleDay(dayId: string): void {
+  toggleDay(dayId: number): void {
     const expanded = new Set(this.expandedDays());
     if (expanded.has(dayId)) {
       expanded.delete(dayId);
@@ -90,7 +78,7 @@ export class RoutineDetailPage implements OnInit{
     this.expandedDays.set(expanded);
   }
 
-  isDayExpanded(dayId: string): boolean {
+  isDayExpanded(dayId: number): boolean {
     return this.expandedDays().has(dayId);
   }
 

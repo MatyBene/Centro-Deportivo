@@ -4,6 +4,8 @@ import com.utn.API_CentroDeportivo.model.dto.response.SportActivityDetailsDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivitySummaryDTO;
 import com.utn.API_CentroDeportivo.model.entity.users.SportActivity;
 
+import java.util.ArrayList;
+
 public class SportActivityMapper {
 
     public static SportActivitySummaryDTO mapToSportActivitySummaryDTO(SportActivity activity) {
@@ -26,7 +28,7 @@ public class SportActivityMapper {
         activityDetailsDTO.setDescription(activity.getDescription());
         activityDetailsDTO.setStartTime(String.valueOf(activity.getStartTime()));
         activityDetailsDTO.setEndTime(String.valueOf(activity.getEndTime()));
-        activityDetailsDTO.setClassDays(activity.getClassDays());
+        activityDetailsDTO.setClassDays(activity.getClassDays() == null ? null : new ArrayList<>(activity.getClassDays()));
         return activityDetailsDTO;
     }
 }

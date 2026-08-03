@@ -19,6 +19,7 @@ import com.utn.API_CentroDeportivo.service.IInstructorService;
 import com.utn.API_CentroDeportivo.service.ISportActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class InstructorService implements IInstructorService {
     private IEnrollmentService enrollmentService;
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<InstructorSummaryDTO> getInstructorSummaryById(long id) {
         Optional<User> instructor = userRepository.findById(id);
 
@@ -60,6 +62,7 @@ public class InstructorService implements IInstructorService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Optional<InstructorDetailsDTO> getInstructorDetailsById(Long id) {
         Optional<User> user = userRepository.findById(id);
 
