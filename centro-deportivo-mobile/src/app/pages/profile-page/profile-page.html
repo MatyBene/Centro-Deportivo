@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Mi Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding profile-content">
+  <section class="title-section">
+    <h1>Mi Perfil</h1>
+  </section>
+
+  @if (isLoading) {
+    <div class="loading">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando perfil...</p>
+    </div>
+  } @else if (errorMessage) {
+    <ion-text color="danger">
+      <p>{{ errorMessage }}</p>
+    </ion-text>
+  } @else {
+    @if (member) {
+      <app-member-profile-card [member]="member"></app-member-profile-card>
+    }
+    @if (admin) {
+      <app-admin-profile-card [admin]="admin"></app-admin-profile-card>
+    }
+    @if (instructor) {
+      <app-instructor-profile-card [instructor]="instructor"></app-instructor-profile-card>
+    }
+
+    <ion-button expand="block" color="danger" class="logout-button" (click)="logout()">
+      Cerrar sesión
+    </ion-button>
+
+    <app-footer></app-footer>
+  }
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      {{ instructor().name }} {{ instructor().lastname }}
+      <ion-badge color="tertiary" class="status-badge">{{ instructor().specialty }}</ion-badge>
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <h3>Usuario</h3>
+          <p>{{ instructor().username }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Rol</h3>
+          <p>{{ instructor().role }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Especialidad</h3>
+          <p>{{ instructor().specialty }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Fecha de nacimiento</h3>
+          <p>{{ instructor().birthdate }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    @if (instructor().activities && instructor().activities.length > 0) {
+      <div class="section">
+        <h4>Actividades del instructor</h4>
+        <ion-list>
+          @for (activity of instructor().activities; track activity.id) {
+            <ion-item>
+              <ion-label>
+                <h3>{{ activity.name }}</h3>
+                <p>Cupos: {{ activity.maxMembers }}</p>
+              </ion-label>
+            </ion-item>
+          }
+        </ion-list>
+      </div>
+    } @else {
+      <p class="no-activities">No tiene actividades asignadas</p>
+    }
+  </ion-card-content>
+</ion-card>
