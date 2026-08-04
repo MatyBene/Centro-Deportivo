@@ -1,0 +1,110 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally.
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+
+/* Optional CSS utils */
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Dark mode always-on */
+@import "@ionic/angular/css/palettes/dark.always.css";
+
+/* Centro Deportivo custom fonts */
+@font-face {
+  font-family: 'AlimamaBold';
+  src: url('https://assets-persist.lovart.ai/agent-static-assets/AlimamaShuHeiTi-Bold.otf') format('opentype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'MiSans';
+  src: url('https://assets-persist.lovart.ai/agent-static-assets/MiSans-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  min-height: 100vh;
+  font-family: 'MiSans', sans-serif;
+  background-color: #111;
+  color: #fff;
+  background-image: url('https://assets-persist.lovart.ai/agent_images/c85f534b-4272-4720-a87c-afcc536096a5.png');
+  background-size: 400px;
+  background-repeat: repeat;
+  position: relative;
+}
+
+ion-app {
+  background-color: #111;
+  background-image: url('https://assets-persist.lovart.ai/agent_images/c85f534b-4272-4720-a87c-afcc536096a5.png');
+  background-size: 400px;
+  background-repeat: repeat;
+  font-family: 'MiSans', sans-serif;
+}
+
+ion-content {
+  --background: transparent;
+  --color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'AlimamaBold', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}

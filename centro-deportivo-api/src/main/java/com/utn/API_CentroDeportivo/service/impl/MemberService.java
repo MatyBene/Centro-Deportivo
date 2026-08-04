@@ -2,14 +2,14 @@ package com.utn.API_CentroDeportivo.service.impl;
 
 import com.utn.API_CentroDeportivo.model.dto.request.MemberEditDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.MembersDetailsDTO;
-import com.utn.API_CentroDeportivo.model.entity.Member;
-import com.utn.API_CentroDeportivo.model.entity.User;
+import com.utn.API_CentroDeportivo.model.entity.users.Member;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.MemberNotFoundException;
 import com.utn.API_CentroDeportivo.model.exception.FieldAlreadyExistsException;
 import com.utn.API_CentroDeportivo.model.mapper.MemberMapper;
-import com.utn.API_CentroDeportivo.model.repository.IMemberRepository;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IMemberRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import com.utn.API_CentroDeportivo.service.IMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +92,7 @@ public class MemberService implements IMemberService {
         userRepository.delete(member);
     }
     @Override
+    @Transactional(readOnly = true)
     public Page<MembersDetailsDTO> getAllMembers(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
         Page<Member> members = memberRepository.findAll(pageable);
@@ -99,6 +100,7 @@ public class MemberService implements IMemberService {
                 .map(MemberMapper::mapToMemberDetailsDTO);
     }
     @Override
+    @Transactional(readOnly = true)
     public MembersDetailsDTO getMemberDetailsById(Long memberId) {
         Member member = (Member) userRepository.findById(memberId)
                 .filter(user -> user instanceof Member)
@@ -108,11 +110,22 @@ public class MemberService implements IMemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MembersDetailsDTO getMemberDetailsByUsername(String username) {
         Member member = (Member) userRepository.findById(credentialService.getUserByUsername(username).getId())
                 .orElseThrow(() -> new MemberNotFoundException("Socio no encontrado"));
 
         return MemberMapper.mapToMemberDetailsDTO(member);
+    }
+
+    @Override
+    public void markInactive(Long memberId) {
+        Member existingMember = (Member) userRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("Socio no encontrado"));
+
+        existingMember.setStatus(Status.INACTIVE);
+
+        userRepository.save(existingMember);
     }
 
     @Override

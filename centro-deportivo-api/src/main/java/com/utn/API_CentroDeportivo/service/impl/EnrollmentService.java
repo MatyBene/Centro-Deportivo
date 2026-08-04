@@ -1,11 +1,12 @@
 package com.utn.API_CentroDeportivo.service.impl;
 
+import com.utn.API_CentroDeportivo.model.constants.EnrollmentConstants;
 import com.utn.API_CentroDeportivo.model.dto.response.EnrollmentDTO;
-import com.utn.API_CentroDeportivo.model.entity.*;
+import com.utn.API_CentroDeportivo.model.entity.users.*;
 import com.utn.API_CentroDeportivo.model.enums.Status;
 import com.utn.API_CentroDeportivo.model.exception.*;
-import com.utn.API_CentroDeportivo.model.repository.IEnrollmentRepository;
-import com.utn.API_CentroDeportivo.model.repository.IUserRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IEnrollmentRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.IUserRepository;
 import com.utn.API_CentroDeportivo.service.ICredentialService;
 import com.utn.API_CentroDeportivo.service.IEnrollmentService;
 import com.utn.API_CentroDeportivo.service.IMemberService;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +38,9 @@ public class EnrollmentService implements IEnrollmentService {
     @Autowired
     private IUserRepository userRepository;
 
+    @Autowired
+    private Clock clock;
+
     @Transactional
     public void enrollMemberToActivity(String username, Long activityId) {
 
@@ -47,8 +52,8 @@ public class EnrollmentService implements IEnrollmentService {
         }
 
         Enrollment enrollment = Enrollment.builder()
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now().plusDays(30))
+                .startDate(LocalDate.now(clock))
+                .endDate(LocalDate.now(clock).plusDays(EnrollmentConstants.EXPIRATION_DAYS))
                 .member(member)
                 .activity(activity)
                 .build();
@@ -135,8 +140,8 @@ public class EnrollmentService implements IEnrollmentService {
                 .orElseThrow(() -> new MemberNotFoundException("Socio no encontrado"));
 
         Enrollment enrollment = Enrollment.builder()
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now().plusDays(30))
+                .startDate(LocalDate.now(clock))
+                .endDate(LocalDate.now(clock).plusDays(EnrollmentConstants.EXPIRATION_DAYS))
                 .member(member)
                 .activity(activity)
                 .build();
@@ -167,8 +172,8 @@ public class EnrollmentService implements IEnrollmentService {
         }
 
         Enrollment enrollment = Enrollment.builder()
-                .startDate(LocalDate.now())
-                .endDate(LocalDate.now().plusDays(30))
+                .startDate(LocalDate.now(clock))
+                .endDate(LocalDate.now(clock).plusDays(EnrollmentConstants.EXPIRATION_DAYS))
                 .member(member)
                 .activity(activity)
                 .build();

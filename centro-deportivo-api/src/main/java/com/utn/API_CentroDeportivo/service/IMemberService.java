@@ -2,8 +2,8 @@ package com.utn.API_CentroDeportivo.service;
 
 import com.utn.API_CentroDeportivo.model.dto.request.MemberEditDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.MembersDetailsDTO;
-import com.utn.API_CentroDeportivo.model.entity.Member;
-import com.utn.API_CentroDeportivo.model.entity.User;
+import com.utn.API_CentroDeportivo.model.entity.users.Member;
+import com.utn.API_CentroDeportivo.model.entity.users.User;
 import org.springframework.data.domain.Page;
 
 import java.util.Optional;
@@ -17,4 +17,5 @@ public interface IMemberService {
     Page<MembersDetailsDTO> getAllMembers(int page, int size);
     MembersDetailsDTO getMemberDetailsById(Long memberId);
     MembersDetailsDTO getMemberDetailsByUsername(String username);
+    void markInactive(Long memberId);
 }

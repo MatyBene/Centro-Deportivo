@@ -2,17 +2,18 @@ package com.utn.API_CentroDeportivo.service.impl;
 
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivityDetailsDTO;
 import com.utn.API_CentroDeportivo.model.dto.response.SportActivitySummaryDTO;
-import com.utn.API_CentroDeportivo.model.entity.Instructor;
-import com.utn.API_CentroDeportivo.model.entity.SportActivity;
+import com.utn.API_CentroDeportivo.model.entity.users.Instructor;
+import com.utn.API_CentroDeportivo.model.entity.users.SportActivity;
 import com.utn.API_CentroDeportivo.model.exception.InvalidTimeFormatException;
 import com.utn.API_CentroDeportivo.model.exception.SportActivityNotFoundException;
 import com.utn.API_CentroDeportivo.model.mapper.SportActivityMapper;
-import com.utn.API_CentroDeportivo.model.repository.ISportActivityRepository;
+import com.utn.API_CentroDeportivo.model.repository.users.ISportActivityRepository;
 import com.utn.API_CentroDeportivo.service.ISportActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -49,6 +50,8 @@ public class SportActivityService implements ISportActivityService {
         }
     }
 
+    @Override
+    @Transactional(readOnly = true)
     public Optional<SportActivityDetailsDTO> getActivityById(Long id) {
         Optional<SportActivity> activity = sportActivityRepository.findById(id);
         if (activity.isPresent()) {
@@ -59,6 +62,7 @@ public class SportActivityService implements ISportActivityService {
         return Optional.empty();
     }
 
+    @Transactional(readOnly = true)
     public int getCurrentMembers(Long id) {
         return sportActivityRepository.findById(id).map(activity -> activity.getEnrollments() != null ? activity.getEnrollments().size() : 0).orElse(0);
     }
@@ -70,6 +74,7 @@ public class SportActivityService implements ISportActivityService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SportActivityDetailsDTO> getActivitiesDetailsByInstructor(Instructor instructor) {
         List<SportActivity> activities = sportActivityRepository.findByInstructor(instructor);
         return activities.stream()

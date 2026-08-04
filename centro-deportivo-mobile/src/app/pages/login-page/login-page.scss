@@ -1,0 +1,156 @@
+.login-content {
+  --background: transparent;
+}
+
+.login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.login-wrapper ion-card {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: 4px solid #c9a83e;
+  box-shadow: 6px 6px 0 #000;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
+}
+
+.login-wrapper ion-card::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  border: 3px solid #d12c2c;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-wrapper ion-card-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-bottom: 8px;
+}
+
+.login-wrapper ion-card-title {
+  font-family: 'AlimamaBold', sans-serif;
+  font-size: 28px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  -webkit-text-stroke: 0.5px #c9a83e;
+}
+
+.login-wrapper ion-card-content {
+  position: relative;
+  z-index: 1;
+  padding: 24px;
+}
+
+.login-wrapper ion-item {
+  --background: #1a1a1a;
+  --border-color: #444;
+  --border-width: 3px;
+  --border-style: solid;
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.login-wrapper ion-item.item-has-focus {
+  --border-color: #c9a83e;
+}
+
+.login-wrapper ion-input {
+  --color: #fff;
+  --placeholder-color: #777;
+  font-family: 'MiSans', sans-serif;
+  font-size: 16px;
+}
+
+.login-wrapper ion-label {
+  font-family: 'MiSans', sans-serif;
+  color: #c9a83e;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 14px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.error-message p {
+  background-color: rgba(209, 44, 44, 0.15);
+  border: 2px solid #d12c2c;
+  border-left: 5px solid #d12c2c;
+  color: #ff6b6b;
+  padding: 15px 20px;
+  margin: 0 0 24px 0;
+  font-weight: 500;
+  font-size: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.error-message p::before {
+  content: '⚠';
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.login-wrapper ion-button[type="submit"] {
+  --background: #d12c2c;
+  --color: #fff;
+  --border-width: 4px;
+  --border-color: #c9a83e;
+  --border-style: solid;
+  --box-shadow: 6px 6px 0 #000;
+  --border-radius: 0;
+  font-family: 'AlimamaBold', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  height: 52px;
+  margin: 0;
+  transition: all 0.3s ease;
+}
+
+.login-wrapper ion-button[type="submit"]:not(:disabled):hover {
+  --background: #c9a83e;
+  --color: #000;
+  --box-shadow: 8px 8px 0 #000;
+}
+
+.login-wrapper ion-button[type="submit"]:disabled {
+  --background: #555;
+  --border-color: #777;
+  --box-shadow: 4px 4px 0 #000;
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .login-wrapper ion-card::before {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border-width: 2px;
+  }
+
+  .login-wrapper ion-card-title {
+    font-size: 24px;
+  }
+
+  .login-wrapper ion-button[type="submit"] {
+    font-size: 16px;
+    letter-spacing: 2px;
+  }
+}

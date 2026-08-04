@@ -13,14 +13,14 @@ import { forkJoin } from 'rxjs';
   styleUrl: './progress-chart-page.css'
 })
 export class ProgressChartPage implements OnInit {
-  routineId = signal<string>('');
+  routineId = signal<number>(0);
   routineName = signal<string>('');
   exercises = signal<Exercise[]>([]);
-  
-  selectedExerciseId = signal<string>('');
+
+  selectedExerciseId = signal<number>(0);
   selectedExerciseName = signal<string>('');
   exerciseHistory = signal<TrainingHistory[]>([]);
-  
+
   loading = signal<boolean>(true);
   showChart = signal<boolean>(false);
 
@@ -34,40 +34,39 @@ export class ProgressChartPage implements OnInit {
     this.route.params.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.routineId.set(id);
-        this.loadRoutineData(id);
+        this.routineId.set(Number(id));
+        this.loadRoutineData(Number(id));
       }
     });
   }
 
-  loadRoutineData(routineId: string) {
+  loadRoutineData(routineId: number) {
     this.loading.set(true);
-    
+
     forkJoin({
       routine: this.routineService.getRoutine(routineId),
       trainingHistory: this.routineService.getTrainingHistory()
     }).subscribe({
       next: ({ routine, trainingHistory }) => {
-        this.routineName.set(routine.routine.name);
-        
+        this.routineName.set(routine.name);
+
         const allExercises: Exercise[] = [];
-        
-        // Normalizar: puede venir como routineDays o days
-        const days = routine.routine.routineDays || (routine.routine as any).days || [];
-        
+
+        const days = routine.routineDays ?? [];
+
         if (days && days.length > 0) {
           days.forEach((day: any) => {
             if (day.exercises && day.exercises.length > 0) {
               day.exercises.forEach((exercise: Exercise) => {
                 exercise.history = trainingHistory.filter(
-                  h => h.exerciseId === exercise.id && h.routineId === routineId
+                  (h: TrainingHistory) => h.exerciseId === exercise.id && h.routineId === routineId
                 );
               });
               allExercises.push(...day.exercises);
             }
           })
         }
-        
+
         this.exercises.set(allExercises);
         this.loading.set(false);
       },
@@ -78,38 +77,38 @@ export class ProgressChartPage implements OnInit {
     })
   }
 
-  selectExercise(exerciseId: string, exerciseName: string) {
+  selectExercise(exerciseId: number, exerciseName: string) {
     this.selectedExerciseId.set(exerciseId);
     this.selectedExerciseName.set(exerciseName);
-    
+
     const decodedToken = this.authService.getDecodedToken();
     const currentUsername = decodedToken?.sub || '';
-    
+
     const selectedExercise = this.exercises().find(e => e.id === exerciseId);
-    
+
     if (selectedExercise && selectedExercise.history) {
       const userHistory = selectedExercise.history.filter(
-        h => h.username === currentUsername
+        (h: TrainingHistory) => h.username === currentUsername
       );
-      
+
       this.exerciseHistory.set(userHistory);
-      
+
       console.log('Exercise selected:', exerciseName);
       console.log('History:', userHistory);
     } else {
       this.exerciseHistory.set([]);
     }
-    
+
     this.showChart.set(true);
   }
 
   onExerciseChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-    const exerciseId = selectElement.value;
-    
+    const exerciseId = Number(selectElement.value);
+
     const exercise = this.exercises().find(e => e.id === exerciseId);
     if (exercise) {
-      this.selectExercise(exercise.id, exercise.name);
+      this.selectExercise(exercise.id!, exercise.name);
     }
   }
 }

@@ -1,0 +1,116 @@
+// For information on how to create your own theme, please refer to:
+// https://ionicframework.com/docs/theming/
+
+:root {
+  /** Centro Deportivo palette **/
+  --ion-color-primary: #c9a83e;
+  --ion-color-primary-rgb: 201, 168, 62;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0, 0, 0;
+  --ion-color-primary-shade: #b19236;
+  --ion-color-primary-tint: #ceb154;
+
+  --ion-color-secondary: #d12c2c;
+  --ion-color-secondary-rgb: 209, 44, 44;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #b82626;
+  --ion-color-secondary-tint: #d64141;
+
+  --ion-color-danger: #d12c2c;
+  --ion-color-danger-rgb: 209, 44, 44;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #b82626;
+  --ion-color-danger-tint: #d64141;
+
+  --ion-color-success: #2ecc71;
+  --ion-color-success-rgb: 46, 204, 113;
+  --ion-color-success-contrast: #000000;
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+
+  --ion-color-dark: #000000;
+  --ion-color-dark-rgb: 0, 0, 0;
+  --ion-color-medium: #444444;
+  --ion-color-medium-rgb: 68, 68, 68;
+  --ion-color-light: #f5f5f5;
+
+  --ion-background-color: #111111;
+  --ion-background-color-rgb: 17, 17, 17;
+  --ion-text-color: #ffffff;
+  --ion-text-color-rgb: 255, 255, 255;
+
+  --ion-card-background: rgba(0, 0, 0, 0.85);
+  --ion-item-background: rgba(255, 255, 255, 0.02);
+  --ion-item-border-color: rgba(201, 168, 62, 0.35);
+  --ion-toolbar-background: #000000;
+  --ion-toolbar-border-color: #c9a83e;
+  --ion-tab-bar-background: #000000;
+  --ion-tab-bar-border-color: #c9a83e;
+}
+
+ion-toolbar {
+  --background: #000000;
+  --color: #ffffff;
+  --border-color: #c9a83e;
+  border-bottom: 4px solid #c9a83e;
+  font-family: 'AlimamaBold', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+ion-title {
+  font-family: 'AlimamaBold', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+ion-card {
+  --background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  border: 3px solid #c9a83e;
+  box-shadow: 6px 6px 0 #000000;
+}
+
+ion-button {
+  --border-radius: 0;
+  --box-shadow: 4px 4px 0 #000000;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-family: 'MiSans', sans-serif;
+}
+
+ion-button[expand="block"] {
+  --border-width: 4px;
+  --border-style: solid;
+  --border-color: #c9a83e;
+}
+
+ion-button[color="danger"] {
+  --border-color: #c9a83e;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: rgba(201, 168, 62, 0.35);
+  --color: #ffffff;
+  --highlight-color-focused: #c9a83e;
+  --highlight-color-valid: #c9a83e;
+}
+
+ion-label {
+  --color: #c9a83e;
+  font-family: 'MiSans', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+ion-input {
+  --color: #ffffff;
+  --placeholder-color: #777;
+  font-family: 'MiSans', sans-serif;
+  font-size: 16px;
+}
