@@ -1,0 +1,87 @@
+.profile-content {
+  --background: transparent;
+}
+
+.title-section {
+  text-align: center;
+  margin: 24px 0 32px;
+  position: relative;
+}
+
+.title-section h1 {
+  font-family: 'AlimamaBold', sans-serif;
+  font-size: 42px;
+  color: #d12c2c;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 3px 3px 0 #000;
+  margin-bottom: 16px;
+  -webkit-text-stroke: 0.5px #c9a83e;
+  display: inline-block;
+  position: relative;
+}
+
+.title-section h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(90deg, transparent, #c9a83e 20%, #d12c2c 50%, #c9a83e 80%, transparent);
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #c9a83e;
+  font-family: 'MiSans', sans-serif;
+}
+
+.loading p {
+  margin-top: 12px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.logout-button {
+  margin-top: 24px;
+  --background: #d12c2c;
+  --color: #fff;
+  --border-color: #c9a83e;
+  --border-width: 4px;
+  --box-shadow: 6px 6px 0 #000;
+  --border-radius: 0;
+  font-family: 'AlimamaBold', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  height: 52px;
+  transition: all 0.3s ease;
+}
+
+.logout-button:not(:disabled):hover {
+  --background: #c9a83e;
+  --color: #000;
+  --box-shadow: 8px 8px 0 #000;
+}
+
+@media (max-width: 768px) {
+  .title-section h1 {
+    font-size: 36px;
+    letter-spacing: 2px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title-section h1 {
+    font-size: 28px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 0 #000;
+  }
+}

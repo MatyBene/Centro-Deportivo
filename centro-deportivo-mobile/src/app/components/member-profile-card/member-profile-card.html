@@ -1,0 +1,72 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title>
+      {{ member().name }} {{ member().lastname }}
+      <ion-badge
+        [color]="member().status === 'ACTIVE' ? 'success' : 'medium'"
+        class="status-badge"
+      >
+        {{ member().status }}
+      </ion-badge>
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-list>
+      <ion-item>
+        <ion-label>
+          <h3>Usuario</h3>
+          <p>{{ member().username }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Rol</h3>
+          <p>{{ member().role }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>DNI</h3>
+          <p>{{ member().dni }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Fecha de nacimiento</h3>
+          <p>{{ member().birthdate }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Teléfono</h3>
+          <p>{{ member().phone }}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>
+          <h3>Email</h3>
+          <p>{{ member().email }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    @if (member().enrollments && member().enrollments!.length > 0) {
+      <div class="section">
+        <h4>Actividades inscriptas</h4>
+        <ion-list>
+          @for (enrollment of member().enrollments; track enrollment.activityId) {
+            <ion-item>
+              <ion-label>
+                <h3>{{ enrollment.activityName }}</h3>
+                <p>Inicio: {{ enrollment.startDate }} — Fin: {{ enrollment.endDate }}</p>
+              </ion-label>
+            </ion-item>
+          }
+        </ion-list>
+      </div>
+    } @else {
+      <p class="no-activities">No estás inscripto en ninguna actividad</p>
+    }
+  </ion-card-content>
+</ion-card>

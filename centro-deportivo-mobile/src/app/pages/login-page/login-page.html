@@ -1,0 +1,59 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Centro Deportivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding login-content">
+  <div class="login-wrapper">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Iniciar Sesión</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label position="floating">Username</ion-label>
+            <ion-input
+              type="text"
+              formControlName="username"
+              autocomplete="username"
+            ></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Password</ion-label>
+            <ion-input
+              type="password"
+              formControlName="password"
+              autocomplete="current-password"
+            ></ion-input>
+          </ion-item>
+
+          @if (errorMessage) {
+            <ion-text color="danger" class="error-message">
+              <p>{{ errorMessage }}</p>
+            </ion-text>
+          }
+
+          <ion-button
+            type="submit"
+            expand="block"
+            class="ion-margin-top"
+            [disabled]="loginForm.invalid || isLoading"
+          >
+            @if (isLoading) {
+              <ion-spinner name="crescent"></ion-spinner>
+              <span class="ion-margin-start">INGRESANDO...</span>
+            } @else {
+              INGRESAR
+            }
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+
+    <app-footer></app-footer>
+  </div>
+</ion-content>
