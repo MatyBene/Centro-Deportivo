@@ -68,7 +68,15 @@ class MemberServiceTest {
         member.setCredential(credential);
         member.setEnrollments(Collections.emptyList());
 
-        memberEditDTO = new MemberEditDTO("New Name", "New Lastname", "123456789", "new@email.com", "2000-01-01");
+        memberEditDTO = new MemberEditDTO(
+                "New Name",
+                "New Lastname",
+                "123456789",
+                "new@email.com",
+                "2000-01-01",
+                "12345678",
+                memberUsername
+        );
 
         userForCredential = new Member();
         userForCredential.setId(memberId);

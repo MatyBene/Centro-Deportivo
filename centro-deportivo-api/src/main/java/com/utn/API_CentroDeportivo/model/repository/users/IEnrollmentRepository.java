@@ -17,6 +17,15 @@ public interface IEnrollmentRepository extends JpaRepository<Enrollment, Long> {
     @Query("SELECT e FROM Enrollment e WHERE e.endDate < :cutoff")
     List<Enrollment> findExpired(@Param("cutoff") LocalDate cutoff);
 
+    @Query("""
+        SELECT e
+        FROM Enrollment e
+        JOIN FETCH e.member
+        JOIN FETCH e.activity
+        WHERE e.endDate = :expirationDate
+        """)
+    List<Enrollment> findEnrollmentsExpiringOn(@Param("expirationDate") LocalDate expirationDate);
+
     @Query("SELECT COUNT(e) > 0 FROM Enrollment e WHERE e.member.id = :memberId AND e.endDate >= :cutoff")
     boolean existsActiveByMemberId(@Param("memberId") Long memberId, @Param("cutoff") LocalDate cutoff);
 }
