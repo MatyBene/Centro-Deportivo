@@ -4,6 +4,7 @@ import { RoutineService } from '../../services/routine-service';
 import { Routine, Exercise } from '../../models/Routine';
 import { ExerciseTable } from '../../components/exercise-table/exercise-table';
 import { forkJoin } from 'rxjs';
+import { PdfService } from '../../services/pdf/pdf-service';
 
 @Component({
   selector: 'app-routine-detail-page',
@@ -20,7 +21,8 @@ export class RoutineDetailPage implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private routineService: RoutineService
+    private routineService: RoutineService,
+    private pdfService: PdfService
   ) {}
 
   ngOnInit(): void {
@@ -85,4 +87,31 @@ export class RoutineDetailPage implements OnInit{
   goBack(): void {
     this.router.navigate(['/routines']);
   }
+
+async downloadPdf(): Promise<void> {
+
+  const currentRoutine = this.routine();
+
+  if (!currentRoutine) {
+    console.error('No hay una rutina cargada para generar el PDF.');
+    return;
+  }
+
+  try {
+
+    await this.pdfService.generateRoutinePdf(
+      currentRoutine
+    );
+
+  } catch (error) {
+
+    console.error(
+      'Error al generar el PDF:',
+      error
+    );
+
+  }
+}
+
+
 }

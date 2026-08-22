@@ -9,7 +9,20 @@
       <button (click)="goBack()">Volver</button>
     </div>
   } @else if (routine()) {
-    <button class="back-button" (click)="goBack()">← Volver</button>
+    <div class="header-actions">
+
+  <button class="back-button" (click)="goBack()">
+    ← Volver
+  </button>
+
+  <button class="download-button"
+          (click)="downloadPdf()">
+
+    📄 Descargar PDF
+
+  </button>
+
+</div>
     <div class="routine-header">
       <h1>{{ routine()!.name }}</h1>
       <p class="description">{{ routine()!.description }}</p>
