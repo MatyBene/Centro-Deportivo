@@ -84,6 +84,7 @@ export class ActivityListPage implements OnInit{
     if(this.currentPage < this.totalPages - 1){
       this.currentPage++;
       this.loadActivities();
+      window.scrollTo(0, 0);
     }
   }
 
@@ -91,6 +92,7 @@ export class ActivityListPage implements OnInit{
     if(this.currentPage > 0){
       this.currentPage--;
       this.loadActivities();
+      window.scrollTo(0, 0);
     }
   }
 
