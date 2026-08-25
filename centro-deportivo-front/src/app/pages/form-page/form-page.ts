@@ -151,7 +151,6 @@ export class FormPage implements OnInit{
     } else if(this.isInstructorRegisterMode) {
       this.instructorService.registerMemberByInstructor(formValue).subscribe({
        next: () => {
-          alert('Socio registrado correctamente');
           this.router.navigate(['/instructors/members']);
         },
         error: (e) => this.handleServerError(e)

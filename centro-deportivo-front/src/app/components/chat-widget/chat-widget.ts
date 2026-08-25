@@ -63,9 +63,7 @@ export class ChatWidget {
   }
 
   clearHistory(): void {
-    if (confirm('¿Estás seguro de que quieres borrar todo el historial?')) {
-      this.chatService.clearHistory();
-    }
+    this.chatService.clearHistory();
   }
 
   updateMessage(value: string): void {
