@@ -2,7 +2,7 @@
     <div class="profile-header">
         <h3 class="profile-name">{{member().name}} {{member().lastname}}</h3>
         <span class="profile-status" [class.active]="member().status === 'ACTIVE'" [class.inactive]="member().status !== 'ACTIVE'">
-            {{member().status}}
+            {{getStatusLabel(member().status)}}
         </span>
     </div>
 
