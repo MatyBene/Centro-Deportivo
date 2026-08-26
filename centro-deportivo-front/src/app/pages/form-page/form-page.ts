@@ -21,6 +21,7 @@ export class FormPage implements OnInit{
   isInstructorRegisterMode: boolean = false;
   currentAdmin: Admin | null = null;
   serverErrors: { [key: string]: string } = {};
+  today: string = new Date().toISOString().split('T')[0];
 
   constructor(
     private memberService: MemberService,
@@ -47,7 +48,7 @@ export class FormPage implements OnInit{
         name: ['', [Validators.required, CustomValidators.noWhitespace]],
         lastname: ['', [Validators.required, CustomValidators.noWhitespace]],
         dni: ['', [Validators.required, Validators.minLength(8), CustomValidators.noWhitespace]],
-        birthdate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
+        birthdate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/), CustomValidators.notInFuture]],
         phone: ['', [Validators.required, Validators.maxLength(15), CustomValidators.noWhitespace]],
         email: ['', [Validators.required, Validators.email]]
       });
@@ -57,7 +58,7 @@ export class FormPage implements OnInit{
         name: ['', [Validators.required, CustomValidators.noWhitespace]],
         lastname: ['', [Validators.required, CustomValidators.noWhitespace]],
         dni: ['', [Validators.required, Validators.minLength(8), CustomValidators.noWhitespace]],
-        birthdate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/)]],
+        birthdate: ['', [Validators.required, Validators.pattern(/^\d{4}-\d{2}-\d{2}$/), CustomValidators.notInFuture]],
         phone: ['', [Validators.required, Validators.maxLength(15), CustomValidators.noWhitespace]],
         email: ['', [Validators.required, Validators.email]],
         username: ['', [Validators.required, CustomValidators.noWhitespace]],

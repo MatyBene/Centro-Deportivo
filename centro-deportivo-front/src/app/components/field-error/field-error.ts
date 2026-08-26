@@ -28,10 +28,11 @@ export class FieldError {
       'minlength': `Debe tener mínimo ${errors['minlength']?.requiredLength} caracteres`,
       'maxlength': `Debe tener máximo ${errors['maxlength']?.requiredLength} caracteres`,
       'pattern': 'El formato es inválido',
+      'notInFuture': 'La fecha no puede ser futura',
       ...this.customErrors()
     };
 
-    const priority = ['required', 'whitespace', 'pattern', 'minlength', 'maxlength', 'email'];
+    const priority = ['required', 'whitespace', 'pattern', 'minlength', 'maxlength', 'email', 'notInFuture'];
     const firstError = priority.find(k => errors[k]) || Object.keys(errors)[0];
 
     return errorMessages[firstError] || 'Error de validación';

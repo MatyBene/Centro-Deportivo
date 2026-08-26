@@ -27,7 +27,7 @@
 
         <fieldset>
             <label for="birthdate">Fecha de nacimiento</label>
-            <input type="date" id="birthdate" formControlName="birthdate">
+            <input type="date" id="birthdate" formControlName="birthdate" [max]="today">
             <app-field-error [control]="birthdate"></app-field-error>
         </fieldset>
     </div>
