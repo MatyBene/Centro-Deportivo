@@ -19,7 +19,7 @@ export class ActivityListPage implements OnInit{
   totalPages!: number;
   isLoading: boolean = false;
   currentSearchTerm: string = '';
-  currentTimeRange!: {startTime: string, endTime: string};
+  currentTimeRange?: {startTime: string, endTime: string};
   showFilters: boolean = false;
 
   constructor(private activityService: ActivityService){}
@@ -106,6 +106,7 @@ export class ActivityListPage implements OnInit{
 
   onSearch(searchTerm: string) {
     this.currentSearchTerm = searchTerm;
+    this.currentTimeRange = undefined;
     this.currentPage = 0;
     this.loadActivities();
   }
