@@ -14,8 +14,8 @@ import java.util.List;
 public interface ISportActivityRepository extends JpaRepository<SportActivity, Long> {
     List<SportActivity> findByInstructor(Instructor instructor);
     Page<SportActivity> findByNameContainingIgnoreCase(String name, Pageable pageable);
-    @Query("SELECT a FROM SportActivity a WHERE a.startTime <= :endTimeTo AND a.endTime >= :startTimeFrom")
+    @Query("SELECT a FROM SportActivity a WHERE a.startTime < :endTimeTo AND a.endTime > :startTimeFrom")
     Page<SportActivity> findByTimeRangeOverlap(@Param("startTimeFrom") LocalTime startTimeFrom,
                                                @Param("endTimeTo") LocalTime endTimeTo,
-                                                Pageable pageable);
+                                               Pageable pageable);
 }
