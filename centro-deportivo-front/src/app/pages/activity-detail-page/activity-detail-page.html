@@ -43,7 +43,7 @@
                 <div class="detail-item full-width">
                     <strong>Días de Clase: </strong> 
                         <span>
-                        @for (day of activity.classDays; track day) {  {{ day }} @if (!$last) { {{', '}}
+                        @for (day of activity.classDays; track day) {  {{ translateDay(day) }} @if (!$last) { {{', '}}
                         }
                         }
     </span>
