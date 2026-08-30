@@ -3,6 +3,7 @@ import { Member } from '../../models/Member';
 import { AdminService } from '../../services/admin-service';
 import { InstructorService } from '../../services/instructor-service';
 import { AuthService } from '../../services/auth-service';
+import { getStatusLabel } from '../../utils/status-label';
 
 @Component({
   selector: 'app-member-profile-card',
@@ -14,6 +15,7 @@ export class MemberProfileCard {
     member = input.required<Member>();
   instructorActivities = input<number[]>([]);
   memberUpdated = output<void>();
+  getStatusLabel = getStatusLabel;
 
   constructor(
     private adminService: AdminService,

@@ -8,6 +8,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -181,6 +182,16 @@ public class GlobalExceptionHandler {
                 "Acceso denegado",
                 details,
                 "UNAUTHORIZED");
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ErrorResponseDTO> handleBadCredentialsException(BadCredentialsException ex, Locale locale) {
+        Map<String, String> details = new HashMap<>();
+        details.put("message", messageSource.getMessage("error.invalid.credentials.detail", null, locale));
+        return buildErrorResponse(HttpStatus.UNAUTHORIZED,
+                messageSource.getMessage("error.invalid.credentials.detail", null, locale),
+                details,
+                "BAD_CREDENTIALS");
     }
 
     @ExceptionHandler(AccessDeniedException.class)

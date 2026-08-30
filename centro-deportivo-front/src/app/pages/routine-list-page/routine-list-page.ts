@@ -66,20 +66,16 @@ export class RoutineListPage {
   }
 
   deleteRoutine(id: number, name: string): void {
-    const confirmed = window.confirm(`¿Estás seguro de que deseas eliminar la rutina "${name}" (ID: ${id})? Esta acción es irreversible.`);
-
-    if (confirmed) {
-      this.routineService.deleteRoutine(id).subscribe({
-        next: () => {
-          console.log(`Rutina con ID ${id} eliminada correctamente.`);
-          this.loadRoutines(); 
-        },
-        error: (err) => {
-          this.errorMessage.set(`Error al eliminar la rutina: ${err.message || 'Error de conexión.'}`);
-          console.error('Error al eliminar:', err);
-        }
-      });
-    }
+    this.routineService.deleteRoutine(id).subscribe({
+      next: () => {
+        console.log(`Rutina con ID ${id} eliminada correctamente.`);
+        this.loadRoutines(); 
+      },
+      error: (err) => {
+        this.errorMessage.set(`Error al eliminar la rutina: ${err.message || 'Error de conexión.'}`);
+        console.error('Error al eliminar:', err);
+      }
+    });
   }
 
   goToDetail(routineId: number) {

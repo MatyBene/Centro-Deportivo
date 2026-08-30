@@ -235,6 +235,19 @@ getInstructor(instructorId: number | undefined): void {
     });
   }
 
+  translateDay(day: string): string {
+    const dayMap: Record<string, string> = {
+      'MONDAY': 'Lunes',
+      'TUESDAY': 'Martes',
+      'WEDNESDAY': 'Miércoles',
+      'THURSDAY': 'Jueves',
+      'FRIDAY': 'Viernes',
+      'SATURDAY': 'Sábado',
+      'SUNDAY': 'Domingo'
+    };
+    return dayMap[day] || day;
+  }
+
   unenrollMemberByInstructor(): void {
     if (!this.activityId) return;
 

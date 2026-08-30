@@ -39,10 +39,6 @@ export class MemberActivitiesPageComponent implements OnInit {
   }
 
   unsubscribe(activityId: number, activityName: string): void {
-    if (!confirm(`¿Estás seguro de que quieres darte de baja de ${activityName}? Esta acción es irreversible.`)) {
-      return;
-    }
-
     this.memberService.unsubscribeFromActivity(activityId).subscribe({
       next: (response) => {
         this.unenrollmentMessage = `¡Te has dado de baja de ${activityName} con éxito!`; 

@@ -4,6 +4,7 @@ import Instructor from '../../models/Instructor';
 import { Admin } from '../../models/Admin';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth-service';
+import { getStatusLabel } from '../../utils/status-label';
 
 @Component({
   selector: 'app-user-summary-item',
@@ -13,6 +14,7 @@ import { AuthService } from '../../services/auth-service';
 })
 export class UserSummaryItem {
   user = input<Member | Instructor | Admin>();
+  getStatusLabel = getStatusLabel;
 
   constructor(private router: Router, private authService: AuthService) {};
 

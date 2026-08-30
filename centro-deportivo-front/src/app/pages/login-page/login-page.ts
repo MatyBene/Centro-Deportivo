@@ -13,7 +13,7 @@ export class LoginPage {
   loginForm: FormGroup;
   isLoading: boolean = false;
   errorMessage: string = '';
-  
+  showPassword: boolean = false;
 
   constructor(
     private fb: FormBuilder, 
@@ -24,6 +24,10 @@ export class LoginPage {
       username: ['', Validators.required],
       password: ['', Validators.required]
     })
+  }
+
+  togglePassword(): void {
+    this.showPassword = !this.showPassword;
   }
 
   onSubmit(){

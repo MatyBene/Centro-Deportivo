@@ -64,7 +64,6 @@ export class UserDetailPage implements OnInit{
       error: (e) => {
         console.log(e);
         this.isDeleting = false;
-        alert('Error al eliminar el usuario');
       }
     })
   }

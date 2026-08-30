@@ -2,7 +2,7 @@
     <div class="profile-header">
         <h3 class="profile-name">{{member().name}} {{member().lastname}}</h3>
         <span class="profile-status" [class.active]="member().status === 'ACTIVE'" [class.inactive]="member().status !== 'ACTIVE'">
-            {{member().status}}
+            {{getStatusLabel(member().status)}}
         </span>
     </div>
 
@@ -51,12 +51,13 @@
                                 <span class="activity-detail">Fin: {{enrollment.endDate}}</span>
                             </div>
                         </div>
-                        <button 
-                            class="btn-unenroll" 
-                            [disabled]="!canUnenroll(enrollment.activityId)" 
-                            (click)="unerollment(enrollment.activityId.toString())">
-                            Dar de baja
-                        </button>
+                        @if (canUnenroll(enrollment.activityId)) {
+                            <button 
+                                class="btn-unenroll" 
+                                (click)="unerollment(enrollment.activityId.toString())">
+                                Dar de baja
+                            </button>
+                        }
                     </div>
                 }
             </div>

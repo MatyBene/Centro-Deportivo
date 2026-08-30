@@ -133,7 +133,6 @@ export class RoutineFormPage implements OnInit {
     },
     error: (err) => {
       console.error('Error al cargar rutina:', err);
-      alert('Error al cargar rutina');
       // this.router.navigate(['/routines']); Â 
     }
   });
@@ -250,7 +249,6 @@ export class RoutineFormPage implements OnInit {
 
   saveRoutine(): void {
     if (this.routineForm.invalid) {
-      alert('Completar todos los campos.');
       this.routineForm.markAllAsTouched();
       return;
     }
@@ -310,15 +308,10 @@ export class RoutineFormPage implements OnInit {
 
     operation.subscribe({
       next: () => {
-        const message = this.isEditMode()
-          ? 'âœ… Rutina editada con Ã©xito! '
-          : 'âœ… Rutina creada con Ã©xito! ';
-        alert(message);
         this.router.navigate(['/routines']);
       },
       error: (err: unknown) => {
         console.error('Error al guardar rutina:', err);
-        alert('Error al guardar rutina.');
         this.isSaving.set(false);
       }
     });

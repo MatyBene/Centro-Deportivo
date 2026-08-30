@@ -1,13 +1,17 @@
 <section>
     <div class="time-field">
         <label for="startTime">Hora de inicio: </label>
-        <input type="time" id="startTime" [value]="startTime()" (input)="startTime.set($any($event.target).value)">
+        <input type="time" id="startTime" [value]="startTime()" (input)="onStartTimeChange($any($event.target).value)">
     </div>
 
     <div class="time-field">
         <label for="endTime">Hora de fin: </label>
-        <input type="time" id="endTime" [value]="endTime()" (input)="endTime.set($any($event.target).value)">
+        <input type="time" id="endTime" [value]="endTime()" (input)="onEndTimeChange($any($event.target).value)">
     </div>
+
+    @if (timeError()) {
+        <p class="time-error">La hora de inicio debe ser anterior a la hora de fin</p>
+    }
 
     <button (click)="onSearch()">Buscar</button>
 </section>
